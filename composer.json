@@ -1,0 +1,208 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "coresite/platform",
+    "type": "project",
+    "description": "CoreSite - Platform toko online dan kasir otomatis untuk UMKM Indonesia",
+    "keywords": ["laravel", "saas", "ecommerce", "pos", "umkm", "indonesia", "coresite"],
+    "license": "proprietary",
+    "require": {
+        "php": "^8.3",
+        "laravel/framework": "^13.8",
+        "laravel/sanctum": "^4.3",
+        "laravel/tinker": "^3.0",
+        "laravel/socialite": "^5.12",
+        "laravel/prompts": "^0.4.0",
+        "laravel/serializable-closure": "^2.0",
+        "guzzlehttp/guzzle": "^7.8",
+        "doctrine/dbal": "^4.1",
+        "maatwebsite/excel": "^3.1",
+        "spatie/laravel-permission": "^6.15",
+        "barryvdh/laravel-dompdf": "^3.0",
+        "intervention/image": "^3.10",
+        "laravel/cashier": "^15.0",
+        "predis/predis": "^2.3",
+        "laravel/octane": "^2.6",
+        "laravel/horizon": "^5.27",
+        "laravel/telescope": "^5.1",
+        "spatie/laravel-activitylog": "^4.9",
+        "spatie/laravel-backup": "^8.8",
+        "spatie/laravel-schedule-monitor": "^4.1",
+        "spatie/laravel-health": "^1.23",
+        "spatie/laravel-mail-preview": "^3.0",
+        "spatie/laravel-csp": "^3.0",
+        "spatie/laravel-robots-middleware": "^2.0",
+        "spatie/laravel-failed-job-monitor": "^3.0",
+        "spatie/laravel-responsecache": "^7.9",
+        "spatie/laravel-sitemap": "^7.0",
+        "spatie/laravel-stats": "^3.0",
+        "spatie/laravel-model-flags": "^2.0",
+        "spatie/laravel-query-builder": "^6.0",
+        "spatie/laravel-collection-macros": "^8.0",
+        "spatie/laravel-data": "^4.16",
+        "spatie/laravel-webhook-client": "^4.0",
+        "spatie/laravel-route-attributes": "^2.0",
+        "spatie/laravel-validation-rules": "^2.0",
+        "spatie/laravel-html": "^3.15",
+        "spatie/laravel-view-models": "^2.0",
+        "spatie/laravel-enum": "^4.0",
+        "spatie/laravel-settings": "^3.0",
+        "spatie/laravel-tags": "^4.13",
+        "spatie/laravel-translatable": "^6.9",
+        "spatie/laravel-sluggable": "^3.6",
+        "spatie/laravel-medialibrary": "^11.10",
+        "spatie/laravel-image-optimizer": "^2.0",
+        "spatie/laravel-cookie-consent": "^3.0",
+        "spatie/laravel-analytics": "^4.0",
+        "spatie/laravel-newsletter": "^5.0",
+        "spatie/laravel-fractal": "^6.0",
+        "spatie/laravel-http-logger": "^2.0",
+        "spatie/laravel-queueable-action": "^3.0",
+        "spatie/laravel-rate-limited-job-middleware": "^2.0",
+        "spatie/laravel-server-side-rendering": "^2.0",
+        "spatie/laravel-visited": "^2.0",
+        "spatie/laravel-mergeable": "^2.0",
+        "spatie/laravel-permanent-redirect": "^2.0",
+        "spatie/laravel-validated": "^2.0",
+        "spatie/laravel-roles": "^4.0",
+        "spatie/laravel-notification": "^4.0",
+        "spatie/laravel-mail": "^3.0",
+        "spatie/laravel-referer": "^2.0",
+        "spatie/laravel-query": "^3.0",
+        "spatie/laravel-welcome": "^2.0"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.23",
+        "laravel/pail": "^1.2.5",
+        "laravel/pao": "^1.0.6",
+        "laravel/pint": "^1.27",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.6",
+        "phpunit/phpunit": "^12.5.12",
+        "larastan/larastan": "^3.0",
+        "roave/security-advisories": "dev-latest",
+        "spatie/laravel-ignition": "^2.9",
+        "laravel/breeze": "^2.4",
+        "laravel/jetstream": "^5.2",
+        "nunomaduro/larastan": "^3.0",
+        "barryvdh/laravel-ide-helper": "^3.5",
+        "spatie/laravel-test-time": "^2.0",
+        "spatie/laravel-ray": "^1.40",
+        "spatie/laravel-dump-server": "^2.0",
+        "spatie/laravel-fake-mail": "^2.0",
+        "spatie/laravel-http-client-test": "^2.0",
+        "spatie/laravel-model-states-test": "^2.0",
+        "spatie/laravel-queue-test": "^2.0",
+        "spatie/laravel-schedule-test": "^2.0",
+        "spatie/laravel-storage-test": "^2.0",
+        "spatie/laravel-view-test": "^2.0",
+        "spatie/laravel-cache-test": "^2.0",
+        "spatie/laravel-event-test": "^2.0",
+        "spatie/laravel-job-test": "^2.0",
+        "spatie/laravel-mail-test": "^2.0",
+        "spatie/laravel-notification-test": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
+        },
+        "files": [
+            "app/Helpers/helpers.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan storage:link",
+            "@php artisan migrate --force",
+            "@php artisan db:seed --force",
+            "@php artisan optimize:clear",
+            "@php artisan config:cache",
+            "@php artisan route:cache",
+            "@php artisan view:cache",
+            "npm install --ignore-scripts",
+            "npm run build"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1 --timeout=0\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi @no_additional_args",
+            "@php artisan test"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan optimize:clear"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
+        ],
+        "deploy": [
+            "@php artisan down --retry=60",
+            "git pull",
+            "composer install --no-dev --prefer-dist --optimize-autoloader",
+            "npm ci && npm run build",
+            "@php artisan migrate --force",
+            "@php artisan optimize:clear",
+            "@php artisan config:cache",
+            "@php artisan route:cache",
+            "@php artisan view:cache",
+            "@php artisan event:cache",
+            "@php artisan up"
+        ],
+        "backup": [
+            "@php artisan backup:run"
+        ],
+        "optimize": [
+            "@php artisan optimize",
+            "@php artisan event:cache",
+            "@php artisan view:cache"
+        ],
+        "clear": [
+            "@php artisan optimize:clear",
+            "@php artisan config:clear",
+            "@php artisan cache:clear",
+            "@php artisan view:clear",
+            "@php artisan route:clear",
+            "@php artisan event:clear"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "dont-discover": []
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true,
+            "spatie/once": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
