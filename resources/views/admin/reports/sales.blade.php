@@ -129,20 +129,20 @@ function salesReport() {
             this.loading = true;
             const params = {
                 page: this.currentPage,
-                start_date: this.dateFrom,
-                end_date: this.dateTo,
+                date_from: this.dateFrom,
+                date_to: this.dateTo,
                 status: this.status
             };
             
             try {
-                const response = await axios.get('/api/v1/reports/sales', { params });
+                const response = await axios.get('/api/v1/transactions', { params });
                 if (response.data.success) {
-                    this.sales = response.data.data.data;
-                    this.currentPage = response.data.data.current_page;
-                    this.lastPage = response.data.data.last_page;
-                    this.total = response.data.data.total;
-                    this.from = response.data.data.from;
-                    this.to = response.data.data.to;
+                    this.sales = response.data.data.data || [];
+                    this.currentPage = response.data.data.current_page || 1;
+                    this.lastPage = response.data.data.last_page || 1;
+                    this.total = response.data.data.total || 0;
+                    this.from = response.data.data.from || 0;
+                    this.to = response.data.data.to || 0;
                 }
             } catch (error) {
                 console.error('Failed to load sales:', error);
