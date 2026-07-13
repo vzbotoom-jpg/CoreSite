@@ -21,7 +21,7 @@ class AuthTest extends TestCase
     }
     
     /** @test */
-    public function user_can_register_new_store()
+    public function test_user_can_register_new_store()
     {
         $response = $this->post('/register', [
             'store_name' => 'Toko Test',
@@ -46,7 +46,7 @@ class AuthTest extends TestCase
     }
     
     /** @test */
-    public function registration_fails_with_duplicate_email()
+    public function test_registration_fails_with_duplicate_email()
     {
         // Create existing store
         Store::factory()->create(['email' => 'existing@test.com']);
@@ -64,7 +64,7 @@ class AuthTest extends TestCase
     }
     
     /** @test */
-    public function user_can_login_with_correct_credentials()
+    public function test_user_can_login_with_correct_credentials()
     {
         $user = User::factory()->admin()->create([
             'email' => 'admin@test.com',
@@ -81,7 +81,7 @@ class AuthTest extends TestCase
     }
     
     /** @test */
-    public function user_cannot_login_with_wrong_password()
+    public function test_user_cannot_login_with_wrong_password()
     {
         $user = User::factory()->admin()->create([
             'email' => 'admin@test.com',
@@ -98,7 +98,7 @@ class AuthTest extends TestCase
     }
     
     /** @test */
-    public function user_cannot_login_when_account_inactive()
+    public function test_user_cannot_login_when_account_inactive()
     {
         $user = User::factory()->admin()->create([
             'email' => 'admin@test.com',
@@ -116,7 +116,7 @@ class AuthTest extends TestCase
     }
     
     /** @test */
-    public function user_cannot_login_when_store_inactive()
+    public function test_user_cannot_login_when_store_inactive()
     {
         $store = Store::factory()->create(['is_active' => false]);
         $user = User::factory()->admin()->create([
@@ -135,7 +135,7 @@ class AuthTest extends TestCase
     }
     
     /** @test */
-    public function user_can_logout()
+    public function test_user_can_logout()
     {
         $user = User::factory()->admin()->create();
         
@@ -146,7 +146,7 @@ class AuthTest extends TestCase
     }
     
     /** @test */
-    public function user_can_request_password_reset()
+    public function test_user_can_request_password_reset()
     {
         $user = User::factory()->admin()->create([
             'email' => 'admin@test.com',

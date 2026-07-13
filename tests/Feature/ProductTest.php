@@ -25,7 +25,7 @@ class ProductTest extends TestCase
     }
     
     /** @test */
-    public function admin_can_view_products_list()
+    public function test_admin_can_view_products_list()
     {
         Product::factory(5)->create(['store_id' => $this->store->id]);
         
@@ -37,7 +37,7 @@ class ProductTest extends TestCase
     }
     
     /** @test */
-    public function admin_can_create_product()
+    public function test_admin_can_create_product()
     {
         $category = Category::factory()->create(['store_id' => $this->store->id]);
         
@@ -64,7 +64,7 @@ class ProductTest extends TestCase
     }
     
     /** @test */
-    public function product_requires_name_and_price()
+    public function test_product_requires_name_and_price()
     {
         $response = $this->actingAs($this->user)
             ->post(route('admin.products.store'), [
@@ -76,7 +76,7 @@ class ProductTest extends TestCase
     }
     
     /** @test */
-    public function admin_can_view_product_detail()
+    public function test_admin_can_view_product_detail()
     {
         $product = Product::factory()->create(['store_id' => $this->store->id]);
         
@@ -88,7 +88,7 @@ class ProductTest extends TestCase
     }
     
     /** @test */
-    public function admin_can_update_product()
+    public function test_admin_can_update_product()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
@@ -113,7 +113,7 @@ class ProductTest extends TestCase
     }
     
     /** @test */
-    public function admin_can_delete_product()
+    public function test_admin_can_delete_product()
     {
         $product = Product::factory()->create(['store_id' => $this->store->id]);
         
@@ -125,7 +125,7 @@ class ProductTest extends TestCase
     }
     
     /** @test */
-    public function admin_can_adjust_product_stock()
+    public function test_admin_can_adjust_product_stock()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
@@ -151,7 +151,7 @@ class ProductTest extends TestCase
     }
     
     /** @test */
-    public function cannot_reduce_stock_below_zero()
+    public function test_cannot_reduce_stock_below_zero()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
@@ -171,7 +171,7 @@ class ProductTest extends TestCase
     }
     
     /** @test */
-    public function products_are_scoped_by_store()
+    public function test_products_are_scoped_by_store()
     {
         // Create product for current store
         Product::factory()->create(['store_id' => $this->store->id]);

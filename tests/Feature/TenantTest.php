@@ -13,7 +13,7 @@ class TenantTest extends TestCase
     use RefreshDatabase;
     
     /** @test */
-    public function store_can_be_accessed_via_slug()
+    public function test_store_can_be_accessed_via_slug()
     {
         $store = Store::factory()->create([
             'slug' => 'toko-test',
@@ -32,7 +32,7 @@ class TenantTest extends TestCase
     }
     
     /** @test */
-    public function inactive_store_returns_404()
+    public function test_inactive_store_returns_404()
     {
         $store = Store::factory()->create([
             'slug' => 'toko-test',
@@ -45,7 +45,7 @@ class TenantTest extends TestCase
     }
     
     /** @test */
-    public function non_existent_store_returns_404()
+    public function test_non_existent_store_returns_404()
     {
         $response = $this->get('/non-existent-store');
         
@@ -53,7 +53,7 @@ class TenantTest extends TestCase
     }
     
     /** @test */
-    public function product_can_be_accessed_via_store_slug_and_product_slug()
+    public function test_product_can_be_accessed_via_store_slug_and_product_slug()
     {
         $store = Store::factory()->create([
             'slug' => 'toko-test',
@@ -73,7 +73,7 @@ class TenantTest extends TestCase
     }
     
     /** @test */
-    public function category_can_be_accessed_via_store_slug_and_category_slug()
+    public function test_category_can_be_accessed_via_store_slug_and_category_slug()
     {
         $store = Store::factory()->create([
             'slug' => 'toko-test',
@@ -93,7 +93,7 @@ class TenantTest extends TestCase
     }
     
     /** @test */
-    public function user_can_only_access_own_store_data()
+    public function test_user_can_only_access_own_store_data()
     {
         // Create two stores
         $store1 = Store::factory()->create();
@@ -116,7 +116,7 @@ class TenantTest extends TestCase
     }
     
     /** @test */
-    public function tenant_middleware_sets_store_context()
+    public function test_tenant_middleware_sets_store_context()
     {
         $store = Store::factory()->create([
             'slug' => 'toko-test',

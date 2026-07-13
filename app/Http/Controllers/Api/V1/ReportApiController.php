@@ -459,26 +459,39 @@ class ReportApiController extends Controller
     public function chartData(Request $request)
     {
         $storeId = $request->user()->store_id;
+        $period = $request->get('period', '7days');
         
-        $last7Days = [];
-        for ($i = 6; $i >= 0; $i--) {
+        $days = match($period) {
+            '30days' => 30,
+            '90days' => 90,
+            '180days' => 180,
+            default => 7,
+        };
+
+        $labels = [];
+        $values = [];
+
+        for ($i = $days - 1; $i >= 0; $i--) {
             $date = now()->subDays($i);
-            $revenue = Transaction::where('store_id', $storeId)
-                ->whereDate('transaction_date', $date->format('Y-m-d'))
-                ->where('status', 'completed')
-                ->sum('total_amount');
             
-            $last7Days[] = [
-                'date' => $date->format('Y-m-d'),
-                'day' => $date->format('D'),
-                'revenue' => $revenue
-            ];
+            try {
+                $revenue = Transaction::where('store_id', $storeId)
+                    ->whereDate('transaction_date', $date->format('Y-m-d'))
+                    ->where('status', 'completed')
+                    ->sum('total_amount');
+            } catch (\Exception $e) {
+                $revenue = 0;
+            }
+
+            $labels[] = $date->format('d/m');
+            $values[] = floatval($revenue);
         }
         
         return response()->json([
             'success' => true,
             'data' => [
-                'last_7_days' => $last7Days
+                'labels' => $labels,
+                'values' => $values,
             ]
         ]);
     }
