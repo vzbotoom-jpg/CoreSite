@@ -24,7 +24,7 @@ class TransactionTest extends TestCase
     }
     
     /** @test */
-    public function admin_can_view_transactions_list()
+    public function test_admin_can_view_transactions_list()
     {
         $product = Product::factory()->create(['store_id' => $this->store->id]);
         
@@ -41,7 +41,7 @@ class TransactionTest extends TestCase
     }
     
     /** @test */
-    public function admin_can_create_sale_transaction()
+    public function test_admin_can_create_sale_transaction()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
@@ -50,7 +50,7 @@ class TransactionTest extends TestCase
         ]);
         
         $response = $this->actingAs($this->user)
-            ->post(route('admin.transactions.store'), [
+            ->postJson(route('admin.transactions.store'), [
                 'items' => [
                     ['product_id' => $product->id, 'quantity' => 2]
                 ],
@@ -72,7 +72,7 @@ class TransactionTest extends TestCase
     }
     
     /** @test */
-    public function transaction_fails_when_stock_insufficient()
+    public function test_transaction_fails_when_stock_insufficient()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
@@ -80,7 +80,7 @@ class TransactionTest extends TestCase
         ]);
         
         $response = $this->actingAs($this->user)
-            ->post(route('admin.transactions.store'), [
+            ->postJson(route('admin.transactions.store'), [
                 'items' => [
                     ['product_id' => $product->id, 'quantity' => 5]
                 ],
@@ -95,7 +95,7 @@ class TransactionTest extends TestCase
     }
     
     /** @test */
-    public function transaction_fails_when_payment_insufficient()
+    public function test_transaction_fails_when_payment_insufficient()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
@@ -103,7 +103,7 @@ class TransactionTest extends TestCase
         ]);
         
         $response = $this->actingAs($this->user)
-            ->post(route('admin.transactions.store'), [
+            ->postJson(route('admin.transactions.store'), [
                 'items' => [
                     ['product_id' => $product->id, 'quantity' => 1]
                 ],
@@ -115,7 +115,7 @@ class TransactionTest extends TestCase
     }
     
     /** @test */
-    public function admin_can_view_transaction_detail()
+    public function test_admin_can_view_transaction_detail()
     {
         $result = $this->createTransaction($this->store->id);
         $transaction = $result['transaction'];
@@ -128,7 +128,7 @@ class TransactionTest extends TestCase
     }
     
     /** @test */
-    public function admin_can_cancel_transaction()
+    public function test_admin_can_cancel_transaction()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
@@ -159,7 +159,7 @@ class TransactionTest extends TestCase
     }
     
     /** @test */
-    public function transaction_creates_inventory_log()
+    public function test_transaction_creates_inventory_log()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,

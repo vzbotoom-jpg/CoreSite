@@ -60,7 +60,35 @@
                 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     <template x-for="product in products" :key="product.id">
-                        @include('catalog.partials.product-card', ['product' => '{{ product }}'])
+                        <div class="card hover:shadow-lg transition-all duration-300 group">
+                            <a :href="'/{{ $store->slug }}/product/' + product.slug" class="block">
+                                <div class="aspect-square bg-light-surface dark:bg-dark-surface rounded-t-xl flex items-center justify-center p-4 group-hover:scale-105 transition-transform">
+                                    <template x-if="product.image_url">
+                                        <img :src="product.image_url" :alt="product.name" class="w-full h-full object-contain">
+                                    </template>
+                                    <template x-if="!product.image_url">
+                                        <svg class="w-16 h-16 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                        </svg>
+                                    </template>
+                                </div>
+                                <div class="p-4">
+                                    <template x-if="product.category">
+                                        <p class="text-xs text-text-secondary mb-1" x-text="product.category.name"></p>
+                                    </template>
+                                    <h3 class="font-semibold mb-1 line-clamp-2" x-text="product.name"></h3>
+                                    <div class="flex justify-between items-center mt-2">
+                                        <span class="text-lg font-bold text-accent" x-text="formatRupiah(product.price)"></span>
+                                        <template x-if="product.stock > 0">
+                                            <span class="text-xs text-success">Tersedia</span>
+                                        </template>
+                                        <template x-if="product.stock <= 0">
+                                            <span class="text-xs text-error">Habis</span>
+                                        </template>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
                     </template>
                 </div>
                 

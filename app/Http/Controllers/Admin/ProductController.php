@@ -120,7 +120,7 @@ class ProductController extends Controller
                 'store_id' => $storeId,
                 'name' => $validated['name'],
                 'slug' => $slug,
-                'description' => $validated['description'],
+                'description' => $validated['description'] ?? null,
                 'price' => $validated['price'],
                 'stock' => $validated['stock'],
                 'min_stock_alert' => $validated['min_stock_alert'],
@@ -249,7 +249,7 @@ class ProductController extends Controller
             // Update product
             $product->update([
                 'name' => $validated['name'],
-                'description' => $validated['description'],
+                'description' => $validated['description'] ?? null,
                 'price' => $validated['price'],
                 'min_stock_alert' => $validated['min_stock_alert'],
                 'category_id' => $validated['category_id'] ?? null,
@@ -313,7 +313,7 @@ class ProductController extends Controller
             InventoryLog::create([
                 'store_id' => $storeId,
                 'product_id' => $product->id,
-                'type' => 'adjustment',
+                'type' => $request->quantity > 0 ? 'restock' : 'adjustment',
                 'quantity' => $request->quantity,
                 'old_stock' => $oldStock,
                 'new_stock' => $newStock,

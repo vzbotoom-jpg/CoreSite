@@ -27,7 +27,7 @@ class SaleServiceTest extends TestCase
     }
     
     /** @test */
-    public function process_sale_successfully()
+    public function test_process_sale_successfully()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
@@ -51,7 +51,7 @@ class SaleServiceTest extends TestCase
     }
     
     /** @test */
-    public function process_sale_fails_with_insufficient_stock()
+    public function test_process_sale_fails_with_insufficient_stock()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
@@ -73,7 +73,7 @@ class SaleServiceTest extends TestCase
     }
     
     /** @test */
-    public function process_sale_fails_with_insufficient_payment()
+    public function test_process_sale_fails_with_insufficient_payment()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
@@ -92,10 +92,11 @@ class SaleServiceTest extends TestCase
     }
     
     /** @test */
-    public function cancel_sale_successfully()
+    public function test_cancel_sale_successfully()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
+            'price' => 50000,
             'stock' => 10,
         ]);
         
@@ -122,10 +123,11 @@ class SaleServiceTest extends TestCase
     }
     
     /** @test */
-    public function cancel_sale_fails_for_already_cancelled_transaction()
+    public function test_cancel_sale_fails_for_already_cancelled_transaction()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
+            'price' => 50000,
         ]);
         
         $result = $this->saleService->processSale(
@@ -148,7 +150,7 @@ class SaleServiceTest extends TestCase
     }
     
     /** @test */
-    public function generate_unique_invoice_number()
+    public function test_generate_unique_invoice_number()
     {
         $method = new \ReflectionMethod($this->saleService, 'generateInvoiceNumber');
         $method->setAccessible(true);
@@ -160,7 +162,7 @@ class SaleServiceTest extends TestCase
     }
     
     /** @test */
-    public function process_sale_creates_transaction_items()
+    public function test_process_sale_creates_transaction_items()
     {
         $product = Product::factory()->create([
             'store_id' => $this->store->id,

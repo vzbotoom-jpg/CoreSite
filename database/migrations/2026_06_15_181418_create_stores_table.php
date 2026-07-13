@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('logo')->nullable();
             $table->boolean('is_active')->default(true);
             $table->json('settings')->nullable();
+            $table->timestamp('deactivated_at')->nullable();
+            $table->string('deactivation_reason')->nullable();
             $table->softDeletes();
             $table->timestamps();
             

@@ -76,17 +76,31 @@ abstract class TestCase extends BaseTestCase
         $saleService = app(\App\Services\SaleService::class);
         
         if (empty($items)) {
-            $product = $this->createProduct($storeId, ['stock' => 10]);
+            $product = $this->createProduct($storeId, ['stock' => 10, 'price' => 10000]);
             $items = [
                 ['product_id' => $product->id, 'quantity' => 2]
             ];
+            if (!isset($transactionData['paid_amount'])) {
+                $transactionData['paid_amount'] = 20000;
+            }
+        } else {
+            $totalAmount = 0;
+            foreach ($items as $item) {
+                $p = \App\Models\Product::find($item['product_id']);
+                if ($p) {
+                    $totalAmount += $p->price * $item['quantity'];
+                }
+            }
+            if (!isset($transactionData['paid_amount'])) {
+                $transactionData['paid_amount'] = $totalAmount;
+            }
         }
         
         return $saleService->processSale(
             $storeId,
             $items,
             $transactionData['payment_method'] ?? 'cash',
-            $transactionData['paid_amount'] ?? 100000,
+            $transactionData['paid_amount'],
             $transactionData['notes'] ?? null
         );
     }

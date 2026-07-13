@@ -31,10 +31,12 @@ class CatalogController extends Controller
         
         // Get categories with product counts
         $categories = Category::where('store_id', $store->id)
+            ->whereHas('products', function($query) {
+                $query->where('is_active', true)->where('stock', '>', 0);
+            })
             ->withCount(['products' => function($query) {
                 $query->where('is_active', true)->where('stock', '>', 0);
             }])
-            ->having('products_count', '>', 0)
             ->get();
         
         // Get store settings
