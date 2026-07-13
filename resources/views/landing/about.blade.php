@@ -101,6 +101,48 @@
         </div>
     </div>
     
+    {{-- Keamanan Data & Legalitas =====
+         Ini gap paling penting yang sebelumnya tidak disentuh sama sekali
+         di seluruh halaman CoreSite — padahal sebagai SaaS yang menyimpan
+         data transaksi & keuangan bisnis orang lain, ini adalah pertanyaan
+         pertama yang muncul di benak calon pengguna sebelum daftar.
+         CATATAN: isi badge di bawah HANYA jika benar-benar berlaku —
+         jangan cantumkan klaim sertifikasi (mis. ISO 27001) kalau belum
+         benar-benar dimiliki CoreSite. Isi juga nama badan hukum resmi
+         (PT/CV) dan nomor registrasi jika sudah ada. --}}
+    <div class="mb-16">
+        <h2 class="text-3xl font-bold text-text-primary dark:text-text-dark-primary text-center mb-8">Keamanan & Legalitas</h2>
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="text-center p-6 border border-light-border dark:border-dark-border rounded-xl">
+                <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-2">Data Terenkripsi</h3>
+                <p class="text-sm text-text-secondary dark:text-text-dark-secondary">Data transaksi dan pelanggan Anda dienkripsi dan tidak dibagikan ke pihak ketiga tanpa izin.</p>
+            </div>
+            <div class="text-center p-6 border border-light-border dark:border-dark-border rounded-xl">
+                <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-2">Backup Otomatis</h3>
+                <p class="text-sm text-text-secondary dark:text-text-dark-secondary">Data toko Anda dicadangkan secara berkala sehingga tetap aman bila terjadi gangguan.</p>
+            </div>
+            <div class="text-center p-6 border border-light-border dark:border-dark-border rounded-xl">
+                <div class="w-14 h-14 bg-accent/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-2">Badan Usaha Resmi</h3>
+                <p class="text-sm text-text-secondary dark:text-text-dark-secondary">CoreSite dioperasikan oleh [nama PT/CV resmi] — lengkapi dengan info legalitas perusahaan Anda di sini.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Team -->
     <div>
         <h2 class="text-3xl font-bold text-text-primary dark:text-text-dark-primary text-center mb-8">Tim Kami</h2>

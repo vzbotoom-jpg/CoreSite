@@ -63,12 +63,51 @@
                         </a>
                     </p>
                 </div>
+
+                {{-- Divider --}}
+                <div class="flex items-center gap-4 my-6">
+                    <div class="flex-1 h-px bg-light-border dark:bg-dark-border"></div>
+                    <span class="text-xs text-text-secondary uppercase tracking-wide">atau</span>
+                    <div class="flex-1 h-px bg-light-border dark:bg-dark-border"></div>
+                </div>
+
+                {{-- Social Login =====
+                     CATATAN: tombol ini butuh backend Socialite (paket
+                     laravel/socialite) untuk benar-benar berfungsi.
+                     - Google: relatif mudah, tinggal daftar OAuth client
+                       di Google Cloud Console.
+                     - Apple ("Sign in with Apple"): butuh Apple Developer
+                       Program (berbayar) + konfigurasi Services ID/Key,
+                       jauh lebih rumit dari Google. Siapkan dulu backend-nya
+                       (route + controller redirect/callback) sebelum tombol
+                       ini benar-benar bisa dipakai; untuk sementara arahnya
+                       masih placeholder route('auth.google') / route('auth.apple').
+                --}}
+                <div class="space-y-3">
+                    <a href="#"
+                       class="w-full flex items-center justify-center gap-3 border border-light-border dark:border-dark-border rounded-lg py-2.5 px-4 text-sm font-medium text-text-primary dark:text-text-dark-primary hover:bg-light-surface dark:hover:bg-dark-surface transition-colors">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24">
+                            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                        </svg>
+                        Continue with Google
+                    </a>
+                    <a href="#"
+                       class="w-full flex items-center justify-center gap-3 border border-light-border dark:border-dark-border rounded-lg py-2.5 px-4 text-sm font-medium text-text-primary dark:text-text-dark-primary hover:bg-light-surface dark:hover:bg-dark-surface transition-colors">
+                        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M16.365 1.43c0 1.14-.463 2.257-1.222 3.07-.803.86-2.104 1.516-3.24 1.516-.145 0-.29-.02-.397-.036-.017-.086-.036-.24-.036-.394 0-1.14.532-2.257 1.246-3.02.83-.9 2.187-1.51 3.246-1.55.017.14.035.276.035.414zm3.808 15.02c-.045.13-.7 2.394-2.316 4.715-1.4 2.01-2.855 4.017-5.148 4.06-2.253.042-2.98-1.335-5.556-1.335-2.575 0-3.38 1.293-5.512 1.377-2.214.083-3.904-2.176-5.318-4.18-2.89-4.115-5.096-11.63-2.132-16.7 1.472-2.51 4.106-4.1 6.968-4.14 2.172-.043 4.222 1.463 5.55 1.463 1.325 0 3.813-1.81 6.428-1.545 1.096.046 4.173.443 6.148 3.34-.16.1-3.673 2.14-3.637 6.395.04 5.086 4.463 6.78 4.525 6.807z"/>
+                        </svg>
+                        Continue with Apple
+                    </a>
+                </div>
+
+                <!-- Demo Credentials -->
+                <div class="mt-6 text-center text-sm text-text-secondary">
+                    <p>Demo: admin@coresite.com / password</p>
+                </div>
             </div>
-        </div>
-        
-        <!-- Demo Credentials -->
-        <div class="mt-6 text-center text-sm text-text-secondary">
-            <p>Demo: admin@coresite.com / password</p>
         </div>
     </div>
 </div>

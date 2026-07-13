@@ -15,6 +15,32 @@
         </p>
     </div>
     
+    <!-- Trust banner: jaminan risiko rendah — sebelumnya tidak ada
+         satupun jaminan eksplisit di halaman pricing, padahal ini penting
+         untuk menghilangkan keraguan sebelum orang commit ke paket berbayar -->
+    <div class="max-w-3xl mx-auto mb-12">
+        <div class="flex flex-wrap items-center justify-center gap-6 bg-accent/5 border border-accent/20 rounded-xl px-6 py-4 text-sm text-text-secondary">
+            <span class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                Garansi 14 hari uang kembali
+            </span>
+            <span class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                </svg>
+                Pembayaran aman & terenkripsi
+            </span>
+            <span class="flex items-center gap-2">
+                <svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+                Batal kapan saja, tanpa biaya tersembunyi
+            </span>
+        </div>
+    </div>
+
     <!-- Pricing Cards -->
     <div class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
         <!-- Starter Plan -->
@@ -196,6 +222,14 @@
                 </summary>
                 <div class="px-6 pb-4 text-text-secondary dark:text-text-dark-secondary">
                     Saat ini support cash, transfer bank, dan QRIS. Kami akan menambah payment gateway segera.
+                </div>
+            </details>
+            <details class="border border-light-border dark:border-dark-border rounded-lg">
+                <summary class="px-6 py-4 font-medium text-text-primary dark:text-text-dark-primary cursor-pointer hover:text-accent transition-colors">
+                    Bagaimana keamanan data toko saya?
+                </summary>
+                <div class="px-6 pb-4 text-text-secondary dark:text-text-dark-secondary">
+                    Data transaksi dan pelanggan Anda dienkripsi dan di-backup otomatis secara berkala. Data toko Anda tidak pernah dibagikan ke pihak ketiga tanpa izin Anda.
                 </div>
             </details>
         </div>

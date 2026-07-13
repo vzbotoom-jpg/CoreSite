@@ -77,11 +77,8 @@
         </div>
 
         <button type="button" class="coresite-chat-button" id="coresite-chat-toggle" aria-label="Buka chat CorBot.AI">
-            <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true">
-                <path d="M7 12a5 5 0 015-5h2.5a.75.75 0 010 1.5H12a3.5 3.5 0 000 7h2.5a.75.75 0 010 1.5H12a5 5 0 01-5-5z" fill="white"/>
-                <circle cx="16.5" cy="7.5" r="1.5" fill="white"/>
-            </svg>
-            <span class="text-white text-[0.65rem] font-semibold uppercase tracking-[0.2em]">AI</span>
+            
+            <span class="text-white text-[0.56rem] font-semibold uppercase tracking-[0.2em]">Bot.AI</span>
         </button>
     </div>
 

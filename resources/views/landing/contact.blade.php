@@ -87,6 +87,15 @@
                     <p>Minggu: Tutup</p>
                 </div>
             </div>
+
+            {{-- Komitmen respon — menghilangkan keraguan "apakah pesan saya
+                 akan dibalas" sebelum orang mengirim form --}}
+            <div class="mt-6 flex items-center gap-3 bg-accent/5 border border-accent/20 rounded-xl px-4 py-3">
+                <svg class="w-5 h-5 text-accent flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <p class="text-sm text-text-secondary">Kami biasanya membalas pesan dalam <strong class="text-text-primary">kurang dari 24 jam</strong> di jam kerja.</p>
+            </div>
         </div>
     </div>
 </div>

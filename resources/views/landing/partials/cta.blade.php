@@ -17,7 +17,7 @@
                     </a>
                 </div>
                 <p class="text-caption text-text-secondary mt-6">
-                    *Tidak memerlukan kartu kredit. Batal kapan saja.
+                    *Tidak memerlukan kartu kredit. Batal kapan saja. Data Anda aman & terenkripsi.
                 </p>
             </div>
         </div>

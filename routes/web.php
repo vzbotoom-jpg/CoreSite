@@ -26,7 +26,7 @@ use App\Http\Controllers\DocsController;
 
 // ==================== LANDING PAGE ROUTES (Priority: HIGHEST) ====================
 Route::get('/', [LandingController::class, 'index'])->name('home'); // DITAMBAHKAN: route home
-Route::get('/landing', [LandingController::class, 'index'])->name('landing'); // Alias untuk landing
+Route::get('/beranda', [LandingController::class, 'index'])->name('landing'); // Alias untuk landing
 
 Route::get('/about', [LandingController::class, 'about'])->name('about');
 Route::get('/pricing', [LandingController::class, 'pricing'])->name('pricing');
