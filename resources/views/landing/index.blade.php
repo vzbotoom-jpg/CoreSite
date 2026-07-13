@@ -1,7 +1,7 @@
 {{-- resources/views/landing/index.blade.php --}}
 @extends('layouts.guest')
 
-@section('title', 'Platform Toko Online & Kasir Otomatis untuk UMKM')
+@section('title', 'CoreSite')
 
 @section('content')
     <!-- Hero Section -->
