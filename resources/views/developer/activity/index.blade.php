@@ -323,7 +323,7 @@ function activityManagement() {
             });
 
             try {
-                const response = await axios.get(`/api/developer/activity?${params}`);
+                const response = await axios.get(`/developer/activity/data?${params}`);
                 if (response.data.success) {
                     this.activities = response.data.data.data;
                     this.currentPage = response.data.data.current_page;
@@ -399,7 +399,7 @@ function activityManagement() {
 
         async confirmClearAll() {
             try {
-                const response = await axios.delete('/api/developer/activity/clear');
+                const response = await axios.delete('/developer/activity/clear');
                 if (response.data.success) {
                     this.showClearModal = false;
                     this.loadActivities();

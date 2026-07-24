@@ -135,7 +135,7 @@ function salesReport() {
             };
             
             try {
-                const response = await axios.get('/api/v1/reports/sales', { params });
+                const response = await axios.get('/admin/reports/sales', { params });
                 if (response.data.success) {
                     this.sales = response.data.data.data;
                     this.currentPage = response.data.data.current_page;

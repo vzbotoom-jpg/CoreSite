@@ -390,7 +390,7 @@ function databaseManagement() {
 
         async loadDatabaseInfo() {
             try {
-                const response = await axios.get('/api/developer/database/stats');
+                const response = await axios.get('/developer/system/database/stats');
                 if (response.data.success) {
                     this.stats = { ...this.stats, ...response.data.stats };
                 }
@@ -402,7 +402,7 @@ function databaseManagement() {
         async loadTables() {
             this.loading = true;
             try {
-                const response = await axios.get('/api/developer/database/tables');
+                const response = await axios.get('/developer/system/database/tables');
                 if (response.data.success) {
                     this.tables = response.data.data;
                     this.stats.total_tables = this.tables.length;
@@ -419,7 +419,7 @@ function databaseManagement() {
 
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/database/migrate');
+                const response = await axios.post('/developer/system/database/migrate');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Migration berhasil dijalankan', 'success');
@@ -438,7 +438,7 @@ function databaseManagement() {
 
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/database/rollback');
+                const response = await axios.post('/developer/system/database/rollback');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Rollback berhasil', 'success');
@@ -461,7 +461,7 @@ function databaseManagement() {
 
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/database/seed', { seeder: this.seederClass });
+                const response = await axios.post('/developer/system/database/seed', { seeder: this.seederClass });
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast(`Seeder ${this.seederClass} berhasil dijalankan`, 'success');
@@ -483,7 +483,7 @@ function databaseManagement() {
             this.showRefreshModal = false;
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/database/refresh');
+                const response = await axios.post('/developer/system/database/refresh');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Database berhasil di-refresh', 'success');
@@ -502,7 +502,7 @@ function databaseManagement() {
 
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/backup/create');
+                const response = await axios.post('/developer/backup/create');
                 if (response.data.success) {
                     window.showToast('Backup berhasil dibuat', 'success');
                     this.output = response.data.message;
@@ -535,7 +535,7 @@ function databaseManagement() {
 
             try {
                 const startTime = performance.now();
-                const response = await axios.post('/api/developer/database/query', { query: this.query });
+                const response = await axios.post('/developer/system/database/query', { query: this.query });
                 const endTime = performance.now();
 
                 if (response.data.success) {

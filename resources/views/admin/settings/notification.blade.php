@@ -130,7 +130,7 @@ function notificationSettings() {
         
         async loadSettings() {
             try {
-                const response = await axios.get('/api/v1/admin/settings/notification');
+                const response = await axios.get('/admin/settings/notification-data');
                 if (response.data.success) {
                     this.settings = response.data.data;
                 }
@@ -141,7 +141,7 @@ function notificationSettings() {
         
         async saveSettings() {
             try {
-                const response = await axios.post('/api/v1/admin/settings/notification', this.settings);
+                const response = await axios.post('/admin/settings/notification', this.settings);
                 if (response.data.success) {
                     window.showToast('Pengaturan notifikasi berhasil disimpan', 'success');
                 }

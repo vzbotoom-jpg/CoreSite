@@ -392,7 +392,7 @@ function systemSettings() {
             
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/migrate');
+                const response = await axios.post('/developer/system/database/migrate');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Migration berhasil dijalankan', 'success');
@@ -430,7 +430,7 @@ function systemSettings() {
 
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/seed', { seeder: this.seederClass });
+                const response = await axios.post('/developer/system/database/seed', { seeder: this.seederClass });
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast(`Seeder ${this.seederClass} berhasil dijalankan`, 'success');
@@ -448,7 +448,7 @@ function systemSettings() {
 
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/database/refresh');
+                const response = await axios.post('/developer/system/database/refresh');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Database berhasil di-refresh', 'success');
@@ -462,7 +462,7 @@ function systemSettings() {
 
         async optimizeApp() {
             try {
-                const response = await axios.post('/api/developer/optimize');
+                const response = await axios.post('/developer/system/optimize');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Application optimized successfully', 'success');
@@ -475,7 +475,7 @@ function systemSettings() {
 
         async clearOptimized() {
             try {
-                const response = await axios.post('/api/developer/optimize/clear');
+                const response = await axios.post('/developer/system/optimize/clear');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Optimized files cleared', 'success');
@@ -490,7 +490,7 @@ function systemSettings() {
             if (!confirm('Hapus semua log files?')) return;
             
             try {
-                const response = await axios.delete('/api/developer/logs');
+                const response = await axios.delete('/developer/logs');
                 if (response.data.success) {
                     window.showToast('Logs cleared successfully', 'success');
                 }
@@ -503,7 +503,7 @@ function systemSettings() {
             if (!confirm('Enable maintenance mode? Only developers can access the site.')) return;
             
             try {
-                const response = await axios.post('/api/developer/maintenance/enable');
+                const response = await axios.post('/developer/maintenance/enable');
                 if (response.data.success) {
                     this.system.maintenance = true;
                     window.showToast('Maintenance mode enabled', 'success');
@@ -517,7 +517,7 @@ function systemSettings() {
             if (!confirm('Disable maintenance mode?')) return;
             
             try {
-                const response = await axios.post('/api/developer/maintenance/disable');
+                const response = await axios.post('/developer/maintenance/disable');
                 if (response.data.success) {
                     this.system.maintenance = false;
                     window.showToast('Maintenance mode disabled', 'success');
@@ -533,7 +533,7 @@ function systemSettings() {
 
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/database/reset');
+                const response = await axios.post('/developer/system/database/reset');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Database berhasil di-reset', 'success');
@@ -550,7 +550,7 @@ function systemSettings() {
 
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/clear');
+                const response = await axios.post('/developer/system/clear');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Application cleared successfully', 'success');

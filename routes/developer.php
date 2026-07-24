@@ -23,7 +23,7 @@ Route::prefix('developer')->name('developer.')->middleware(['auth', 'developer']
     
     // API Routes for Dashboard
     Route::get('/api/stats', [DeveloperController::class, 'getDashboardStats'])->name('api.stats');
-    Route::get('/api/activity/recent', [DeveloperController::class, 'getRecentActivities'])->name('api.activity.recent');
+    Route::get('/api/activity/recent', [DeveloperController::class, 'getRecentActivity'])->name('api.activity.recent');
     
     // ==================== USER MANAGEMENT ====================
     Route::prefix('users')->name('users.')->group(function () {

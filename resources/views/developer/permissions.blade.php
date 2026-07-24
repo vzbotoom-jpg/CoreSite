@@ -170,7 +170,7 @@ function permissionManagement() {
             });
 
             try {
-                const response = await axios.get(`/api/developer/permissions?${params}`);
+                const response = await axios.get(`/developer/permissions/data?${params}`);
                 if (response.data.success) {
                     this.permissions = response.data.data.data;
                     this.currentPage = response.data.data.current_page;
@@ -226,7 +226,7 @@ function permissionManagement() {
 
         async savePermission() {
             try {
-                const url = this.form.id ? `/api/developer/permissions/${this.form.id}` : '/api/developer/permissions';
+                const url = this.form.id ? `/developer/permissions/${this.form.id}` : '/developer/permissions';
                 const method = this.form.id ? 'PUT' : 'POST';
                 
                 const response = await axios({
@@ -249,7 +249,7 @@ function permissionManagement() {
             if (!confirm(`Hapus permission "${permission.name}"?`)) return;
 
             try {
-                const response = await axios.delete(`/api/developer/permissions/${permission.id}`);
+                const response = await axios.delete(`/developer/permissions/${permission.id}`);
                 if (response.data.success) {
                     this.loadPermissions();
                     window.showToast('Permission berhasil dihapus', 'success');

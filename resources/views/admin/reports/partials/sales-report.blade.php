@@ -130,7 +130,7 @@ function salesReport() {
             };
             
             try {
-                const response = await axios.get('/api/v1/transactions', { params });
+                const response = await axios.get('/admin/transactions', { params });
                 if (response.data.success) {
                     this.sales = response.data.data.data || [];
                     this.currentPage = response.data.data.current_page || 1;

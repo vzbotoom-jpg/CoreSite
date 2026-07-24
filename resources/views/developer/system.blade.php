@@ -183,7 +183,7 @@ function systemSettings() {
             
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/migrate');
+                const response = await axios.post('/developer/system/database/migrate');
                 if (response.data.success) {
                     window.showToast('Migration berhasil dijalankan', 'success');
                     if (response.data.output) {
@@ -205,7 +205,7 @@ function systemSettings() {
 
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/seed', { seeder: this.seederClass });
+                const response = await axios.post('/developer/system/database/seed', { seeder: this.seederClass });
                 if (response.data.success) {
                     window.showToast(`Seeder ${this.seederClass} berhasil dijalankan`, 'success');
                 }
@@ -217,7 +217,7 @@ function systemSettings() {
 
         async optimizeApp() {
             try {
-                const response = await axios.post('/api/developer/optimize');
+                const response = await axios.post('/developer/system/optimize');
                 if (response.data.success) {
                     window.showToast('Application optimized successfully', 'success');
                 }
@@ -230,7 +230,7 @@ function systemSettings() {
             if (!confirm('Hapus semua log files?')) return;
             
             try {
-                const response = await axios.delete('/api/developer/logs');
+                const response = await axios.delete('/developer/logs');
                 if (response.data.success) {
                     window.showToast('Logs cleared successfully', 'success');
                 }

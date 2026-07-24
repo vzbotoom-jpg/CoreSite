@@ -284,7 +284,7 @@ function roleManagement() {
             });
 
             try {
-                const response = await axios.get(`/api/developer/roles?${params}`);
+                const response = await axios.get(`/developer/roles/data?${params}`);
                 if (response.data.success) {
                     this.roles = response.data.data;
                     this.stats = response.data.stats || this.stats;
@@ -320,7 +320,7 @@ function roleManagement() {
 
         async saveRole() {
             try {
-                const response = await axios.post('/api/developer/roles', this.form);
+                const response = await axios.post('/developer/roles', this.form);
                 if (response.data.success) {
                     this.closeCreateModal();
                     this.loadRoles();
@@ -335,7 +335,7 @@ function roleManagement() {
             if (!confirm(`Hapus role "${role.name}"?`)) return;
 
             try {
-                const response = await axios.delete(`/api/developer/roles/${role.id}`);
+                const response = await axios.delete(`/developer/roles/${role.id}`);
                 if (response.data.success) {
                     this.loadRoles();
                     window.showToast('Role berhasil dihapus', 'success');

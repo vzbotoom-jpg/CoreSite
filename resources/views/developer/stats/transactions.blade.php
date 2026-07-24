@@ -163,7 +163,7 @@ function transactionStats() {
         async loadStats() {
             this.loading = true;
             try {
-                const response = await axios.get('/api/developer/stats/transactions');
+                const response = await axios.get('/developer/stats/transactions');
                 if (response.data.success) {
                     this.stats = response.data.data;
                     this.renderCharts();

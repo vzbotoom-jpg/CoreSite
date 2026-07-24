@@ -188,7 +188,7 @@ function financialReport() {
             }
             
             try {
-                const response = await axios.get('/api/v1/reports/monthly', { params });
+                const response = await axios.get('/admin/reports/financial', { params });
                 if (response.data.success) {
                     this.data = response.data.data;
                     this.updateChart();

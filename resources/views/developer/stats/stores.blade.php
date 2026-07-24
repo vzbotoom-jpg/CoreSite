@@ -135,7 +135,7 @@ function storeStats() {
         async loadStats() {
             this.loading = true;
             try {
-                const response = await axios.get('/api/developer/stats/stores');
+                const response = await axios.get('/developer/stats/stores');
                 if (response.data.success) {
                     this.stats = response.data.data;
                 }

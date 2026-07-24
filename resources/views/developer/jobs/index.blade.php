@@ -350,7 +350,7 @@ function jobManager() {
         async loadJobs() {
             this.loading = true;
             try {
-                const response = await axios.get('/api/developer/jobs');
+                const response = await axios.get('/developer/jobs/data');
                 if (response.data.success) {
                     this.jobs = response.data.data;
                     this.stats = response.data.stats || this.stats;
@@ -422,7 +422,7 @@ function jobManager() {
             }
 
             try {
-                const response = await axios.post(`/api/developer/jobs/run/${job.id || job.name}`);
+                const response = await axios.post(`/developer/jobs/run/${job.id || job.name}`);
                 if (response.data.success) {
                     window.showToast(`Job "${job.name}" berhasil dijalankan`, 'success');
                     this.loadJobs();
@@ -435,7 +435,7 @@ function jobManager() {
         async toggleJob(job) {
             const action = job.status === 'active' ? 'disable' : 'enable';
             try {
-                const response = await axios.post(`/api/developer/jobs/${action}/${job.id || job.name}`);
+                const response = await axios.post(`/developer/jobs/${action}/${job.id || job.name}`);
                 if (response.data.success) {
                     window.showToast(`Job "${job.name}" ${action}d`, 'success');
                     this.loadJobs();
@@ -453,7 +453,7 @@ function jobManager() {
             this.showRunAllModal = false;
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/jobs/run-all');
+                const response = await axios.post('/developer/jobs/run-all');
                 if (response.data.success) {
                     window.showToast('Semua jobs berhasil dijalankan', 'success');
                     this.loadJobs();
@@ -469,7 +469,7 @@ function jobManager() {
             this.showLogsModal = true;
             this.loadingLogs = true;
             try {
-                const response = await axios.get(`/api/developer/jobs/logs/${job.id || job.name}`);
+                const response = await axios.get(`/developer/jobs/logs/${job.id || job.name}`);
                 if (response.data.success) {
                     this.jobLogs = response.data.data;
                 }

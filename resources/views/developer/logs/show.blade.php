@@ -189,7 +189,7 @@ function logViewer() {
             });
 
             try {
-                const response = await axios.get(`/api/developer/logs/${this.fileName}?${params}`);
+                const response = await axios.get(`/developer/logs/${this.fileName}?${params}`);
                 if (response.data.success) {
                     this.lines = response.data.data;
                     this.totalLines = response.data.total || 0;
@@ -233,7 +233,7 @@ function logViewer() {
 
         async confirmDelete() {
             try {
-                const response = await axios.delete(`/api/developer/logs/${this.fileName}`);
+                const response = await axios.delete(`/developer/logs/${this.fileName}`);
                 if (response.data.success) {
                     this.showDeleteModal = false;
                     window.showToast('Log berhasil dihapus', 'success');

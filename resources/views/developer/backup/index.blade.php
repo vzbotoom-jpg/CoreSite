@@ -363,7 +363,7 @@ function backupManager() {
         async loadBackups() {
             this.loading = true;
             try {
-                const response = await axios.get('/api/developer/backup/list');
+                const response = await axios.get('/developer/backup/list');
                 if (response.data.success) {
                     this.backups = response.data.data;
                     this.stats = response.data.stats || this.stats;
@@ -377,7 +377,7 @@ function backupManager() {
 
         async loadSettings() {
             try {
-                const response = await axios.get('/api/developer/backup/settings');
+                const response = await axios.get('/developer/backup/settings');
                 if (response.data.success) {
                     this.settings = { ...this.settings, ...response.data.data };
                 }
@@ -470,7 +470,7 @@ function backupManager() {
         async updateSettings() {
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/backup/settings', this.settings);
+                const response = await axios.post('/developer/backup/settings', this.settings);
                 if (response.data.success) {
                     window.showToast('Settings updated successfully', 'success');
                 }
