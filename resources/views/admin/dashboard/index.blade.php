@@ -103,7 +103,7 @@ function dashboard() {
         async loadChartData() {
             this.loading = true;
             try {
-                const response = await axios.get(`/api/v1/dashboard/chart?period=${this.period}`);
+                const response = await axios.get(`/admin/dashboard/chart?period=${this.period}`);
                 if (response.data.success) {
                     this.updateChart(response.data.data);
                 }
@@ -187,25 +187,31 @@ function dashboard() {
         },
         
         formatRupiah(value) {
+            const num = parseFloat(value);
+            if (isNaN(num)) return 'Rp 0';
             return new Intl.NumberFormat('id-ID', {
                 style: 'currency',
                 currency: 'IDR',
                 minimumFractionDigits: 0
-            }).format(value);
+            }).format(num);
         },
         
         formatRupiahShort(value) {
+            const num = parseFloat(value);
+            if (isNaN(num)) return 'Rp 0';
             return new Intl.NumberFormat('id-ID', {
                 style: 'currency',
                 currency: 'IDR',
                 minimumFractionDigits: 0,
                 notation: 'compact',
                 compactDisplay: 'short'
-            }).format(value);
+            }).format(num);
         },
         
         formatNumber(value) {
-            return new Intl.NumberFormat('id-ID').format(value);
+            const num = parseFloat(value);
+            if (isNaN(num)) return '0';
+            return new Intl.NumberFormat('id-ID').format(num);
         }
     }
 }
