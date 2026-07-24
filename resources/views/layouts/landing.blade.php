@@ -4,8 +4,34 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="theme-color" content="#FFFFFF">
     <title>@yield('title', config('app.name', 'CoreSite')) - {{ config('app.name', 'CoreSite') }}</title>
     
+    <!-- ============================================ -->
+    <!-- ANTI-FLICKER SCRIPT - 100% AUTO FOLLOW CHROME -->
+    <!-- ============================================ -->
+    <script>
+        (function() {
+            const mq = window.matchMedia('(prefers-color-scheme: dark)');
+            function applyTheme(isDark) {
+                if (isDark) {
+                    document.documentElement.classList.add('dark');
+                    const meta = document.querySelector('meta[name="theme-color"]');
+                    if (meta) meta.content = '#0A0B0E';
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    const meta = document.querySelector('meta[name="theme-color"]');
+                    if (meta) meta.content = '#FFFFFF';
+                }
+            }
+            applyTheme(mq.matches);
+            mq.addEventListener('change', function(e) {
+                applyTheme(e.matches);
+            });
+        })();
+    </script>
+    <!-- ============================================ -->
+
     <!-- SEO Meta -->
     <meta name="description" content="@yield('description', 'CoreSite - Platform toko online dan kasir otomatis untuk UMKM Indonesia.')">
     <meta name="keywords" content="CoreSite, toko online, kasir, UMKM, e-commerce, manajemen bisnis">
@@ -146,33 +172,26 @@
     @stack('scripts')
     
     <script>
-        // ==================== THEME TOGGLE ====================
-        document.getElementById('theme-toggle')?.addEventListener('click', function() {
-            const html = document.documentElement;
+        // ==================== THEME SYNC ====================
+        function syncThemeIcons(isDark) {
             const icon = document.getElementById('theme-icon');
-            
-            if (html.classList.contains('dark')) {
-                html.classList.remove('dark');
-                icon.setAttribute('d', 'M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z');
-                localStorage.setItem('theme', 'light');
-            } else {
-                html.classList.add('dark');
-                icon.setAttribute('d', 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z');
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-
-        // Load theme preference
-        (function loadTheme() {
-            const theme = localStorage.getItem('theme');
-            if (theme === 'dark') {
-                document.documentElement.classList.add('dark');
-                const icon = document.getElementById('theme-icon');
-                if (icon) {
+            if (icon) {
+                if (isDark) {
                     icon.setAttribute('d', 'M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z');
+                } else {
+                    icon.setAttribute('d', 'M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z');
                 }
             }
-        })();
+        }
+
+        // Initial sync
+        syncThemeIcons(document.documentElement.classList.contains('dark'));
+
+        // Dynamic observer
+        const mqTheme = window.matchMedia('(prefers-color-scheme: dark)');
+        mqTheme.addEventListener('change', function(e) {
+            syncThemeIcons(e.matches);
+        });
 
         // ==================== MOBILE MENU ====================
         const menuToggle = document.getElementById('mobile-menu-toggle');
