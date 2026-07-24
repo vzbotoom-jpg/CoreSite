@@ -203,7 +203,7 @@ function activityDetail() {
         async loadActivity() {
             this.loading = true;
             try {
-                const response = await axios.get(`/api/developer/activity/${this.activityId}`);
+                const response = await axios.get(`/developer/activity/${this.activityId}`);
                 if (response.data.success) {
                     this.activity = response.data.data;
                     this.relatedActivities = response.data.related || [];
@@ -221,7 +221,7 @@ function activityDetail() {
 
         async confirmDelete() {
             try {
-                const response = await axios.delete(`/api/developer/activity/${this.activityId}`);
+                const response = await axios.delete(`/developer/activity/${this.activityId}`);
                 if (response.data.success) {
                     this.showDeleteModal = false;
                     window.showToast('Aktivitas berhasil dihapus', 'success');

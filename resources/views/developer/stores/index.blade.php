@@ -330,7 +330,7 @@ function storeManagement() {
             });
 
             try {
-                const response = await axios.get(`/api/developer/stores?${params}`);
+                const response = await axios.get(`/developer/stores/data?${params}`);
                 if (response.data.success) {
                     this.stores = response.data.data;
                     this.stats = response.data.stats || this.stats;

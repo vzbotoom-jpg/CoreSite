@@ -237,7 +237,7 @@ function userDetail() {
         async loadUser() {
             this.loading = true;
             try {
-                const response = await axios.get(`/api/developer/users/${this.userId}`);
+                const response = await axios.get(`/developer/users/${this.userId}`);
                 if (response.data.success) {
                     this.user = response.data.data;
                     this.activities = response.data.activities || [];
@@ -254,7 +254,7 @@ function userDetail() {
             if (!confirm(`Yakin ingin ${action} user "${this.user.name}"?`)) return;
 
             try {
-                const response = await axios.post(`/api/developer/users/${this.userId}/toggle-status`);
+                const response = await axios.post(`/developer/users/${this.userId}/toggle-status`);
                 if (response.data.success) {
                     this.user.is_active = !this.user.is_active;
                     window.showToast(`User berhasil ${action}`, 'success');
@@ -268,7 +268,7 @@ function userDetail() {
             if (!confirm(`Reset password untuk user "${this.user.name}"?`)) return;
             
             try {
-                const response = await axios.post(`/api/developer/users/${this.userId}/reset-password`);
+                const response = await axios.post(`/developer/users/${this.userId}/reset-password`);
                 if (response.data.success) {
                     window.showToast(`Password reset berhasil. Password baru: ${response.data.password}`, 'success');
                 }
@@ -279,7 +279,7 @@ function userDetail() {
 
         async sendVerification() {
             try {
-                const response = await axios.post(`/api/developer/users/${this.userId}/send-verification`);
+                const response = await axios.post(`/developer/users/${this.userId}/send-verification`);
                 if (response.data.success) {
                     window.showToast('Email verifikasi berhasil dikirim', 'success');
                 }
@@ -294,7 +294,7 @@ function userDetail() {
 
         async confirmDelete() {
             try {
-                const response = await axios.delete(`/api/developer/users/${this.userId}`);
+                const response = await axios.delete(`/developer/users/${this.userId}`);
                 if (response.data.success) {
                     this.showDeleteModal = false;
                     window.showToast('User berhasil dihapus', 'success');

@@ -195,7 +195,7 @@ function roleDetail() {
         async loadRole() {
             this.loading = true;
             try {
-                const response = await axios.get(`/api/developer/roles/${this.roleId}`);
+                const response = await axios.get(`/developer/roles/${this.roleId}`);
                 if (response.data.success) {
                     this.role = response.data.data;
                 }
@@ -212,7 +212,7 @@ function roleDetail() {
 
         async confirmDelete() {
             try {
-                const response = await axios.delete(`/api/developer/roles/${this.roleId}`);
+                const response = await axios.delete(`/developer/roles/${this.roleId}`);
                 if (response.data.success) {
                     this.showDeleteModal = false;
                     window.showToast('Role berhasil dihapus', 'success');

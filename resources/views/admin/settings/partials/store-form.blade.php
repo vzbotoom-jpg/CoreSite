@@ -102,7 +102,7 @@ function storeSettings() {
         async saveStore() {
             this.loading = true;
             try {
-                const response = await axios.put('/api/v1/admin/store', this.store);
+                const response = await axios.put('/admin/settings/store', this.store);
                 if (response.data.success) {
                     window.showToast('Informasi toko berhasil disimpan', 'success');
                 }
@@ -120,7 +120,7 @@ function storeSettings() {
             formData.append('logo', file);
             
             try {
-                const response = await axios.post('/api/v1/admin/store/logo', formData, {
+                const response = await axios.post('/admin/settings/logo', formData, {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 });
                 if (response.data.success) {

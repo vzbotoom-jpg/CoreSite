@@ -230,7 +230,7 @@ function transactionForm() {
             clearTimeout(this.searchTimeout);
             this.searchTimeout = setTimeout(async () => {
                 try {
-                    const response = await axios.get(`/api/v1/products?search=${this.searchQuery}&per_page=10`);
+                    const response = await axios.get(`/admin/products?search=${this.searchQuery}&per_page=10`);
                     if (response.data.success) {
                         this.searchResults = response.data.data.data.filter(p => p.stock > 0);
                     }
@@ -323,7 +323,7 @@ function transactionForm() {
             }));
             
             try {
-                const response = await axios.post('/api/v1/transactions', {
+                const response = await axios.post('/admin/transactions', {
                     items: items,
                     payment_method: this.paymentMethod,
                     paid_amount: this.paymentMethod === 'cash' ? this.paidAmount : this.total

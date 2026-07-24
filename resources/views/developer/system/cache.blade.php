@@ -191,7 +191,7 @@ function cacheManagement() {
 
         async loadStats() {
             try {
-                const response = await axios.get('/api/developer/cache/stats');
+                const response = await axios.get('/developer/system/cache/stats');
                 if (response.data.success) {
                     this.stats = response.data.data;
                 }
@@ -205,7 +205,7 @@ function cacheManagement() {
 
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/cache/clear');
+                const response = await axios.post('/developer/system/cache/clear');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Cache berhasil dihapus', 'success');
@@ -220,7 +220,7 @@ function cacheManagement() {
         async clearConfig() {
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/cache/clear/config');
+                const response = await axios.post('/developer/system/cache/clear/config');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Config cache berhasil dihapus', 'success');
@@ -235,7 +235,7 @@ function cacheManagement() {
         async clearViews() {
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/cache/clear/views');
+                const response = await axios.post('/developer/system/cache/clear/view');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('View cache berhasil dihapus', 'success');
@@ -250,7 +250,7 @@ function cacheManagement() {
         async clearRoutes() {
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/cache/clear/routes');
+                const response = await axios.post('/developer/system/cache/clear/route');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Route cache berhasil dihapus', 'success');
@@ -267,7 +267,7 @@ function cacheManagement() {
 
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/cache/warmup');
+                const response = await axios.post('/developer/system/cache/warmup');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Cache warmup berhasil', 'success');
@@ -284,7 +284,7 @@ function cacheManagement() {
 
             this.loading = true;
             try {
-                const response = await axios.post('/api/developer/cache/clear/all');
+                const response = await axios.post('/developer/system/cache/clear/all');
                 if (response.data.success) {
                     this.output = response.data.output || response.data.message;
                     window.showToast('Semua cache berhasil dihapus', 'success');

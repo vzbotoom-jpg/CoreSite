@@ -159,7 +159,7 @@ function settingsManager() {
         
         async saveUser() {
             try {
-                const url = this.userForm.id ? `/api/v1/admin/users/${this.userForm.id}` : '/api/v1/admin/users';
+                const url = this.userForm.id ? `/admin/settings/users/${this.userForm.id}` : '/admin/settings/users';
                 const method = this.userForm.id ? 'PUT' : 'POST';
                 
                 const response = await axios({

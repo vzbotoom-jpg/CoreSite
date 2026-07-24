@@ -447,7 +447,7 @@ function developerDashboard() {
 
         async loadRecentActivities() {
             try {
-                const response = await axios.get('/api/developer/activity/recent');
+                const response = await axios.get('/developer/api/activity/recent');
                 if (response.data.success) {
                     this.recentActivities = response.data.data;
                 }
@@ -649,7 +649,7 @@ function developerDashboard() {
         async refreshDashboard() {
             this.refreshing = true;
             try {
-                const response = await axios.get('/api/developer/stats');
+                const response = await axios.get('/developer/api/stats');
                 if (response.data.success) {
                     this.stats = { ...this.stats, ...response.data.data };
                 }

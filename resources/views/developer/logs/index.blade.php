@@ -223,7 +223,7 @@ function logManagement() {
             });
 
             try {
-                const response = await axios.get(`/api/developer/logs?${params}`);
+                const response = await axios.get(`/developer/logs/data?${params}`);
                 if (response.data.success) {
                     this.logs = response.data.data;
                     this.stats = response.data.stats || this.stats;
@@ -244,7 +244,7 @@ function logManagement() {
             if (!confirm('Konfirmasi: Yakin ingin menghapus semua log files?')) return;
 
             try {
-                const response = await axios.delete('/api/developer/logs');
+                const response = await axios.delete('/developer/logs');
                 if (response.data.success) {
                     this.loadLogs();
                     window.showToast('Semua logs berhasil dihapus', 'success');
@@ -263,7 +263,7 @@ function logManagement() {
             if (!this.deleteData) return;
 
             try {
-                const response = await axios.delete(`/api/developer/logs/${this.deleteData.name}`);
+                const response = await axios.delete(`/developer/logs/${this.deleteData.name}`);
                 if (response.data.success) {
                     this.showDeleteModal = false;
                     this.deleteData = null;

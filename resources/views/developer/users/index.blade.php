@@ -472,7 +472,7 @@ function userManagement() {
             });
 
             try {
-                const response = await axios.get(`/api/developer/users?${params}`);
+                const response = await axios.get(`/developer/users/data?${params}`);
                 if (response.data.success) {
                     this.users = response.data.data.data;
                     this.currentPage = response.data.data.current_page;
@@ -565,7 +565,7 @@ function userManagement() {
 
         async saveUser() {
             try {
-                const url = this.form.id ? `/api/developer/users/${this.form.id}` : '/api/developer/users';
+                const url = this.form.id ? `/developer/users/${this.form.id}` : '/developer/users';
                 const method = this.form.id ? 'PUT' : 'POST';
                 
                 const data = {
@@ -605,7 +605,7 @@ function userManagement() {
             if (!confirm(`Yakin ingin ${action} user "${user.name}"?`)) return;
 
             try {
-                const response = await axios.post(`/api/developer/users/${user.id}/toggle-status`);
+                const response = await axios.post(`/developer/users/${user.id}/toggle-status`);
                 if (response.data.success) {
                     this.loadUsers();
                     window.showToast(`User berhasil ${action}`, 'success');
@@ -624,7 +624,7 @@ function userManagement() {
             if (!this.deleteUserData) return;
             
             try {
-                const response = await axios.delete(`/api/developer/users/${this.deleteUserData.id}`);
+                const response = await axios.delete(`/developer/users/${this.deleteUserData.id}`);
                 if (response.data.success) {
                     this.showDeleteModal = false;
                     this.deleteUserData = null;

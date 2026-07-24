@@ -183,7 +183,7 @@ function userManager() {
         async loadUsers() {
             this.loading = true;
             try {
-                const response = await axios.get('/api/v1/admin/users');
+                const response = await axios.get('/admin/settings/users-data');
                 if (response.data.success) {
                     this.users = response.data.data;
                 }
@@ -231,7 +231,7 @@ function userManager() {
             this.formErrors = {};
             
             try {
-                const url = this.form.id ? `/api/v1/admin/users/${this.form.id}` : '/api/v1/admin/users';
+                const url = this.form.id ? `/admin/settings/users/${this.form.id}` : '/admin/settings/users';
                 const method = this.form.id ? 'PUT' : 'POST';
                 
                 const data = {
@@ -274,7 +274,7 @@ function userManager() {
             if (!confirm(`Yakin ingin ${action} user "${user.name}"?`)) return;
             
             try {
-                const response = await axios.post(`/api/v1/admin/users/${user.id}/toggle-status`);
+                const response = await axios.post(`/admin/settings/users/${user.id}/toggle-status`);
                 if (response.data.success) {
                     this.loadUsers();
                     window.showToast(`User berhasil ${action}`, 'success');
@@ -288,7 +288,7 @@ function userManager() {
             if (!confirm(`Hapus user "${user.name}"?`)) return;
             
             try {
-                const response = await axios.delete(`/api/v1/admin/users/${user.id}`);
+                const response = await axios.delete(`/admin/settings/users/${user.id}`);
                 if (response.data.success) {
                     this.loadUsers();
                     window.showToast('User berhasil dihapus', 'success');

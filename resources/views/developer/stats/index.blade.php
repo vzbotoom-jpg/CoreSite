@@ -254,7 +254,7 @@ function statisticsDashboard() {
         async loadStats() {
             this.loading = true;
             try {
-                const response = await axios.get(`/api/developer/stats/overview?period=${this.period}`);
+                const response = await axios.get(`/developer/stats/overview?period=${this.period}`);
                 if (response.data.success) {
                     this.stats = response.data.data;
                     this.renderCharts();

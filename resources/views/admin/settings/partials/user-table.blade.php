@@ -92,7 +92,7 @@ function userTable() {
         async loadUsers() {
             this.loading = true;
             try {
-                const response = await axios.get('/api/v1/admin/users');
+                const response = await axios.get('/admin/settings/users-data');
                 if (response.data.success) {
                     this.users = response.data.data;
                 }
@@ -106,7 +106,7 @@ function userTable() {
             if (!confirm(`Hapus user "${user.name}"?`)) return;
             
             try {
-                const response = await axios.delete(`/api/v1/admin/users/${user.id}`);
+                const response = await axios.delete(`/admin/settings/users/${user.id}`);
                 if (response.data.success) {
                     this.loadUsers();
                     window.showToast('User berhasil dihapus', 'success');

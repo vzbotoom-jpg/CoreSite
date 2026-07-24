@@ -106,7 +106,7 @@ function paymentSettings() {
         
         async loadSettings() {
             try {
-                const response = await axios.get('/api/v1/admin/settings/payment');
+                const response = await axios.get('/admin/settings/payment-data');
                 if (response.data.success) {
                     this.settings = response.data.data;
                 }
@@ -117,7 +117,7 @@ function paymentSettings() {
         
         async saveSettings() {
             try {
-                const response = await axios.post('/api/v1/admin/settings/payment', this.settings);
+                const response = await axios.post('/admin/settings/payment', this.settings);
                 if (response.data.success) {
                     window.showToast('Pengaturan pembayaran berhasil disimpan', 'success');
                 }
@@ -146,7 +146,7 @@ function paymentSettings() {
             formData.append('qris', file);
             
             try {
-                const response = await axios.post('/api/v1/admin/settings/qris', formData, {
+                const response = await axios.post('/admin/settings/qris', formData, {
                     headers: { 'Content-Type': 'multipart/form-data' }
                 });
                 if (response.data.success) {

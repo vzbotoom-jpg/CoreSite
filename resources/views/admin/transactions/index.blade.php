@@ -218,7 +218,7 @@ function transactionManager() {
             });
             
             try {
-                const response = await axios.get(`/api/v1/transactions?${params}`);
+                const response = await axios.get(`/admin/transactions?${params}`);
                 if (response.data.success) {
                     this.transactions = response.data.data.data;
                     this.currentPage = response.data.data.current_page;
@@ -282,7 +282,7 @@ function transactionManager() {
             if (!confirm('Batalkan transaksi ini? Stok akan dikembalikan.')) return;
             
             try {
-                const response = await axios.post(`/api/v1/transactions/${id}/cancel`);
+                const response = await axios.post(`/admin/transactions/${id}/cancel`);
                 if (response.data.success) {
                     window.showToast('Transaksi berhasil dibatalkan', 'success');
                     this.loadTransactions();

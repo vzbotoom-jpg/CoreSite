@@ -221,7 +221,7 @@ function productManager() {
             });
             
             try {
-                const response = await axios.get(`/api/v1/products?${params}`);
+                const response = await axios.get(`/admin/products?${params}`);
                 if (response.data.success) {
                     this.products = response.data.data.data;
                     this.currentPage = response.data.data.current_page;
@@ -294,7 +294,7 @@ function productManager() {
         },
         
         async saveProduct() {
-            const url = this.isEditing ? `/api/v1/products/${this.form.id}` : '/api/v1/products';
+            const url = this.isEditing ? `/admin/products/${this.form.id}` : '/admin/products';
             const method = this.isEditing ? 'PUT' : 'POST';
             
             try {
@@ -328,7 +328,7 @@ function productManager() {
             }
             
             try {
-                const response = await axios.post(`/api/v1/products/${this.selectedProduct.id}/adjust-stock`, {
+                const response = await axios.post(`/admin/products/${this.selectedProduct.id}/adjust-stock`, {
                     quantity: parseInt(this.stockQuantity),
                     notes: this.stockNotes
                 });
@@ -347,7 +347,7 @@ function productManager() {
             if (!confirm(`Hapus produk "${product.name}"?`)) return;
             
             try {
-                const response = await axios.delete(`/api/v1/products/${product.id}`);
+                const response = await axios.delete(`/admin/products/${product.id}`);
                 if (response.data.success) {
                     this.loadProducts();
                     window.showToast('Produk berhasil dihapus', 'success');

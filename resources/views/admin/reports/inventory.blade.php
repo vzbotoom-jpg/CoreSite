@@ -204,7 +204,7 @@ function inventoryReport() {
             
             try {
                 // Load summary and alerts
-                const response = await axios.get('/api/v1/reports/inventory');
+                const response = await axios.get('/admin/reports/inventory');
                 if (response.data.success) {
                     this.summary = response.data.data.stock_summary;
                     this.lowStockProducts = response.data.data.low_stock_products;
@@ -222,7 +222,7 @@ function inventoryReport() {
         
         async loadAllProducts() {
             try {
-                const response = await axios.get(`/api/v1/products?page=${this.allProductsPage}&per_page=20`);
+                const response = await axios.get(`/admin/products?page=${this.allProductsPage}&per_page=20`);
                 if (response.data.success) {
                     this.allProducts = response.data.data.data;
                     this.allProductsPage = response.data.data.current_page;

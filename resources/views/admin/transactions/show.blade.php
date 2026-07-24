@@ -167,7 +167,7 @@ async function cancelTransaction(id) {
     if (!confirm('Batalkan transaksi ini? Stok akan dikembalikan.')) return;
     
     try {
-        const response = await axios.post(`/api/v1/transactions/${id}/cancel`);
+        const response = await axios.post(`/admin/transactions/${id}/cancel`);
         if (response.data.success) {
             window.showToast('Transaksi berhasil dibatalkan', 'success');
             setTimeout(() => {

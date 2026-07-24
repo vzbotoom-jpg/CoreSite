@@ -125,7 +125,7 @@ function preferenceSettings() {
         
         async loadPreferences() {
             try {
-                const response = await axios.get('/api/v1/admin/settings/preferences');
+                const response = await axios.get('/admin/settings/preferences-data');
                 if (response.data.success) {
                     this.preferences = response.data.data;
                     // Apply theme
@@ -142,7 +142,7 @@ function preferenceSettings() {
         
         async savePreferences() {
             try {
-                const response = await axios.post('/api/v1/admin/settings/preferences', this.preferences);
+                const response = await axios.post('/admin/settings/preferences', this.preferences);
                 if (response.data.success) {
                     window.showToast('Preferensi berhasil disimpan', 'success');
                     // Reload page to apply theme
