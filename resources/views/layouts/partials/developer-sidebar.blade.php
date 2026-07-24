@@ -1,17 +1,17 @@
 {{-- resources/views/layouts/partials/developer-sidebar.blade.php --}}
 <aside x-data="{ collapsed: false }"
-       class="relative bg-dark-bg text-white flex-shrink-0 flex flex-col transition-all duration-300 overflow-hidden h-screen"
+       class="relative bg-light-bg dark:bg-dark-bg border-r border-light-border dark:border-dark-border text-text-primary dark:text-text-dark-primary flex-shrink-0 flex flex-col transition-all duration-300 overflow-hidden h-screen"
        :class="collapsed ? 'w-20' : 'w-64'">
 
     <!-- Logo -->
-    <div class="flex items-center justify-between gap-2 p-4 border-b border-white/10 flex-shrink-0">
+    <div class="flex items-center justify-between gap-2 p-4 border-b border-light-border dark:border-dark-border flex-shrink-0">
         <a href="{{ route('developer.dashboard') }}" class="flex items-center gap-3 overflow-hidden">
             <div class="w-10 h-10 bg-accent rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg shadow-accent/20">
                 <span class="text-white font-bold text-xl">C</span>
             </div>
             <div class="flex items-center gap-2 whitespace-nowrap transition-all duration-300"
                  :class="collapsed ? 'opacity-0 w-0' : 'opacity-100 w-auto'">
-                <span class="text-xl font-bold">CoreSite</span>
+                <span class="text-xl font-bold text-text-primary dark:text-text-dark-primary">CoreSite</span>
                 <span class="text-xs bg-accent/20 text-accent px-2 py-0.5 rounded">Dev</span>
             </div>
         </a>
@@ -19,8 +19,8 @@
 
     <!-- Collapse Toggle -->
     <button @click="collapsed = !collapsed"
-            class="absolute -right-3 top-[4.5rem] bg-dark-bg border border-white/10 rounded-full p-1 hover:bg-accent/20 transition z-20 hidden lg:block">
-        <svg class="w-4 h-4 text-white transition-transform duration-300"
+            class="absolute -right-3 top-[4.5rem] bg-light-bg dark:bg-dark-bg border border-light-border dark:border-dark-border rounded-full p-1 hover:bg-accent/20 transition z-20 hidden lg:block">
+        <svg class="w-4 h-4 text-text-primary dark:text-text-dark-primary transition-transform duration-300"
              :class="collapsed ? 'rotate-180' : ''"
              fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
@@ -200,7 +200,7 @@
     </nav>
 
     <!-- User Info -->
-    <div class="flex-shrink-0 p-4 border-t border-white/10 bg-dark-bg/95 backdrop-blur">
+    <div class="flex-shrink-0 p-4 border-t border-light-border dark:border-dark-border bg-light-surface/50 dark:bg-dark-surface/50 backdrop-blur">
         <div class="flex items-center gap-3" :class="collapsed ? 'justify-center' : ''">
             <div class="w-9 h-9 bg-accent/20 rounded-full flex items-center justify-center flex-shrink-0">
                 <span class="text-accent font-semibold text-sm">
@@ -209,13 +209,13 @@
             </div>
             <div class="flex-1 min-w-0 overflow-hidden whitespace-nowrap transition-all duration-300"
                  :class="collapsed ? 'opacity-0 w-0' : 'opacity-100 w-auto'">
-                <p class="text-sm font-medium text-white truncate">
+                <p class="text-sm font-medium text-text-primary dark:text-text-dark-primary truncate">
                     {{ auth()->user()->name }}
                 </p>
                 <p class="text-xs text-accent">Developer</p>
             </div>
             <button onclick="document.getElementById('logout-form-sidebar').submit()"
-                    class="text-gray-400 hover:text-white transition flex-shrink-0"
+                    class="text-text-secondary hover:text-error dark:text-text-dark-secondary dark:hover:text-error transition flex-shrink-0"
                     :class="collapsed ? 'hidden' : ''"
                     title="Logout">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -232,11 +232,11 @@
 <!-- Sidebar CSS -->
 <style>
 .sidebar-link {
-    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200 text-sm;
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-secondary hover:text-accent hover:bg-accent/10 transition-all duration-200 text-sm dark:text-text-dark-secondary dark:hover:text-accent dark:hover:bg-accent/20;
 }
 
 .sidebar-link-active {
-    @apply text-accent bg-accent/20 shadow-lg shadow-accent/10;
+    @apply text-accent bg-accent/10 shadow-lg shadow-accent/5 dark:bg-accent/20 dark:shadow-accent/10;
 }
 
 .sidebar-link-active svg {
