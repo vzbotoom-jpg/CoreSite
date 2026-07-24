@@ -70,15 +70,24 @@ class Store extends Model
      */
     public function getSettingsArrayAttribute(): array
     {
-        return $this->settings ?? [
+        $defaults = [
             'currency' => 'IDR',
             'timezone' => 'Asia/Jakarta',
             'date_format' => 'd-m-Y',
-            'notification_email' => $this->email,
+            'notification_email' => $this->email ?? '',
             'low_stock_alert_enabled' => true,
             'send_monthly_report' => true,
             'theme' => 'light',
         ];
+
+        $settings = $this->settings;
+        if (is_string($settings)) {
+            $decoded = json_decode($settings, true);
+            $settings = is_array($decoded) ? $decoded : [];
+        }
+
+        $settingsArray = is_array($settings) ? $settings : [];
+        return array_merge($defaults, $settingsArray);
     }
 
     /**
