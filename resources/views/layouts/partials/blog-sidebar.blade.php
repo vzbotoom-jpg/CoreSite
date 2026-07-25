@@ -3,24 +3,24 @@
     <!-- Journal Title -->
     <div class="pb-6 border-b border-light-border/40 dark:border-dark-border/40">
         <h2 class="text-xl font-bold text-text-primary dark:text-text-dark-primary tracking-tight">
-            Journal
+            Edukasi UMKM
         </h2>
-        <p class="text-sm text-text-secondary/70 mt-1 leading-relaxed">
-            Thoughts on building, fixing, and learning.
+        <p class="text-xs text-text-secondary/70 mt-2 leading-relaxed">
+            Strategi pemasaran, pembukuan keuangan, dan update fitur CoreSite untuk memajukan bisnis Anda.
         </p>
     </div>
 
     <!-- Search -->
     <div>
-        <h4 class="text-xs font-semibold text-text-secondary dark:text-text-dark-secondary uppercase tracking-wider mb-4">
-            Search
+        <h4 class="text-xs font-bold text-text-secondary dark:text-text-dark-secondary uppercase tracking-wider mb-4">
+            Cari Artikel
         </h4>
         <form action="{{ route('blog.search') }}" method="GET" class="relative">
             <input 
                 type="text" 
                 name="q" 
-                placeholder="Search articles..." 
-                class="w-full px-4 py-2.5 bg-light-surface dark:bg-dark-surface border-0 rounded-lg text-text-primary dark:text-text-dark-primary placeholder:text-text-secondary/60 focus:ring-1 focus:ring-accent/50 transition outline-none text-sm"
+                placeholder="Cari artikel..."
+                class="w-full px-4 py-2.5 bg-light-surface dark:bg-dark-surface border border-light-border dark:border-dark-border rounded-lg text-text-primary dark:text-text-dark-primary placeholder:text-text-secondary/60 focus:ring-1 focus:ring-accent/50 transition outline-none text-sm"
             >
             <button 
                 type="submit" 
@@ -34,44 +34,65 @@
     </div>
 
     <!-- Subscribe -->
-    <div class="bg-light-surface/50 dark:bg-dark-surface/50 rounded-xl p-5">
-        <h4 class="text-xs font-semibold text-text-secondary dark:text-text-dark-secondary uppercase tracking-wider mb-2">
-            Subscribe
+    <div class="bg-accent/5 border border-accent/10 rounded-xl p-5">
+        <h4 class="text-xs font-bold text-accent uppercase tracking-wider mb-2">
+            Langganan Buletin
         </h4>
-        <p class="text-sm text-text-secondary dark:text-text-dark-secondary mb-4 leading-relaxed">
-            Get the latest posts delivered right to your inbox.
+        <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-4 leading-relaxed">
+            Dapatkan tips bisnis mingguan yang telah dibaca oleh 1,000+ pemilik UMKM.
         </p>
         <form action="{{ route('blog.subscribe') }}" method="POST" class="space-y-3">
             @csrf
             <input 
                 type="email" 
                 name="email" 
-                placeholder="Your email address" 
-                class="w-full px-4 py-2 bg-light-bg dark:bg-dark-bg border border-light-border dark:border-dark-border rounded-lg text-text-primary dark:text-text-dark-primary placeholder:text-text-secondary/60 focus:ring-1 focus:ring-accent/50 transition outline-none text-sm"
+                placeholder="Alamat email Anda"
+                class="w-full px-4 py-2 bg-light-bg dark:bg-dark-bg border border-light-border dark:border-dark-border rounded-lg text-text-primary dark:text-text-dark-primary placeholder:text-text-secondary/60 focus:ring-1 focus:ring-accent/50 transition outline-none text-xs"
                 required
             >
             <button 
                 type="submit" 
-                class="w-full px-4 py-2 bg-text-primary dark:bg-text-dark-primary text-light-bg dark:text-dark-bg font-medium rounded-lg hover:opacity-80 transition text-sm"
+                class="w-full px-4 py-2 bg-accent hover:bg-accent-hover text-white font-bold rounded-lg transition text-xs"
             >
-                Subscribe
+                Langganan
             </button>
         </form>
     </div>
 
+    <!-- Top Guides / Artikel Pilihan -->
+    <div>
+        <h4 class="text-xs font-bold text-text-secondary dark:text-text-dark-secondary uppercase tracking-wider mb-4">
+            Artikel Pilihan
+        </h4>
+        <div class="space-y-3">
+            <a href="{{ route('guides') }}" class="block group">
+                <span class="text-[10px] text-accent font-bold uppercase tracking-wider">Panduan</span>
+                <p class="text-xs font-semibold text-text-primary dark:text-text-dark-primary group-hover:text-accent transition mt-0.5">
+                    Langkah Awal Membangun E-Catalog Toko Online
+                </p>
+            </a>
+            <a href="{{ route('guides') }}" class="block group">
+                <span class="text-[10px] text-accent font-bold uppercase tracking-wider">Kasir POS</span>
+                <p class="text-xs font-semibold text-text-primary dark:text-text-dark-primary group-hover:text-accent transition mt-0.5">
+                    Cara Cetak Struk Kasir Lewat Bluetooth Thermal Printer
+                </p>
+            </a>
+        </div>
+    </div>
+
     <!-- Categories -->
     <div>
-        <h4 class="text-xs font-semibold text-text-secondary dark:text-text-dark-secondary uppercase tracking-wider mb-4">
-            Categories
+        <h4 class="text-xs font-bold text-text-secondary dark:text-text-dark-secondary uppercase tracking-wider mb-4">
+            Kategori
         </h4>
         <div class="space-y-1.5">
             @foreach($categories ?? [] as $category)
             <a 
                 href="{{ route('blog.category', $category->slug) }}" 
-                class="flex justify-between items-center py-1.5 text-sm text-text-secondary hover:text-text-primary dark:hover:text-text-dark-primary transition group"
+                class="flex justify-between items-center py-1.5 text-xs text-text-secondary hover:text-text-primary dark:hover:text-text-dark-primary transition group"
             >
                 <span class="group-hover:underline">{{ $category->name }}</span>
-                <span class="text-xs text-text-secondary/60">{{ $category->posts_count ?? 0 }}</span>
+                <span class="text-[10px] font-bold text-text-secondary/60 bg-light-surface dark:bg-dark-surface px-1.5 py-0.5 rounded-full border border-light-border dark:border-dark-border/40">{{ $category->posts_count ?? 0 }}</span>
             </a>
             @endforeach
         </div>
@@ -79,16 +100,16 @@
 
     <!-- Recent Posts -->
     <div>
-        <h4 class="text-xs font-semibold text-text-secondary dark:text-text-dark-secondary uppercase tracking-wider mb-4">
-            Recent Posts
+        <h4 class="text-xs font-bold text-text-secondary dark:text-text-dark-secondary uppercase tracking-wider mb-4">
+            Artikel Terbaru
         </h4>
         <div class="space-y-4">
             @foreach($recentPosts ?? [] as $recent)
             <a href="{{ route('blog.post', $recent->slug) }}" class="block group">
-                <p class="text-sm text-text-primary dark:text-text-dark-primary group-hover:text-accent transition leading-snug">
+                <p class="text-xs font-bold text-text-primary dark:text-text-dark-primary group-hover:text-accent transition leading-snug">
                     {{ $recent->title }}
                 </p>
-                <p class="text-xs text-text-secondary/60 mt-1">{{ $recent->created_at->format('M d, Y') }}</p>
+                <p class="text-[10px] text-text-secondary/60 mt-1">{{ $recent->created_at->format('d/m/Y') }}</p>
             </a>
             @endforeach
         </div>
@@ -97,14 +118,14 @@
     <!-- Tags -->
     @if(isset($tags) && count($tags) > 0)
     <div>
-        <h4 class="text-xs font-semibold text-text-secondary dark:text-text-dark-secondary uppercase tracking-wider mb-4">
-            Tags
+        <h4 class="text-xs font-bold text-text-secondary dark:text-text-dark-secondary uppercase tracking-wider mb-4">
+            Label / Tag
         </h4>
         <div class="flex flex-wrap gap-1.5">
             @foreach($tags as $tag)
             <a 
                 href="{{ route('blog.tag', $tag->slug) }}" 
-                class="text-xs px-2.5 py-1 rounded-full bg-light-surface dark:bg-dark-surface text-text-secondary hover:text-accent hover:bg-accent/5 transition"
+                class="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-light-surface dark:bg-dark-surface text-text-secondary hover:text-accent hover:bg-accent/5 transition border border-light-border dark:border-dark-border/40"
             >
                 {{ $tag->name }}
             </a>

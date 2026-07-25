@@ -84,8 +84,8 @@
     </div>
 
     <!-- Search & Filter -->
-    <div class="card">
-        <div class="card-body">
+    <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+        <div class="card-body p-4">
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div>
                     <input type="text" x-model="filters.search" @input="debounceSearch" 
@@ -101,7 +101,7 @@
                 <div>
                     <select x-model="filters.permission" @change="loadRoles" class="input">
                         <option value="">Semua Permission</option>
-                        <template x-for="permission in permissions" :key="permission.id">
+                        <template x-for="permission in allPermissions" :key="permission.id">
                             <option :value="permission.id" x-text="permission.name"></option>
                         </template>
                     </select>
@@ -113,54 +113,56 @@
     <!-- Roles Grid -->
     <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         <template x-for="role in roles" :key="role.id">
-            <div class="card hover:shadow-lg transition group" :class="role.is_default ? 'border-accent/30' : ''">
-                <div class="card-body">
-                    <div class="flex justify-between items-start mb-4">
-                        <div class="flex-1">
-                            <div class="flex items-center gap-2">
-                                <h3 class="text-lg font-bold text-text-primary dark:text-text-dark-primary" x-text="role.name"></h3>
-                                <span x-show="role.is_default" class="badge badge-primary text-xs">Default</span>
-                                <span x-show="role.slug === 'developer'" class="badge badge-error text-xs">System</span>
+            <div class="card hover:shadow-lg transition group bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border" :class="role.is_default ? 'border-accent/30' : ''">
+                <div class="card-body p-5 flex flex-col justify-between h-full">
+                    <div>
+                        <div class="flex justify-between items-start mb-4">
+                            <div class="flex-1 min-w-0">
+                                <div class="flex flex-wrap items-center gap-2">
+                                    <h3 class="text-base font-bold text-text-primary dark:text-text-dark-primary truncate" x-text="role.name"></h3>
+                                    <span x-show="role.is_default" class="badge badge-primary text-[10px] py-0.5 px-1.5 font-bold">Default</span>
+                                    <span x-show="role.slug === 'developer' || role.slug === 'super-admin' || role.slug === 'store-owner'" class="badge badge-error text-[10px] py-0.5 px-1.5 font-bold">System</span>
+                                </div>
+                                <p class="text-xs text-text-secondary dark:text-text-dark-secondary font-mono mt-0.5" x-text="role.slug"></p>
                             </div>
-                            <p class="text-xs text-text-secondary dark:text-text-dark-secondary" x-text="role.slug"></p>
+                            <div class="flex gap-1 shrink-0 ml-2">
+                                <a :href="`/developer/roles/${role.id}`" class="text-info hover:text-info/80 transition p-1" title="Detail">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                    </svg>
+                                </a>
+                                <a :href="`/developer/roles/${role.id}/edit`" class="text-info hover:text-info/80 transition p-1" title="Edit">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                </a>
+                                <button @click="deleteRole(role)" class="text-error hover:text-error/80 transition p-1" title="Hapus" x-show="role.slug !== 'developer'">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </div>
-                        <div class="flex gap-1">
-                            <a :href="`/developer/roles/${role.id}`" class="text-info hover:text-info/80 transition p-1" title="Detail">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                </svg>
-                            </a>
-                            <a :href="`/developer/roles/${role.id}/edit`" class="text-info hover:text-info/80 transition p-1" title="Edit">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
-                                </svg>
-                            </a>
-                            <button @click="deleteRole(role)" class="text-error hover:text-error/80 transition p-1" title="Hapus" x-show="role.slug !== 'developer'">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                                </svg>
-                            </button>
+
+                        <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-4 line-clamp-2 min-h-8" x-text="role.description || 'Tidak ada deskripsi'"></p>
+
+                        <div class="mb-4">
+                            <p class="text-[11px] font-bold text-text-secondary uppercase tracking-wider mb-2">Permissions:</p>
+                            <div class="flex flex-wrap gap-1 max-h-24 overflow-y-auto">
+                                <template x-for="permission in role.permissions" :key="permission.id">
+                                    <span class="badge badge-secondary text-[10px] py-0.5 px-1.5 font-medium" x-text="permission.name"></span>
+                                </template>
+                                <span x-show="!role.permissions || role.permissions.length === 0" class="text-xs text-text-secondary italic">Tidak ada permission</span>
+                            </div>
                         </div>
                     </div>
 
-                    <p class="text-sm text-text-secondary dark:text-text-dark-secondary mb-4" x-text="role.description || 'Tidak ada deskripsi'"></p>
-
-                    <div class="mb-4">
-                        <p class="text-xs font-medium text-text-secondary mb-2">Permissions:</p>
-                        <div class="flex flex-wrap gap-1 max-h-20 overflow-y-auto">
-                            <template x-for="permission in role.permissions" :key="permission.id">
-                                <span class="badge badge-secondary text-xs" x-text="permission.name"></span>
-                            </template>
-                            <span x-show="!role.permissions || role.permissions.length === 0" class="text-xs text-text-secondary">Tidak ada permission</span>
-                        </div>
-                    </div>
-
-                    <div class="pt-3 border-t border-light-border dark:border-dark-border flex justify-between items-center">
-                        <span class="text-xs text-text-secondary">
+                    <div class="pt-3 border-t border-light-border dark:border-dark-border flex justify-between items-center mt-4">
+                        <span class="text-xs text-text-secondary font-medium">
                             👥 <span x-text="role.users_count || 0"></span> user(s)
                         </span>
-                        <span class="text-xs text-text-secondary">
+                        <span class="text-xs text-text-secondary font-medium">
                             🛡️ <span x-text="role.permissions?.length || 0"></span> permission(s)
                         </span>
                     </div>
@@ -187,48 +189,60 @@
     </div>
 
     <!-- Create Role Modal -->
-    <div x-show="showCreateModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/50" @click.away="closeCreateModal">
-        <div class="card w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto" @click.stop>
-            <div class="card-header flex justify-between items-center">
-                <h3 class="text-xl font-bold text-text-primary dark:text-text-dark-primary">Tambah Role Baru</h3>
+    <div x-show="showCreateModal" x-cloak class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-xs" @click.away="closeCreateModal">
+        <div class="card w-full max-w-2xl mx-4 max-h-[90vh] overflow-y-auto bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border" @click.stop>
+            <div class="card-header flex justify-between items-center border-b border-light-border dark:border-dark-border pb-4">
+                <h3 class="text-lg font-bold text-text-primary dark:text-text-dark-primary">Tambah Role Baru</h3>
                 <button @click="closeCreateModal" class="text-text-secondary hover:text-text-primary">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
                     </svg>
                 </button>
             </div>
-            <div class="card-body">
+            <div class="card-body p-6">
                 <form @submit.prevent="saveRole">
-                    <div class="space-y-4">
+                    <div class="space-y-5">
                         <div>
-                            <label class="block text-sm font-medium text-text-primary dark:text-text-dark-primary mb-2">Nama Role *</label>
+                            <label class="block text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-2">Nama Role *</label>
                             <input type="text" x-model="form.name" required class="input" placeholder="Nama role">
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-text-primary dark:text-text-dark-primary mb-2">Slug *</label>
+                            <label class="block text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-2">Slug *</label>
                             <input type="text" x-model="form.slug" required class="input" placeholder="role-slug">
                             <p class="text-xs text-text-secondary mt-1">Identifier unik untuk role</p>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-text-primary dark:text-text-dark-primary mb-2">Deskripsi</label>
+                            <label class="block text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-2">Deskripsi</label>
                             <textarea x-model="form.description" rows="2" class="input" placeholder="Deskripsi role"></textarea>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-text-primary dark:text-text-dark-primary mb-2">Permissions</label>
-                            <div class="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto p-2 border border-light-border dark:border-dark-border rounded-lg">
-                                <template x-for="permission in allPermissions" :key="permission.id">
-                                    <label class="flex items-center gap-2 cursor-pointer text-sm">
-                                        <input type="checkbox" :value="permission.id" x-model="form.permissions" class="w-3 h-3 rounded border-gray-300 text-accent">
-                                        <span x-text="permission.name"></span>
-                                        <span class="text-xs text-text-secondary" x-text="permission.group ? '(' + permission.group + ')' : ''"></span>
-                                    </label>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="block text-sm font-semibold text-text-primary dark:text-text-dark-primary">Permissions</label>
+                                <label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold text-accent hover:underline">
+                                    <input type="checkbox" @change="toggleSelectAllPermissions" :checked="isAllPermissionsSelected" class="w-3.5 h-3.5 rounded border-gray-300 text-accent">
+                                    Pilih Semua
+                                </label>
+                            </div>
+                            <div class="space-y-4 max-h-60 overflow-y-auto p-3 border border-light-border dark:border-dark-border rounded-lg bg-light-bg/30 dark:bg-dark-bg/20">
+                                <template x-for="(perms, groupName) in groupedPermissions" :key="groupName">
+                                    <div class="space-y-2">
+                                        <h4 class="text-xs font-bold text-accent uppercase tracking-wider border-b border-light-border/60 dark:border-dark-border/40 pb-1" x-text="groupName || 'General'"></h4>
+                                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                                            <template x-for="permission in perms" :key="permission.id">
+                                                <label class="flex items-center gap-2 cursor-pointer text-sm">
+                                                    <input type="checkbox" :value="permission.id" x-model="form.permissions" class="w-3 h-3 rounded border-gray-300 text-accent">
+                                                    <span class="text-text-primary dark:text-text-dark-primary text-xs" x-text="permission.name"></span>
+                                                </label>
+                                            </template>
+                                        </div>
+                                    </div>
                                 </template>
                             </div>
                         </div>
                         <div>
                             <label class="flex items-center gap-2 cursor-pointer">
                                 <input type="checkbox" x-model="form.is_default" class="w-4 h-4 rounded border-gray-300 text-accent">
-                                <span class="text-sm">Default Role</span>
+                                <span class="text-sm font-semibold text-text-primary dark:text-text-dark-primary">Default Role</span>
                             </label>
                         </div>
                     </div>
@@ -249,6 +263,7 @@ function roleManagement() {
         roles: [],
         permissions: @json($permissions ?? []),
         allPermissions: @json($allPermissions ?? []),
+        groupedPermissions: @json($permissions), // Grouped permissions mapped from backend
         loading: false,
         stats: {
             total: 0,
@@ -268,11 +283,29 @@ function roleManagement() {
             slug: '',
             description: '',
             permissions: [],
-            is_default: false
+            is_default: false,
+            slugAuto: true
         },
 
         init() {
             this.loadRoles();
+
+            // Watch for role name changes and auto-generate slug dynamically
+            this.$watch('form.name', value => {
+                if (this.form.slugAuto) {
+                    this.form.slug = value.toLowerCase()
+                        .replace(/[^a-z0-9]+/g, '-')
+                        .replace(/^-+|-+$/g, '');
+                }
+            });
+            this.$watch('form.slug', value => {
+                const autoGenerated = this.form.name.toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-+|-+$/g, '');
+                if (value !== autoGenerated) {
+                    this.form.slugAuto = false;
+                }
+            });
         },
 
         async loadRoles() {
@@ -309,7 +342,8 @@ function roleManagement() {
                 slug: '',
                 description: '',
                 permissions: [],
-                is_default: false
+                is_default: false,
+                slugAuto: true
             };
             this.showCreateModal = true;
         },
@@ -341,8 +375,20 @@ function roleManagement() {
                     window.showToast('Role berhasil dihapus', 'success');
                 }
             } catch (error) {
-                window.showToast('Gagal menghapus role', 'error');
+                window.showToast(error.response?.data?.message || 'Gagal menghapus role', 'error');
             }
+        },
+
+        toggleSelectAllPermissions(e) {
+            if (e.target.checked) {
+                this.form.permissions = this.allPermissions.map(p => p.id);
+            } else {
+                this.form.permissions = [];
+            }
+        },
+
+        get isAllPermissionsSelected() {
+            return this.allPermissions.length > 0 && this.form.permissions.length === this.allPermissions.length;
         },
 
         formatDate(date) {

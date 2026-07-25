@@ -406,11 +406,14 @@ class DeveloperController extends Controller
      */
     public function getRolesData(Request $request)
     {
-        $query = Role::with('permissions', 'users');
+        $query = Role::with('permissions', 'users')->withCount('users');
         
         if ($request->filled('search')) {
-            $query->where('name', 'like', '%' . $request->search . '%')
-                  ->orWhere('slug', 'like', '%' . $request->search . '%');
+            $search = $request->search;
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('slug', 'like', '%' . $search . '%');
+            });
         }
         
         if ($request->filled('type')) {
@@ -513,8 +516,17 @@ class DeveloperController extends Controller
      */
     public function showRole($id)
     {
-        $role = Role::with(['permissions', 'users'])->findOrFail($id);
-        return view('developer.roles.show', compact('role'));
+        $role = Role::with(['permissions', 'users' => function($q) {
+            $q->select('users.id', 'users.name', 'users.email', 'users.is_active');
+        }])->withCount('users')->findOrFail($id);
+
+        if (request()->expectsJson() || request()->wantsJson() || request()->ajax()) {
+            return response()->json([
+                'success' => true,
+                'data' => $role
+            ]);
+        }
+        return view('developer.roles.show', compact('role', 'id'));
     }
     
     /**
@@ -593,7 +605,14 @@ class DeveloperController extends Controller
         if ($role->slug === 'developer') {
             return response()->json([
                 'success' => false,
-                'message' => 'Tidak dapat menghapus role developer'
+                'message' => 'Tidak dapat menghapus system role developer'
+            ], 403);
+        }
+
+        if ($role->users()->exists()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Tidak dapat menghapus role yang sedang digunakan oleh pengguna aktif'
             ], 403);
         }
         
