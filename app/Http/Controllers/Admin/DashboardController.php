@@ -127,6 +127,21 @@ class DashboardController extends Controller
         $outOfStockProducts = Product::where('store_id', $storeId)
             ->where('stock', 0)
             ->count();
+
+        // Low stock products list
+        try {
+            $lowStockProductsList = Product::where('store_id', $storeId)
+                ->where(function($query) {
+                    $query->whereRaw('stock <= min_stock_alert')
+                          ->orWhere('stock', 0);
+                })
+                ->orderBy('stock', 'asc')
+                ->limit(5)
+                ->get();
+        } catch (\Exception $e) {
+            Log::warning('Failed to load low stock products list: ' . $e->getMessage());
+            $lowStockProductsList = collect([]);
+        }
         
         // Recent transactions - AMAN dengan pengecekan
         try {
@@ -262,6 +277,7 @@ class DashboardController extends Controller
             'chartData' => $chartData,
             'monthlyRevenue' => $monthlyRevenue,
             'paymentBreakdown' => $paymentBreakdown,
+            'lowStockProductsList' => $lowStockProductsList,
         ];
     }
     
