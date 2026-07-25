@@ -83,10 +83,23 @@
                     </p>
                     @php
                         $dominantProduct = 'Belum ada data';
-                        if (!empty($topProducts)) {
-                            $first = is_iterable($topProducts) ? $topProducts->first() : ($topProducts[0] ?? null);
-                            if ($first) {
-                                $dominantProduct = is_object($first) ? $first->name : ($first['name'] ?? 'Belum ada data');
+                        if (!empty($topProducts) && !($topProducts instanceof \__PHP_Incomplete_Class)) {
+                            $first = null;
+                            if (is_iterable($topProducts)) {
+                                foreach ($topProducts as $item) {
+                                    $first = $item;
+                                    break;
+                                }
+                            } elseif (is_array($topProducts) && isset($topProducts[0])) {
+                                $first = $topProducts[0];
+                            }
+
+                            if ($first && !($first instanceof \__PHP_Incomplete_Class)) {
+                                if (is_object($first)) {
+                                    $dominantProduct = $first->name ?? 'Belum ada data';
+                                } elseif (is_array($first)) {
+                                    $dominantProduct = $first['name'] ?? 'Belum ada data';
+                                }
                             }
                         }
                     @endphp
