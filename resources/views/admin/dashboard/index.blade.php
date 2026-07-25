@@ -130,6 +130,7 @@
             <div class="card-body p-4">
                 <div class="space-y-3.5">
                     @forelse($lowStockProductsList ?? [] as $product)
+                        @if(is_object($product) && $product->name)
                         <div class="flex items-center justify-between p-2.5 rounded-lg bg-light-bg/50 dark:bg-dark-bg/40 border border-light-border/60 dark:border-dark-border/40 hover:bg-light-bg dark:hover:bg-dark-bg/60 transition-colors">
                             <div class="flex items-center gap-3">
                                 <div class="w-8 h-8 rounded-lg bg-rose-500/10 flex items-center justify-center text-rose-500 font-semibold text-xs shrink-0">
@@ -161,6 +162,7 @@
                                 </a>
                             </div>
                         </div>
+                        @endif
                     @empty
                         <div class="text-center py-12 flex flex-col items-center justify-center">
                             <div class="w-12 h-12 rounded-full bg-emerald-500/10 text-emerald-500 flex items-center justify-center mb-3 shadow-sm">
@@ -226,8 +228,11 @@ function dashboard() {
         loading: false,
         
         init() {
-            this.loadChartData();
-            this.initPaymentChart();
+            // Initialize charts after DOM is ready
+            this.$nextTick(() => {
+                this.loadChartData();
+                this.initPaymentChart();
+            });
         },
         
         setPeriod(period) {
@@ -343,12 +348,15 @@ function dashboard() {
                 'qris': 0
             };
 
-            this.paymentBreakdown.forEach(item => {
-                const method = item.payment_method?.toLowerCase();
-                if (methods.hasOwnProperty(method)) {
-                    methods[method] = parseFloat(item.total || 0);
-                }
-            });
+            // Ensure paymentBreakdown is an array
+            if (Array.isArray(this.paymentBreakdown) && this.paymentBreakdown.length > 0) {
+                this.paymentBreakdown.forEach(item => {
+                    const method = item.payment_method?.toLowerCase();
+                    if (methods.hasOwnProperty(method)) {
+                        methods[method] = parseFloat(item.total || 0);
+                    }
+                });
+            }
 
             const labelsMap = [];
             const valuesMap = [];
