@@ -6,26 +6,26 @@
 
 @section('content')
 <div class="max-w-2xl mx-auto">
-    <div class="card">
-        <div class="card-header flex justify-between items-center">
+    <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+        <div class="card-header flex justify-between items-center border-b border-light-border dark:border-dark-border pb-4">
             <div>
                 <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">Tambah Role Baru</h3>
                 <p class="text-sm text-text-secondary dark:text-text-dark-secondary mt-1">Buat role baru dengan permissions</p>
             </div>
-            <a href="{{ route('developer.roles.index') }}" class="btn btn-outline text-sm">
+            <a href="{{ route('developer.roles.index') }}" class="btn btn-outline text-sm border border-light-border dark:border-dark-border hover:bg-light-bg dark:hover:bg-dark-bg">
                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
                 Kembali
             </a>
         </div>
-        <div class="card-body">
+        <div class="card-body p-6">
             <form method="POST" action="{{ route('developer.roles.store') }}">
                 @csrf
                 <div class="space-y-4">
                     <!-- Name -->
                     <div>
-                        <label class="block text-sm font-medium text-text-primary dark:text-text-dark-primary mb-2">Nama Role *</label>
+                        <label class="block text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-2">Nama Role *</label>
                         <input type="text" name="name" value="{{ old('name') }}" required 
                                class="input @error('name') input-error @enderror" placeholder="Nama role">
                         @error('name')
@@ -35,7 +35,7 @@
 
                     <!-- Slug -->
                     <div>
-                        <label class="block text-sm font-medium text-text-primary dark:text-text-dark-primary mb-2">Slug *</label>
+                        <label class="block text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-2">Slug *</label>
                         <input type="text" name="slug" value="{{ old('slug') }}" required 
                                class="input @error('slug') input-error @enderror" placeholder="role-slug">
                         <p class="text-xs text-text-secondary mt-1">Identifier unik untuk role. Contoh: admin, staff, manager</p>
@@ -46,20 +46,26 @@
 
                     <!-- Description -->
                     <div>
-                        <label class="block text-sm font-medium text-text-primary dark:text-text-dark-primary mb-2">Deskripsi</label>
+                        <label class="block text-sm font-semibold text-text-primary dark:text-text-dark-primary mb-2">Deskripsi</label>
                         <textarea name="description" rows="2" class="input" placeholder="Deskripsi role">{{ old('description') }}</textarea>
                     </div>
 
                     <!-- Permissions -->
                     <div>
-                        <label class="block text-sm font-medium text-text-primary dark:text-text-dark-primary mb-2">Permissions</label>
-                        <div class="grid grid-cols-2 gap-2 max-h-60 overflow-y-auto p-3 border border-light-border dark:border-dark-border rounded-lg">
+                        <div class="flex justify-between items-center mb-2">
+                            <label class="block text-sm font-semibold text-text-primary dark:text-text-dark-primary">Permissions</label>
+                            <label class="flex items-center gap-1.5 cursor-pointer text-xs font-bold text-accent hover:underline">
+                                <input type="checkbox" id="select-all-permissions" class="w-3.5 h-3.5 rounded border-gray-300 text-accent">
+                                Pilih Semua
+                            </label>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 max-h-60 overflow-y-auto p-3 border border-light-border dark:border-dark-border rounded-lg bg-light-bg/30 dark:bg-dark-bg/20">
                             @foreach($permissions ?? [] as $permission)
                                 <label class="flex items-center gap-2 cursor-pointer text-sm">
                                     <input type="checkbox" name="permissions[]" value="{{ $permission->id }}" 
                                            {{ in_array($permission->id, old('permissions', [])) ? 'checked' : '' }}
                                            class="w-3 h-3 rounded border-gray-300 text-accent focus:ring-accent">
-                                    <span class="text-text-primary dark:text-text-dark-primary">{{ $permission->name }}</span>
+                                    <span class="text-text-primary dark:text-text-dark-primary text-xs">{{ $permission->name }}</span>
                                     @if($permission->group)
                                         <span class="text-xs text-text-secondary">({{ $permission->group }})</span>
                                     @endif
@@ -77,7 +83,7 @@
                             <input type="checkbox" name="is_default" value="1" 
                                    {{ old('is_default') ? 'checked' : '' }}
                                    class="w-4 h-4 rounded border-gray-300 text-accent focus:ring-accent">
-                            <span class="text-sm text-text-primary dark:text-text-dark-primary">Default Role</span>
+                            <span class="text-sm font-semibold text-text-primary dark:text-text-dark-primary">Default Role</span>
                         </label>
                         <p class="text-xs text-text-secondary mt-1">Role default akan diberikan ke user baru</p>
                     </div>
@@ -117,6 +123,27 @@ document.addEventListener('DOMContentLoaded', function() {
         slugInput.addEventListener('input', function() {
             this.dataset.auto = 'false';
         });
+    }
+
+    // Select All Permissions
+    const selectAllCheckbox = document.getElementById('select-all-permissions');
+    const checkboxes = document.querySelectorAll('input[name="permissions[]"]');
+
+    if (selectAllCheckbox && checkboxes.length > 0) {
+        selectAllCheckbox.addEventListener('change', function() {
+            checkboxes.forEach(cb => cb.checked = this.checked);
+        });
+
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', function() {
+                const allChecked = Array.from(checkboxes).every(c => c.checked);
+                selectAllCheckbox.checked = allChecked;
+            });
+        });
+
+        // Set initial state of Select All
+        const allChecked = Array.from(checkboxes).every(c => c.checked);
+        selectAllCheckbox.checked = allChecked && checkboxes.length > 0;
     }
 });
 </script>
