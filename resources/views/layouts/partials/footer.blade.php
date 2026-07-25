@@ -78,10 +78,14 @@
                      mengikuti pola "Solutions -> Claude Platform" di footer Anthropic --}}
                 <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 mt-8 transition-colors duration-200">Terms and policies</h3>
                 <ul class="space-y-2.5 text-sm">
-                    <li><a href="{{ route('privacy') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Kebijakan Privasi</a></li>
-                    <li><a href="{{ route('terms') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Syarat & Ketentuan</a></li>
+                    <li><a href="{{ route('privacy') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Privacy Policy</a></li>
+                    <li><a href="{{ route('terms') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Terms and Services</a></li>
                     <li><a href="{{ route('cookie-policy') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Cookie Policy</a></li>
                     <li><a href="{{ route('gdpr') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">GDPR</a></li>
+                </ul>
+                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 mt-8 transition-colors duration-200">Help and security</h3>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="{{ route('privacy') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Support center</a></li>
                 </ul>
             </div>
             
@@ -93,7 +97,7 @@
                     <li><a href="{{ route('guides') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Events</a></li>
                     <li><a href="{{ route('docs.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Comunity</a></li>
                     <li><a href="{{ route('docs.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Service Partners</a></li>
-                    <li><a href="{{ route('docs.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Tutorials</a></li>
+                    <li><a href="{{ route('guides') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Tutorials</a></li>
                     <li><a href="{{ route('faq') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Faq</a></li>
 
                 </ul>
