@@ -43,7 +43,7 @@
             <div>
                 <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 transition-colors duration-200">Products</h3>
                 <ul class="space-y-2.5 text-sm">
-                    <li><a href="{{ route('features') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Feature</a></li>
+                    <li><a href="{{ route('features') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Features</a></li>
                     <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">CoreSite Security</a></li>
                     <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Download app</a></li>
                     <li><a href="{{ route('pricing') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Pricing</a></li>
@@ -59,7 +59,7 @@
                     <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Overview</a></li>
                     <li><a href="{{ route('docs.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Docs</a></li>
                     <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Ecosystem</a></li>
-                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Princing</a></li>
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Pricing</a></li>
                 </ul>
             </div>
             
@@ -67,11 +67,8 @@
             <div>
                 <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 transition-colors duration-200">Solutions</h3>
                 <ul class="space-y-2.5 text-sm">
-                    <li><a href="{{ route('about') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">About</a></li>
                     <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">CyberSecurity</a></li>
                     <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Government</a></li>
-                    <li><a href="{{ route('contact') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Customer Support</a></li>
-                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Legal</a></li>
                 </ul>
 
                 {{-- Sub-section: ditumpuk di bawah list Solutions dalam kolom yang sama,
@@ -86,6 +83,7 @@
                 <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 mt-8 transition-colors duration-200">Help and security</h3>
                 <ul class="space-y-2.5 text-sm">
                     <li><a href="{{ route('privacy') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Support center</a></li>
+                    <li><a href="{{ route('contact') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Customer Support</a></li>
                 </ul>
             </div>
             
@@ -95,10 +93,10 @@
                 <ul class="space-y-2.5 text-sm">
                     <li><a href="{{ route('blog.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Blog</a></li>
                     <li><a href="{{ route('guides') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Events</a></li>
-                    <li><a href="{{ route('docs.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Comunity</a></li>
+                    <li><a href="{{ route('docs.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Community</a></li>
                     <li><a href="{{ route('docs.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Service Partners</a></li>
                     <li><a href="{{ route('guides') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Tutorials</a></li>
-                    <li><a href="{{ route('faq') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Faq</a></li>
+                    <li><a href="{{ route('faq') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">FAQs</a></li>
 
                 </ul>
             </div>
@@ -108,6 +106,7 @@
                 <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 transition-colors duration-200">Company</h3>
                 <ul class="space-y-2.5 text-sm">
                     <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">CoreSite</a></li>
+                    <li><a href="{{ route('about') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">About</a></li>
                     <li><a href="{{ route('careers') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Careers</a></li>
                     <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">News</a></li>
                     <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Policy</a></li>

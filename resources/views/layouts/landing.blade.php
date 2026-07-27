@@ -81,24 +81,24 @@
 
                     <!-- Navigation - Desktop -->
                     <nav class="hidden md:flex items-center gap-8">
-                        <a href="{{ route('features') }}" class="text-sm font-medium text-text-secondary hover:text-text-primary dark:hover:text-text-dark-primary transition">Fitur</a>
-                        <a href="{{ route('pricing') }}" class="text-sm font-medium text-text-secondary hover:text-text-primary dark:hover:text-text-dark-primary transition">Harga</a>
-                        <a href="{{ route('about') }}" class="text-sm font-medium text-text-secondary hover:text-text-primary dark:hover:text-text-dark-primary transition">Tentang</a>
-                        <a href="{{ route('blog.index') }}" class="text-sm font-medium text-text-secondary hover:text-text-primary dark:hover:text-text-dark-primary transition">Blog</a>
-                        <a href="{{ route('contact') }}" class="text-sm font-medium text-text-secondary hover:text-text-primary dark:hover:text-text-dark-primary transition">Kontak</a>
+                        <a href="{{ route('features') }}" class="text-text-secondary hover:text-accent transition-colors duration-200 ease-out">Fitur</a>
+                        <a href="{{ route('pricing') }}" class="text-text-secondary hover:text-accent transition-colors duration-200 ease-out">Harga</a>
+                        <a href="{{ route('about') }}" class="text-text-secondary hover:text-accent transition-colors duration-200 ease-out">Tentang</a>
+                        <a href="{{ route('blog.index') }}" class="text-text-secondary hover:text-accent transition-colors duration-200 ease-out">Blog</a>
+                        <a href="{{ route('contact') }}" class="text-text-secondary hover:text-accent transition-colors duration-200 ease-out">Kontak</a>
                     </nav>
 
                     <!-- Right Side -->
                     <div class="flex items-center gap-4">
                         @auth
-                            <a href="{{ route('admin.dashboard') }}" class="btn-primary text-sm px-4 py-2 hidden sm:inline-flex">
+                            <a href="{{ route('admin.dashboard') }}" class="btn btn-primary hidden sm:inline-flex">
                                 Dashboard
                             </a>
                         @else
-                            <a href="{{ route('login') }}" class="text-sm font-medium text-text-secondary hover:text-text-primary dark:hover:text-text-dark-primary transition hidden sm:inline-block">
+                            <a href="{{ route('login') }}" class="text-text-secondary hover:text-accent transition-colors duration-200 ease-out hidden sm:inline-block">
                                 Login
                             </a>
-                            <a href="{{ route('register') }}" class="btn-primary text-sm px-4 py-2 hidden sm:inline-flex">
+                            <a href="{{ route('register') }}" class="btn btn-primary hidden sm:inline-flex">
                                 Daftar
                             </a>
                         @endauth
@@ -118,17 +118,17 @@
                     </button>
                 </div>
                 <nav class="flex flex-col gap-4">
-                    <a href="{{ route('features') }}" class="text-lg font-medium text-text-primary dark:text-text-dark-primary hover:text-accent transition">Fitur</a>
-                    <a href="{{ route('pricing') }}" class="text-lg font-medium text-text-primary dark:text-text-dark-primary hover:text-accent transition">Harga</a>
-                    <a href="{{ route('about') }}" class="text-lg font-medium text-text-primary dark:text-text-dark-primary hover:text-accent transition">Tentang</a>
-                    <a href="{{ route('blog.index') }}" class="text-lg font-medium text-text-primary dark:text-text-dark-primary hover:text-accent transition">Blog</a>
-                    <a href="{{ route('contact') }}" class="text-lg font-medium text-text-primary dark:text-text-dark-primary hover:text-accent transition">Kontak</a>
+                    <a href="{{ route('features') }}" class="text-lg font-medium text-text-primary dark:text-text-dark-primary hover:text-accent transition-colors duration-200 ease-out">Fitur</a>
+                    <a href="{{ route('pricing') }}" class="text-lg font-medium text-text-primary dark:text-text-dark-primary hover:text-accent transition-colors duration-200 ease-out">Harga</a>
+                    <a href="{{ route('about') }}" class="text-lg font-medium text-text-primary dark:text-text-dark-primary hover:text-accent transition-colors duration-200 ease-out">Tentang</a>
+                    <a href="{{ route('blog.index') }}" class="text-lg font-medium text-text-primary dark:text-text-dark-primary hover:text-accent transition-colors duration-200 ease-out">Blog</a>
+                    <a href="{{ route('contact') }}" class="text-lg font-medium text-text-primary dark:text-text-dark-primary hover:text-accent transition-colors duration-200 ease-out">Kontak</a>
                     <hr class="border-light-border/40 dark:border-dark-border/40">
                     @auth
-                        <a href="{{ route('admin.dashboard') }}" class="btn-primary text-center text-sm px-4 py-2">Dashboard</a>
+                        <a href="{{ route('admin.dashboard') }}" class="btn btn-primary text-center">Dashboard</a>
                     @else
-                        <a href="{{ route('login') }}" class="text-lg font-medium text-text-primary dark:text-text-dark-primary hover:text-accent transition">Login</a>
-                        <a href="{{ route('register') }}" class="btn-primary text-center text-sm px-4 py-2">Daftar</a>
+                        <a href="{{ route('login') }}" class="text-lg font-medium text-text-primary dark:text-text-dark-primary hover:text-accent transition-colors duration-200 ease-out">Login</a>
+                        <a href="{{ route('register') }}" class="btn btn-primary text-center">Daftar</a>
                     @endauth
                 </nav>
             </div>
