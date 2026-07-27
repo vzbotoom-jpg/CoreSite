@@ -40,15 +40,15 @@
 
     <!-- Quick Stats - Real-time -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-        <div class="card hover:shadow-lg transition-all group cursor-pointer" @click="navigateTo('users')">
-            <div class="card-body py-4">
+        <div class="card hover:shadow-lg transition-all group cursor-pointer bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border" @click="navigateTo('users')">
+            <div class="card-body p-5">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs text-text-secondary uppercase tracking-wider">Total Users</p>
+                        <p class="text-[10px] font-bold text-text-secondary uppercase tracking-wider">Total Users</p>
                         <p class="text-2xl font-bold text-text-primary dark:text-text-dark-primary mt-1" x-text="formatNumber(stats.total_users)"></p>
                         <div class="flex items-center gap-2 mt-1">
-                            <span class="text-xs text-success" x-text="'↑ ' + (stats.user_growth || 0) + '%'"></span>
-                            <span class="text-xs text-text-secondary">this month</span>
+                            <span class="text-xs text-success font-semibold" x-text="'↑ ' + (stats.user_growth || 0) + '%'"></span>
+                            <span class="text-[10px] font-medium text-text-secondary">this month</span>
                         </div>
                     </div>
                     <div class="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary/20 transition">
@@ -57,22 +57,22 @@
                         </svg>
                     </div>
                 </div>
-                <div class="mt-3 pt-2 border-t border-light-border dark:border-dark-border flex justify-between text-xs">
+                <div class="mt-4 pt-2 border-t border-light-border dark:border-dark-border/40 flex justify-between text-xs font-semibold">
                     <span class="text-success">Active: <span x-text="formatNumber(stats.active_users)"></span></span>
                     <span class="text-error">Inactive: <span x-text="formatNumber(stats.inactive_users)"></span></span>
                 </div>
             </div>
         </div>
 
-        <div class="card hover:shadow-lg transition-all group cursor-pointer" @click="navigateTo('stores')">
-            <div class="card-body py-4">
+        <div class="card hover:shadow-lg transition-all group cursor-pointer bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border" @click="navigateTo('stores')">
+            <div class="card-body p-5">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs text-text-secondary uppercase tracking-wider">Total Stores</p>
+                        <p class="text-[10px] font-bold text-text-secondary uppercase tracking-wider">Total Stores</p>
                         <p class="text-2xl font-bold text-text-primary dark:text-text-dark-primary mt-1" x-text="formatNumber(stats.total_stores)"></p>
                         <div class="flex items-center gap-2 mt-1">
-                            <span class="text-xs text-success" x-text="'↑ ' + (stats.store_growth || 0) + '%'"></span>
-                            <span class="text-xs text-text-secondary">this month</span>
+                            <span class="text-xs text-success font-semibold" x-text="'↑ ' + (stats.store_growth || 0) + '%'"></span>
+                            <span class="text-[10px] font-medium text-text-secondary">this month</span>
                         </div>
                     </div>
                     <div class="w-12 h-12 bg-success/10 rounded-xl flex items-center justify-center group-hover:bg-success/20 transition">
@@ -81,20 +81,20 @@
                         </svg>
                     </div>
                 </div>
-                <div class="mt-3 pt-2 border-t border-light-border dark:border-dark-border flex justify-between text-xs">
+                <div class="mt-4 pt-2 border-t border-light-border dark:border-dark-border/40 flex justify-between text-xs font-semibold">
                     <span class="text-success">Active: <span x-text="formatNumber(stats.active_stores)"></span></span>
                     <span class="text-error">Inactive: <span x-text="formatNumber(stats.inactive_stores)"></span></span>
                 </div>
             </div>
         </div>
 
-        <div class="card hover:shadow-lg transition-all group cursor-pointer" @click="navigateTo('roles')">
-            <div class="card-body py-4">
+        <div class="card hover:shadow-lg transition-all group cursor-pointer bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border" @click="navigateTo('roles')">
+            <div class="card-body p-5">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs text-text-secondary uppercase tracking-wider">Total Roles</p>
+                        <p class="text-[10px] font-bold text-text-secondary uppercase tracking-wider">Total Roles</p>
                         <p class="text-2xl font-bold text-text-primary dark:text-text-dark-primary mt-1" x-text="formatNumber(stats.total_roles)"></p>
-                        <p class="text-xs text-text-secondary mt-1">System & Custom Roles</p>
+                        <p class="text-[10px] text-text-secondary mt-1 font-medium">System & Custom Roles</p>
                     </div>
                     <div class="w-12 h-12 bg-info/10 rounded-xl flex items-center justify-center group-hover:bg-info/20 transition">
                         <svg class="w-6 h-6 text-info" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -102,20 +102,20 @@
                         </svg>
                     </div>
                 </div>
-                <div class="mt-3 pt-2 border-t border-light-border dark:border-dark-border flex justify-between text-xs">
+                <div class="mt-4 pt-2 border-t border-light-border dark:border-dark-border/40 flex justify-between text-xs font-semibold">
                     <span class="text-primary">System: <span x-text="formatNumber(stats.system_roles)"></span></span>
                     <span class="text-warning">Custom: <span x-text="formatNumber(stats.custom_roles)"></span></span>
                 </div>
             </div>
         </div>
 
-        <div class="card hover:shadow-lg transition-all group cursor-pointer" @click="navigateTo('permissions')">
-            <div class="card-body py-4">
+        <div class="card hover:shadow-lg transition-all group cursor-pointer bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border" @click="navigateTo('permissions')">
+            <div class="card-body p-5">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs text-text-secondary uppercase tracking-wider">Permissions</p>
+                        <p class="text-[10px] font-bold text-text-secondary uppercase tracking-wider">Permissions</p>
                         <p class="text-2xl font-bold text-text-primary dark:text-text-dark-primary mt-1" x-text="formatNumber(stats.total_permissions)"></p>
-                        <p class="text-xs text-text-secondary mt-1">Granular Access Control</p>
+                        <p class="text-[10px] text-text-secondary mt-1 font-medium">Granular Access Control</p>
                     </div>
                     <div class="w-12 h-12 bg-warning/10 rounded-xl flex items-center justify-center group-hover:bg-warning/20 transition">
                         <svg class="w-6 h-6 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -123,20 +123,20 @@
                         </svg>
                     </div>
                 </div>
-                <div class="mt-3 pt-2 border-t border-light-border dark:border-dark-border flex justify-between text-xs">
+                <div class="mt-4 pt-2 border-t border-light-border dark:border-dark-border/40 flex justify-between text-xs font-semibold">
                     <span class="text-success">Assigned: <span x-text="formatNumber(stats.assigned_permissions)"></span></span>
                     <span class="text-error">Unassigned: <span x-text="formatNumber(stats.unassigned_permissions)"></span></span>
                 </div>
             </div>
         </div>
 
-        <div class="card hover:shadow-lg transition-all group cursor-pointer" @click="navigateTo('activity')">
-            <div class="card-body py-4">
+        <div class="card hover:shadow-lg transition-all group cursor-pointer bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border" @click="navigateTo('activity')">
+            <div class="card-body p-5">
                 <div class="flex items-center justify-between">
                     <div>
-                        <p class="text-xs text-text-secondary uppercase tracking-wider">Today's Activity</p>
+                        <p class="text-[10px] font-bold text-text-secondary uppercase tracking-wider">Today's Activity</p>
                         <p class="text-2xl font-bold text-text-primary dark:text-text-dark-primary mt-1" x-text="formatNumber(stats.today_activity)"></p>
-                        <p class="text-xs text-text-secondary mt-1">Last 24 hours</p>
+                        <p class="text-[10px] text-text-secondary mt-1 font-medium">Last 24 hours</p>
                     </div>
                     <div class="w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center group-hover:bg-accent/20 transition">
                         <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,7 +144,7 @@
                         </svg>
                     </div>
                 </div>
-                <div class="mt-3 pt-2 border-t border-light-border dark:border-dark-border flex justify-between text-xs">
+                <div class="mt-4 pt-2 border-t border-light-border dark:border-dark-border/40 flex justify-between text-xs font-semibold">
                     <span class="text-info">Unique: <span x-text="formatNumber(stats.unique_activity_users)"></span></span>
                     <span class="text-text-secondary">users</span>
                 </div>
@@ -154,29 +154,33 @@
 
     <!-- Charts Section -->
     <div class="grid lg:grid-cols-2 gap-6">
-        <div class="card">
-            <div class="card-header flex justify-between items-center">
-                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">User Growth</h3>
+        <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+            <div class="card-header border-b border-light-border dark:border-dark-border/60 pb-4 flex justify-between items-center">
+                <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">User Growth</h3>
                 <div class="flex gap-2">
-                    <button @click="chartPeriod = 'week'; updateCharts()" :class="chartPeriod === 'week' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline'">Week</button>
-                    <button @click="chartPeriod = 'month'; updateCharts()" :class="chartPeriod === 'month' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline'">Month</button>
-                    <button @click="chartPeriod = 'year'; updateCharts()" :class="chartPeriod === 'year' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline'">Year</button>
+                    <button @click="chartPeriod = 'week'; updateCharts()" :class="chartPeriod === 'week' ? 'bg-accent text-white' : 'bg-light-surface dark:bg-dark-bg text-text-secondary hover:bg-accent/10'" class="px-2.5 py-1 text-xs font-bold rounded-lg transition-colors">Week</button>
+                    <button @click="chartPeriod = 'month'; updateCharts()" :class="chartPeriod === 'month' ? 'bg-accent text-white' : 'bg-light-surface dark:bg-dark-bg text-text-secondary hover:bg-accent/10'" class="px-2.5 py-1 text-xs font-bold rounded-lg transition-colors">Month</button>
+                    <button @click="chartPeriod = 'year'; updateCharts()" :class="chartPeriod === 'year' ? 'bg-accent text-white' : 'bg-light-surface dark:bg-dark-bg text-text-secondary hover:bg-accent/10'" class="px-2.5 py-1 text-xs font-bold rounded-lg transition-colors">Year</button>
                 </div>
             </div>
-            <div class="card-body">
-                <div class="h-64">
+            <div class="card-body p-5">
+                <div style="height: 280px;">
                     <canvas id="userGrowthChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header flex justify-between items-center">
-                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">Revenue Trend</h3>
-                <span class="text-xs text-text-secondary">Last 30 days</span>
+        <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+            <div class="card-header border-b border-light-border dark:border-dark-border/60 pb-4 flex justify-between items-center">
+                <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">Revenue Trend</h3>
+                <div class="flex gap-2">
+                    <button @click="chartPeriod = 'week'; updateCharts()" :class="chartPeriod === 'week' ? 'bg-accent text-white' : 'bg-light-surface dark:bg-dark-bg text-text-secondary hover:bg-accent/10'" class="px-2.5 py-1 text-xs font-bold rounded-lg transition-colors">Week</button>
+                    <button @click="chartPeriod = 'month'; updateCharts()" :class="chartPeriod === 'month' ? 'bg-accent text-white' : 'bg-light-surface dark:bg-dark-bg text-text-secondary hover:bg-accent/10'" class="px-2.5 py-1 text-xs font-bold rounded-lg transition-colors">Month</button>
+                    <button @click="chartPeriod = 'year'; updateCharts()" :class="chartPeriod === 'year' ? 'bg-accent text-white' : 'bg-light-surface dark:bg-dark-bg text-text-secondary hover:bg-accent/10'" class="px-2.5 py-1 text-xs font-bold rounded-lg transition-colors">Year</button>
+                </div>
             </div>
-            <div class="card-body">
-                <div class="h-64">
+            <div class="card-body p-5">
+                <div style="height: 280px;">
                     <canvas id="revenueChart"></canvas>
                 </div>
             </div>
@@ -186,35 +190,35 @@
     <!-- Recent Activity & Quick Actions -->
     <div class="grid lg:grid-cols-3 gap-6">
         <!-- Recent Activity -->
-        <div class="lg:col-span-2 card">
-            <div class="card-header flex justify-between items-center">
-                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">Recent Activity</h3>
-                <a href="{{ route('developer.activity.index') }}" class="text-xs text-accent hover:underline">View All →</a>
+        <div class="lg:col-span-2 card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+            <div class="card-header border-b border-light-border dark:border-dark-border pb-4 flex justify-between items-center">
+                <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">Recent Activity</h3>
+                <a href="{{ route('developer.activity.index') }}" class="text-xs text-accent font-bold hover:underline">View All →</a>
             </div>
-            <div class="card-body">
-                <div class="space-y-3 max-h-80 overflow-y-auto">
+            <div class="card-body p-5">
+                <div class="space-y-3.5 max-h-80 overflow-y-auto">
                     <template x-for="activity in recentActivities" :key="activity.id">
-                        <div class="flex items-start gap-3 p-3 rounded-lg hover:bg-light-surface dark:hover:bg-dark-surface transition">
-                            <div class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0" 
+                        <div class="flex items-start gap-3.5 p-3 rounded-lg hover:bg-light-bg/50 dark:hover:bg-dark-bg/40 border border-light-border/40 dark:border-dark-border/10 transition">
+                            <div class="w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-xs"
                                  :class="getActivityColor(activity.type)">
-                                <span x-text="getActivityIcon(activity.type)" class="text-lg"></span>
+                                <span x-html="getActivityIcon(activity.type)" class="flex items-center justify-center"></span>
                             </div>
                             <div class="flex-1 min-w-0">
-                                <p class="text-sm text-text-primary dark:text-text-dark-primary" x-text="activity.description"></p>
-                                <div class="flex items-center gap-2 mt-0.5">
-                                    <span class="text-xs text-text-secondary" x-text="activity.user?.name || 'System'"></span>
-                                    <span class="w-1 h-1 rounded-full bg-text-secondary/30"></span>
-                                    <span class="text-xs text-text-secondary" x-text="timeAgo(activity.created_at)"></span>
+                                <p class="text-xs font-semibold text-text-primary dark:text-text-dark-primary" x-text="activity.description"></p>
+                                <div class="flex items-center gap-2 mt-1">
+                                    <span class="text-[10px] font-bold text-text-secondary uppercase" x-text="activity.user?.name || 'System'"></span>
+                                    <span class="w-1.5 h-1.5 rounded-full bg-text-secondary/20"></span>
+                                    <span class="text-[10px] text-text-secondary font-medium" x-text="timeAgo(activity.created_at)"></span>
                                 </div>
                             </div>
-                            <span class="text-xs text-text-secondary flex-shrink-0" x-text="formatTime(activity.created_at)"></span>
+                            <span class="text-[10px] text-text-secondary/60 shrink-0 font-mono" x-text="formatTime(activity.created_at)"></span>
                         </div>
                     </template>
-                    <div x-show="recentActivities.length === 0" class="text-center py-8 text-text-secondary">
+                    <div x-show="recentActivities.length === 0" class="text-center py-12 text-text-secondary">
                         <svg class="w-12 h-12 mx-auto mb-3 text-text-secondary/30" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                         </svg>
-                        <p>Belum ada aktivitas</p>
+                        <p class="text-xs italic">Belum ada aktivitas terbaru</p>
                     </div>
                 </div>
             </div>
@@ -223,121 +227,90 @@
         <!-- Quick Actions & System Status -->
         <div class="space-y-6">
             <!-- Quick Actions -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">Quick Actions</h3>
+            <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+                <div class="card-header border-b border-light-border dark:border-dark-border pb-4">
+                    <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">Quick Actions</h3>
                 </div>
-                <div class="card-body">
+                <div class="card-body p-4">
                     <div class="grid grid-cols-2 gap-2">
-                        <a href="{{ route('developer.users.index') }}" class="btn btn-outline text-center py-2.5 text-sm hover:border-accent hover:text-accent transition group">
-                            <svg class="w-5 h-5 mx-auto mb-1 group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('developer.users.index') }}" class="btn btn-outline text-center py-2.5 text-xs font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border-light-border dark:border-dark-border flex flex-col justify-center items-center gap-1 hover:scale-[1.02] transition shadow-xs group">
+                            <svg class="w-5 h-5 mx-auto group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
                             </svg>
-                            <span class="text-xs">Users</span>
+                            <span>Users</span>
                         </a>
-                        <a href="{{ route('developer.roles.index') }}" class="btn btn-outline text-center py-2.5 text-sm hover:border-accent hover:text-accent transition group">
-                            <svg class="w-5 h-5 mx-auto mb-1 group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('developer.roles.index') }}" class="btn btn-outline text-center py-2.5 text-xs font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border-light-border dark:border-dark-border flex flex-col justify-center items-center gap-1 hover:scale-[1.02] transition shadow-xs group">
+                            <svg class="w-5 h-5 mx-auto group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                             </svg>
-                            <span class="text-xs">Roles</span>
+                            <span>Roles</span>
                         </a>
-                        <a href="{{ route('developer.permissions.index') }}" class="btn btn-outline text-center py-2.5 text-sm hover:border-accent hover:text-accent transition group">
-                            <svg class="w-5 h-5 mx-auto mb-1 group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('developer.permissions.index') }}" class="btn btn-outline text-center py-2.5 text-xs font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border-light-border dark:border-dark-border flex flex-col justify-center items-center gap-1 hover:scale-[1.02] transition shadow-xs group">
+                            <svg class="w-5 h-5 mx-auto group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                             </svg>
-                            <span class="text-xs">Permissions</span>
+                            <span>Permissions</span>
                         </a>
-                        <a href="{{ route('developer.stores.index') }}" class="btn btn-outline text-center py-2.5 text-sm hover:border-accent hover:text-accent transition group">
-                            <svg class="w-5 h-5 mx-auto mb-1 group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('developer.stores.index') }}" class="btn btn-outline text-center py-2.5 text-xs font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border-light-border dark:border-dark-border flex flex-col justify-center items-center gap-1 hover:scale-[1.02] transition shadow-xs group">
+                            <svg class="w-5 h-5 mx-auto group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
                             </svg>
-                            <span class="text-xs">Stores</span>
+                            <span>Stores</span>
                         </a>
-                        <a href="{{ route('developer.system.index') }}" class="btn btn-outline text-center py-2.5 text-sm hover:border-accent hover:text-accent transition group">
-                            <svg class="w-5 h-5 mx-auto mb-1 group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('developer.system.index') }}" class="btn btn-outline text-center py-2.5 text-xs font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border-light-border dark:border-dark-border flex flex-col justify-center items-center gap-1 hover:scale-[1.02] transition shadow-xs group">
+                            <svg class="w-5 h-5 mx-auto group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                             </svg>
-                            <span class="text-xs">System</span>
+                            <span>System</span>
                         </a>
-                        <a href="{{ route('developer.logs.index') }}" class="btn btn-outline text-center py-2.5 text-sm hover:border-accent hover:text-accent transition group">
-                            <svg class="w-5 h-5 mx-auto mb-1 group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <a href="{{ route('developer.logs.index') }}" class="btn btn-outline text-center py-2.5 text-xs font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border-light-border dark:border-dark-border flex flex-col justify-center items-center gap-1 hover:scale-[1.02] transition shadow-xs group">
+                            <svg class="w-5 h-5 mx-auto group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                             </svg>
-                            <span class="text-xs">Logs</span>
+                            <span>Logs</span>
                         </a>
                     </div>
                 </div>
             </div>
 
             <!-- System Status -->
-            <div class="card">
-                <div class="card-header">
-                    <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">System Status</h3>
+            <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+                <div class="card-header border-b border-light-border dark:border-dark-border pb-4">
+                    <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">System Status</h3>
                 </div>
-                <div class="card-body space-y-2">
-                    <div class="flex justify-between items-center py-1.5 border-b border-light-border dark:border-dark-border">
+                <div class="card-body p-5 space-y-2">
+                    <div class="flex justify-between items-center py-1.5 border-b border-light-border/60 dark:border-dark-border/40">
                         <span class="text-xs text-text-secondary">PHP Version</span>
-                        <span class="text-xs font-medium text-text-primary dark:text-text-dark-primary">{{ phpversion() }}</span>
+                        <span class="text-xs font-bold text-text-primary dark:text-text-dark-primary">{{ phpversion() }}</span>
                     </div>
-                    <div class="flex justify-between items-center py-1.5 border-b border-light-border dark:border-dark-border">
+                    <div class="flex justify-between items-center py-1.5 border-b border-light-border/60 dark:border-dark-border/40">
                         <span class="text-xs text-text-secondary">Laravel</span>
-                        <span class="text-xs font-medium text-text-primary dark:text-text-dark-primary">{{ app()->version() }}</span>
+                        <span class="text-xs font-bold text-text-primary dark:text-text-dark-primary">{{ app()->version() }}</span>
                     </div>
-                    <div class="flex justify-between items-center py-1.5 border-b border-light-border dark:border-dark-border">
+                    <div class="flex justify-between items-center py-1.5 border-b border-light-border/60 dark:border-dark-border/40">
                         <span class="text-xs text-text-secondary">Environment</span>
-                        <span class="text-xs font-medium" :class="'{{ app()->environment() }}' === 'production' ? 'text-success' : 'text-warning'">
+                        <span class="text-xs font-bold text-white px-2 py-0.5 rounded-full" :class="'{{ app()->environment() }}' === 'production' ? 'bg-emerald-500' : 'bg-amber-500'">
                             {{ app()->environment() }}
                         </span>
                     </div>
-                    <div class="flex justify-between items-center py-1.5 border-b border-light-border dark:border-dark-border">
+                    <div class="flex justify-between items-center py-1.5 border-b border-light-border/60 dark:border-dark-border/40">
                         <span class="text-xs text-text-secondary">Debug Mode</span>
-                        <span class="text-xs font-medium" :class="'{{ config('app.debug') }}' ? 'text-error' : 'text-success'">
+                        <span class="text-xs font-bold text-white px-2 py-0.5 rounded-full" :class="'{{ config('app.debug') }}' ? 'bg-rose-500' : 'bg-emerald-500'">
                             {{ config('app.debug') ? 'Enabled' : 'Disabled' }}
                         </span>
                     </div>
-                    <div class="flex justify-between items-center py-1.5 border-b border-light-border dark:border-dark-border">
+                    <div class="flex justify-between items-center py-1.5 border-b border-light-border/60 dark:border-dark-border/40">
                         <span class="text-xs text-text-secondary">Database</span>
-                        <span class="text-xs font-medium text-success">🟢 Connected</span>
+                        <span class="text-xs font-bold text-white bg-emerald-500 px-2 py-0.5 rounded-full flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span> Connected
+                        </span>
                     </div>
                     <div class="flex justify-between items-center py-1.5">
                         <span class="text-xs text-text-secondary">Queue Worker</span>
-                        <span class="text-xs font-medium text-success">🟢 Running</span>
+                        <span class="text-xs font-bold text-white bg-emerald-500 px-2 py-0.5 rounded-full flex items-center gap-1">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span> Running
+                        </span>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Charts -->
-    <div class="grid md:grid-cols-2 gap-6">
-        <div class="card">
-            <div class="card-header flex justify-between items-center">
-                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">User Growth</h3>
-                <div class="flex gap-2">
-                    <button @click="chartPeriod = 'week'; updateCharts()" :class="chartPeriod === 'week' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline'">Week</button>
-                    <button @click="chartPeriod = 'month'; updateCharts()" :class="chartPeriod === 'month' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline'">Month</button>
-                    <button @click="chartPeriod = 'year'; updateCharts()" :class="chartPeriod === 'year' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline'">Year</button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div style="height: 300px;">
-                    <canvas id="userGrowthChart"></canvas>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header flex justify-between items-center">
-                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">Revenue</h3>
-                <div class="flex gap-2">
-                    <button @click="chartPeriod = 'week'; updateCharts()" :class="chartPeriod === 'week' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline'">Week</button>
-                    <button @click="chartPeriod = 'month'; updateCharts()" :class="chartPeriod === 'month' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline'">Month</button>
-                    <button @click="chartPeriod = 'year'; updateCharts()" :class="chartPeriod === 'year' ? 'btn btn-sm btn-primary' : 'btn btn-sm btn-outline'">Year</button>
-                </div>
-            </div>
-            <div class="card-body">
-                <div style="height: 300px;">
-                    <canvas id="revenueChart"></canvas>
                 </div>
             </div>
         </div>
@@ -345,59 +318,59 @@
 
     <!-- Server Resources -->
     <div class="grid md:grid-cols-3 gap-6">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">CPU Usage</h3>
+        <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+            <div class="card-header border-b border-light-border dark:border-dark-border pb-4">
+                <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">CPU Usage</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body p-6">
                 <div class="text-center">
                     <div class="relative inline-flex">
                         <svg class="w-32 h-32 transform -rotate-90">
-                            <circle class="text-light-surface dark:text-dark-surface" stroke-width="8" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64"/>
+                            <circle class="text-light-surface dark:text-dark-bg" stroke-width="8" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64"/>
                             <circle class="text-accent" stroke-width="8" stroke-linecap="round" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64" 
                                     stroke-dasharray="351.858" :stroke-dashoffset="351.858 - (351.858 * (stats.cpu_usage || 0) / 100)"/>
                         </svg>
-                        <span class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-text-primary dark:text-text-dark-primary" x-text="(stats.cpu_usage || 0) + '%'"></span>
+                        <span class="absolute inset-0 flex items-center justify-center text-2xl font-extrabold text-text-primary dark:text-text-dark-primary" x-text="(stats.cpu_usage || 0) + '%'"></span>
                     </div>
-                    <p class="text-xs text-text-secondary mt-2">Current CPU Load</p>
+                    <p class="text-xs font-semibold text-text-secondary mt-3 uppercase tracking-wider">Current CPU Load</p>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">Memory Usage</h3>
+        <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+            <div class="card-header border-b border-light-border dark:border-dark-border pb-4">
+                <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">Memory Usage</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body p-6">
                 <div class="text-center">
                     <div class="relative inline-flex">
                         <svg class="w-32 h-32 transform -rotate-90">
-                            <circle class="text-light-surface dark:text-dark-surface" stroke-width="8" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64"/>
+                            <circle class="text-light-surface dark:text-dark-bg" stroke-width="8" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64"/>
                             <circle class="text-info" stroke-width="8" stroke-linecap="round" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64" 
                                     stroke-dasharray="351.858" :stroke-dashoffset="351.858 - (351.858 * (stats.memory_usage || 0) / 100)"/>
                         </svg>
-                        <span class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-text-primary dark:text-text-dark-primary" x-text="(stats.memory_usage || 0) + '%'"></span>
+                        <span class="absolute inset-0 flex items-center justify-center text-2xl font-extrabold text-text-primary dark:text-text-dark-primary" x-text="(stats.memory_usage || 0) + '%'"></span>
                     </div>
-                    <p class="text-xs text-text-secondary mt-2">Memory Usage</p>
+                    <p class="text-xs font-semibold text-text-secondary mt-3 uppercase tracking-wider">Memory Used</p>
                 </div>
             </div>
         </div>
 
-        <div class="card">
-            <div class="card-header">
-                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">Storage</h3>
+        <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+            <div class="card-header border-b border-light-border dark:border-dark-border pb-4">
+                <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">Storage</h3>
             </div>
-            <div class="card-body">
+            <div class="card-body p-6">
                 <div class="text-center">
                     <div class="relative inline-flex">
                         <svg class="w-32 h-32 transform -rotate-90">
-                            <circle class="text-light-surface dark:text-dark-surface" stroke-width="8" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64"/>
+                            <circle class="text-light-surface dark:text-dark-bg" stroke-width="8" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64"/>
                             <circle class="text-warning" stroke-width="8" stroke-linecap="round" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64" 
                                     stroke-dasharray="351.858" :stroke-dashoffset="351.858 - (351.858 * (stats.storage_usage || 0) / 100)"/>
                         </svg>
-                        <span class="absolute inset-0 flex items-center justify-center text-2xl font-bold text-text-primary dark:text-text-dark-primary" x-text="(stats.storage_usage || 0) + '%'"></span>
+                        <span class="absolute inset-0 flex items-center justify-center text-2xl font-extrabold text-text-primary dark:text-text-dark-primary" x-text="(stats.storage_usage || 0) + '%'"></span>
                     </div>
-                    <p class="text-xs text-text-secondary mt-2">Storage Used</p>
+                    <p class="text-xs font-semibold text-text-secondary mt-3 uppercase tracking-wider">Storage Used</p>
                 </div>
             </div>
         </div>
@@ -417,27 +390,28 @@ function developerDashboard() {
             active_stores: {{ $stats['active_stores'] ?? 0 }},
             inactive_stores: {{ $stats['inactive_stores'] ?? 0 }},
             total_roles: {{ $stats['total_roles'] ?? 0 }},
-            system_roles: 4,
-            custom_roles: {{ ($stats['total_roles'] ?? 0) - 4 }},
+            system_roles: {{ $stats['system_roles'] ?? 0 }},
+            custom_roles: {{ $stats['custom_roles'] ?? 0 }},
             total_permissions: {{ $stats['total_permissions'] ?? 0 }},
-            assigned_permissions: 0,
-            unassigned_permissions: 0,
-            today_activity: 0,
-            unique_activity_users: 0,
-            user_growth: 12.5,
-            store_growth: 8.3,
-            cpu_usage: 45,
-            memory_usage: 62,
-            storage_usage: 38
+            assigned_permissions: {{ $stats['assigned_permissions'] ?? 0 }},
+            unassigned_permissions: {{ $stats['unassigned_permissions'] ?? 0 }},
+            today_activity: {{ $stats['today_activity'] ?? 0 }},
+            unique_activity_users: {{ $stats['unique_activity_users'] ?? 0 }},
+            user_growth: {{ $stats['user_growth'] ?? 0 }},
+            store_growth: {{ $stats['store_growth'] ?? 0 }},
+            cpu_usage: {{ $stats['cpu_usage'] ?? 0 }},
+            memory_usage: {{ $stats['memory_usage'] ?? 0 }},
+            storage_usage: {{ $stats['storage_usage'] ?? 0 }}
         },
+        chartsData: null,
         recentActivities: [],
         chartPeriod: 'month',
         refreshing: false,
         userGrowthChart: null,
         revenueChart: null,
 
-        init() {
-            this.loadRecentActivities();
+        async init() {
+            await this.refreshDashboard();
             this.initCharts();
             // Auto-refresh every 60 seconds
             setInterval(() => {
@@ -453,12 +427,6 @@ function developerDashboard() {
                 }
             } catch (error) {
                 console.error('Failed to load recent activities:', error);
-                // Fallback sample data
-                this.recentActivities = [
-                    { id: 1, type: 'login', description: 'User logged in', user: { name: 'Admin' }, created_at: new Date().toISOString() },
-                    { id: 2, type: 'update', description: 'Updated product settings', user: { name: 'Developer' }, created_at: new Date(Date.now() - 3600000).toISOString() },
-                    { id: 3, type: 'create', description: 'Created new user account', user: { name: 'Manager' }, created_at: new Date(Date.now() - 7200000).toISOString() }
-                ];
             }
         },
 
@@ -469,21 +437,15 @@ function developerDashboard() {
 
         initUserGrowthChart() {
             const ctx = document.getElementById('userGrowthChart');
-            if (!ctx) {
-                console.warn('Canvas element #userGrowthChart not found');
-                return;
-            }
+            if (!ctx) return;
 
-            // Destroy existing chart if it exists
             if (this.userGrowthChart) {
                 this.userGrowthChart.destroy();
             }
 
-            // Sample data - will be updated by period
             const data = this.getChartData('user');
 
-            try {
-                this.userGrowthChart = new Chart(ctx, {
+            this.userGrowthChart = new Chart(ctx, {
                 type: 'line',
                 data: {
                     labels: data.labels,
@@ -512,50 +474,44 @@ function developerDashboard() {
                         y: {
                             beginAtZero: true,
                             grid: {
-                                color: 'rgba(0, 0, 0, 0.05)'
+                                color: document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                color: '#94A3B8',
+                                stepSize: 1
                             }
                         },
                         x: {
                             grid: {
                                 display: false
+                            },
+                            ticks: {
+                                color: '#94A3B8'
                             }
                         }
                     }
                 }
             });
-            } catch (error) {
-                console.error('Failed to initialize user growth chart:', error);
-            }
         },
 
         initRevenueChart() {
             const ctx = document.getElementById('revenueChart');
-            if (!ctx) {
-                console.warn('Canvas element #revenueChart not found');
-                return;
-            }
+            if (!ctx) return;
 
-            // Destroy existing chart if it exists
             if (this.revenueChart) {
                 this.revenueChart.destroy();
             }
 
             const data = this.getChartData('revenue');
 
-            try {
-                this.revenueChart = new Chart(ctx, {
+            this.revenueChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: data.labels,
                     datasets: [{
                         label: 'Revenue (IDR)',
                         data: data.values,
-                        backgroundColor: [
-                            'rgba(0, 210, 122, 0.6)',
-                            'rgba(0, 210, 122, 0.8)',
-                            'rgba(0, 210, 122, 0.6)',
-                            'rgba(0, 210, 122, 0.9)'
-                        ],
+                        backgroundColor: 'rgba(0, 210, 122, 0.85)',
                         borderColor: '#00D27A',
                         borderWidth: 1,
                         borderRadius: 4
@@ -573,62 +529,43 @@ function developerDashboard() {
                         y: {
                             beginAtZero: true,
                             grid: {
-                                color: 'rgba(0, 0, 0, 0.05)'
+                                color: document.documentElement.classList.contains('dark') ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.05)'
                             },
                             ticks: {
+                                color: '#94A3B8',
                                 callback: function(value) {
-                                    return 'Rp ' + (value / 1000000).toFixed(1) + 'M';
+                                    if (value >= 1000000) {
+                                        return 'Rp ' + (value / 1000000).toFixed(1) + 'M';
+                                    } else if (value >= 1000) {
+                                        return 'Rp ' + (value / 1000).toFixed(0) + 'k';
+                                    }
+                                    return 'Rp ' + value;
                                 }
                             }
                         },
                         x: {
                             grid: {
                                 display: false
+                            },
+                            ticks: {
+                                color: '#94A3B8'
                             }
                         }
                     }
                 }
             });
-            } catch (error) {
-                console.error('Failed to initialize revenue chart:', error);
-            }
         },
 
         getChartData(type) {
-            // Sample data by period
-            const userData = {
-                week: {
-                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                    values: [12, 19, 15, 22, 18, 25, 20]
-                },
-                month: {
-                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-                    values: [65, 78, 90, 85]
-                },
-                year: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    values: [65, 78, 90, 85, 95, 110, 120, 115, 130, 145, 150, 165]
-                }
-            };
-
-            const revenueData = {
-                week: {
-                    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-                    values: [2500000, 3200000, 2800000, 4500000, 3800000, 5200000, 4800000]
-                },
-                month: {
-                    labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-                    values: [2500000, 3200000, 2800000, 4500000]
-                },
-                year: {
-                    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    values: [2500000, 3200000, 2800000, 4500000, 3800000, 5200000, 4800000, 6000000, 5500000, 7000000, 6500000, 8500000]
-                }
-            };
-
-            const data = type === 'user' ? userData : revenueData;
             const period = this.chartPeriod || 'month';
-            return data[period] || data.month;
+            if (this.chartsData && this.chartsData[type] && this.chartsData[type][period]) {
+                return this.chartsData[type][period];
+            }
+            // Standard fallback
+            return {
+                labels: period === 'week' ? ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'] : ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+                values: period === 'week' ? [0, 0, 0, 0, 0, 0, 0] : [0, 0, 0, 0]
+            };
         },
 
         updateCharts() {
@@ -651,7 +588,10 @@ function developerDashboard() {
             try {
                 const response = await axios.get('/developer/api/stats');
                 if (response.data.success) {
-                    this.stats = { ...this.stats, ...response.data.data };
+                    const resData = response.data.data;
+                    this.stats = { ...this.stats, ...resData };
+                    this.chartsData = resData.charts || null;
+                    this.updateCharts();
                 }
                 await this.loadRecentActivities();
             } catch (error) {
@@ -689,20 +629,21 @@ function developerDashboard() {
         },
 
         getActivityIcon(type) {
+            // High-fidelity Heroicons inline SVGs for professional dashboard list
             const icons = {
-                'login': '🔑',
-                'logout': '🚪',
-                'create': '📝',
-                'update': '✏️',
-                'delete': '🗑️',
-                'status_change': '🔄',
-                'role_change': '🎭',
-                'permission_change': '🔐',
-                'export': '📤',
-                'import': '📥',
-                'system': '⚙️'
+                'login': `<svg class="w-5 h-5 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m0 0a2 2 0 01-2 2m2-2h3m-3 4a2 2 0 01-2 2m0 0a2 2 0 01-2-2m2 2v3m-2-3H9m2-4H3m6-4a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`,
+                'logout': `<svg class="w-5 h-5 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>`,
+                'create': `<svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>`,
+                'update': `<svg class="w-5 h-5 text-info" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>`,
+                'delete': `<svg class="w-5 h-5 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>`,
+                'status_change': `<svg class="w-5 h-5 text-warning" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>`,
+                'role_change': `<svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>`,
+                'permission_change': `<svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>`,
+                'export': `<svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>`,
+                'import': `<svg class="w-5 h-5 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4-4v12"/></svg>`,
+                'system': `<svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>`
             };
-            return icons[type] || '📌';
+            return icons[type] || `<svg class="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5h5v5H5zm10 0h5v5h-5zM5 15h5v5H5zm10 0h5v5h-5z"/></svg>`;
         },
 
         formatNumber(value) {

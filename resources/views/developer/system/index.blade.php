@@ -12,13 +12,13 @@
             <p class="text-text-secondary dark:text-text-dark-secondary">Kelola pengaturan sistem dan performa aplikasi</p>
         </div>
         <div class="flex gap-3">
-            <button @click="checkUpdates" class="btn btn-secondary">
+            <button @click="checkUpdates" class="btn btn-secondary text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border border-light-border dark:border-dark-border flex items-center shadow-xs">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                 </svg>
                 Check Updates
             </button>
-            <a href="{{ route('developer.system.info') }}" class="btn btn-outline">
+            <a href="{{ route('developer.system.info') }}" class="btn btn-outline text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border border-light-border dark:border-dark-border flex items-center shadow-xs">
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
@@ -29,93 +29,119 @@
 
     <!-- Quick Stats -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div class="card">
-            <div class="card-body py-3">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <p class="text-xs text-text-secondary">PHP Version</p>
-                        <p class="text-lg font-bold text-text-primary dark:text-text-dark-primary" x-text="system.php_version"></p>
-                    </div>
-                    <span :class="system.php_version >= '8.0' ? 'badge-success' : 'badge-warning'" class="badge">
-                        <span x-text="system.php_version >= '8.0' ? '✅' : '⚠️'"></span>
+        <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+            <div class="card-body p-4 flex justify-between items-center">
+                <div>
+                    <p class="text-xs text-text-secondary uppercase font-bold tracking-wider">PHP Version</p>
+                    <p class="text-lg font-bold text-text-primary dark:text-text-dark-primary mt-1" x-text="system.php_version"></p>
+                </div>
+                <div class="flex items-center">
+                    <span :class="system.php_version >= '8.0' ? 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20' : 'bg-amber-500/10 text-amber-500 border-amber-500/20'" class="badge border py-1 px-2.5 font-bold text-xs rounded-full flex items-center gap-1">
+                        <template x-if="system.php_version >= '8.0'">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                            </svg>
+                        </template>
+                        <template x-if="system.php_version < '8.0'">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                        </template>
+                        <span x-text="system.php_version >= '8.0' ? 'Compatible' : 'Warning'"></span>
                     </span>
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body py-3">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <p class="text-xs text-text-secondary">Laravel</p>
-                        <p class="text-lg font-bold text-text-primary dark:text-text-dark-primary" x-text="system.laravel_version"></p>
-                    </div>
-                    <span class="badge badge-primary">{{ $laravelVersion ?? app()->version() }}</span>
+        <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+            <div class="card-body p-4 flex justify-between items-center">
+                <div>
+                    <p class="text-xs text-text-secondary uppercase font-bold tracking-wider">Laravel</p>
+                    <p class="text-lg font-bold text-text-primary dark:text-text-dark-primary mt-1" x-text="system.laravel_version"></p>
                 </div>
+                <span class="badge badge-primary bg-accent/15 text-accent border border-accent/25 py-1 px-2.5 font-bold text-xs rounded-full">v{{ $laravelVersion ?? app()->version() }}</span>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body py-3">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <p class="text-xs text-text-secondary">Environment</p>
-                        <p class="text-lg font-bold" :class="system.environment === 'production' ? 'text-success' : 'text-warning'" x-text="system.environment"></p>
-                    </div>
-                    <span :class="system.environment === 'production' ? 'badge-success' : 'badge-warning'" class="badge">
-                        <span x-text="system.environment === 'production' ? '🟢' : '🟡'"></span>
-                    </span>
+        <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+            <div class="card-body p-4 flex justify-between items-center">
+                <div>
+                    <p class="text-xs text-text-secondary uppercase font-bold tracking-wider">Environment</p>
+                    <p class="text-lg font-bold mt-1" :class="system.environment === 'production' ? 'text-emerald-500' : 'text-amber-500'" x-text="system.environment"></p>
                 </div>
+                <span :class="system.environment === 'production' ? 'bg-emerald-500 text-white' : 'bg-amber-500 text-white'" class="badge py-1 px-2.5 font-bold text-xs rounded-full flex items-center gap-1 shadow-sm">
+                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9-9c1.657 0 3 4.03 3 9s-1.343 9-3 9m0-18c-1.657 0-3 4.03-3 9s1.343 9 3 9m-9-9h9"/>
+                    </svg>
+                    <span x-text="system.environment === 'production' ? 'Production' : 'Local'"></span>
+                </span>
             </div>
         </div>
-        <div class="card">
-            <div class="card-body py-3">
-                <div class="flex justify-between items-center">
-                    <div>
-                        <p class="text-xs text-text-secondary">Debug Mode</p>
-                        <p class="text-lg font-bold" :class="system.debug ? 'text-error' : 'text-success'" x-text="system.debug ? 'Enabled' : 'Disabled'"></p>
-                    </div>
-                    <span :class="system.debug ? 'badge-error' : 'badge-success'" class="badge">
-                        <span x-text="system.debug ? '🔴' : '🟢'"></span>
-                    </span>
+        <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+            <div class="card-body p-4 flex justify-between items-center">
+                <div>
+                    <p class="text-xs text-text-secondary uppercase font-bold tracking-wider">Debug Mode</p>
+                    <p class="text-lg font-bold mt-1" :class="system.debug ? 'text-rose-500' : 'text-emerald-500'" x-text="system.debug ? 'Enabled' : 'Disabled'"></p>
                 </div>
+                <span :class="system.debug ? 'bg-rose-500 text-white' : 'bg-emerald-500 text-white'" class="badge py-1 px-2.5 font-bold text-xs rounded-full flex items-center gap-1 shadow-sm">
+                    <template x-if="system.debug">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                        </svg>
+                    </template>
+                    <template x-if="!system.debug">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+                        </svg>
+                    </template>
+                    <span x-text="system.debug ? 'Debug' : 'Secure'"></span>
+                </span>
             </div>
         </div>
     </div>
 
     <!-- System Health -->
-    <div class="card">
-        <div class="card-header">
-            <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">System Health</h3>
+    <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+        <div class="card-header border-b border-light-border dark:border-dark-border/60 pb-4">
+            <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">System Health</h3>
         </div>
-        <div class="card-body">
+        <div class="card-body p-5">
             <div class="grid md:grid-cols-2 gap-4">
-                <div class="border rounded-lg p-4">
-                    <div class="flex justify-between items-center mb-2">
-                        <span class="text-sm text-text-secondary">Database Connection</span>
-                        <span :class="system.db_connected ? 'text-success' : 'text-error'" class="font-medium">
-                            <span x-text="system.db_connected ? '✅ Connected' : '❌ Disconnected'"></span>
-                        </span>
+                <div class="border border-light-border/80 dark:border-dark-border/60 rounded-xl p-4 bg-light-bg/10 dark:bg-dark-bg/10">
+                    <div class="flex justify-between items-center mb-3">
+                        <span class="text-sm font-semibold text-text-secondary">Database Connection</span>
+                        <div class="flex items-center gap-1.5 font-bold text-xs">
+                            <template x-if="system.db_connected">
+                                <span class="flex items-center text-emerald-500 bg-emerald-500/10 border border-emerald-500/20 py-0.5 px-2 rounded-full gap-1">
+                                    <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span> Connected
+                                </span>
+                            </template>
+                            <template x-if="!system.db_connected">
+                                <span class="flex items-center text-rose-500 bg-rose-500/10 border border-rose-500/20 py-0.5 px-2 rounded-full gap-1">
+                                    <span class="w-1.5 h-1.5 bg-rose-500 rounded-full"></span> Disconnected
+                                </span>
+                            </template>
+                        </div>
                     </div>
                     <div class="flex justify-between items-center mb-2">
                         <span class="text-sm text-text-secondary">Database Name</span>
-                        <span class="text-sm font-medium text-text-primary dark:text-text-dark-primary" x-text="system.db_name || '-'"></span>
+                        <span class="text-sm font-bold text-text-primary dark:text-text-dark-primary font-mono" x-text="system.db_name || '-'"></span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-sm text-text-secondary">Database Size</span>
-                        <span class="text-sm font-medium text-text-primary dark:text-text-dark-primary" x-text="system.db_size || '-'"></span>
+                        <span class="text-sm font-bold text-text-primary dark:text-text-dark-primary font-mono" x-text="system.db_size || '-'"></span>
                     </div>
                 </div>
-                <div class="border rounded-lg p-4">
+                <div class="border border-light-border/80 dark:border-dark-border/60 rounded-xl p-4 bg-light-bg/10 dark:bg-dark-bg/10">
                     <div class="flex justify-between items-center mb-2">
                         <span class="text-sm text-text-secondary">Cache Driver</span>
-                        <span class="text-sm font-medium text-text-primary dark:text-text-dark-primary" x-text="system.cache_driver || 'file'"></span>
+                        <span class="text-sm font-bold text-text-primary dark:text-text-dark-primary font-mono" x-text="system.cache_driver || 'file'"></span>
                     </div>
                     <div class="flex justify-between items-center mb-2">
                         <span class="text-sm text-text-secondary">Session Driver</span>
-                        <span class="text-sm font-medium text-text-primary dark:text-text-dark-primary" x-text="system.session_driver || 'file'"></span>
+                        <span class="text-sm font-bold text-text-primary dark:text-text-dark-primary font-mono" x-text="system.session_driver || 'file'"></span>
                     </div>
                     <div class="flex justify-between items-center">
                         <span class="text-sm text-text-secondary">Queue Driver</span>
-                        <span class="text-sm font-medium text-text-primary dark:text-text-dark-primary" x-text="system.queue_driver || 'sync'"></span>
+                        <span class="text-sm font-bold text-text-primary dark:text-text-dark-primary font-mono" x-text="system.queue_driver || 'sync'"></span>
                     </div>
                 </div>
             </div>
@@ -123,97 +149,105 @@
     </div>
 
     <!-- Cache Management -->
-    <div class="card">
-        <div class="card-header">
-            <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">Cache Management</h3>
+    <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+        <div class="card-header border-b border-light-border dark:border-dark-border/60 pb-4">
+            <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">Cache Management</h3>
         </div>
-        <div class="card-body">
+        <div class="card-body p-5">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-                <button @click="clearCache('config')" class="btn btn-outline text-center py-3 hover:border-accent hover:text-accent transition">
-                    <svg class="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="clearCache('config')" class="btn btn-outline text-center py-3 text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border-light-border dark:border-dark-border flex flex-col items-center justify-center gap-1.5 hover:scale-[1.02] transition shadow-xs group">
+                    <svg class="w-6 h-6 mx-auto group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
                     </svg>
-                    <span class="text-sm">Config</span>
+                    <span>Config</span>
                 </button>
-                <button @click="clearCache('cache')" class="btn btn-outline text-center py-3 hover:border-accent hover:text-accent transition">
-                    <svg class="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="clearCache('cache')" class="btn btn-outline text-center py-3 text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border-light-border dark:border-dark-border flex flex-col items-center justify-center gap-1.5 hover:scale-[1.02] transition shadow-xs group">
+                    <svg class="w-6 h-6 mx-auto group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                     </svg>
-                    <span class="text-sm">Cache</span>
+                    <span>Cache</span>
                 </button>
-                <button @click="clearCache('view')" class="btn btn-outline text-center py-3 hover:border-accent hover:text-accent transition">
-                    <svg class="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="clearCache('view')" class="btn btn-outline text-center py-3 text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border-light-border dark:border-dark-border flex flex-col items-center justify-center gap-1.5 hover:scale-[1.02] transition shadow-xs group">
+                    <svg class="w-6 h-6 mx-auto group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
                     </svg>
-                    <span class="text-sm">Views</span>
+                    <span>Views</span>
                 </button>
-                <button @click="clearCache('route')" class="btn btn-outline text-center py-3 hover:border-accent hover:text-accent transition">
-                    <svg class="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="clearCache('route')" class="btn btn-outline text-center py-3 text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border-light-border dark:border-dark-border flex flex-col items-center justify-center gap-1.5 hover:scale-[1.02] transition shadow-xs group">
+                    <svg class="w-6 h-6 mx-auto group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/>
                     </svg>
-                    <span class="text-sm">Routes</span>
+                    <span>Routes</span>
                 </button>
-                <button @click="clearCache('all')" class="col-span-2 btn-primary text-center py-3">
-                    <svg class="w-5 h-5 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="clearCache('all')" class="col-span-2 btn btn-primary text-center py-3 text-sm font-semibold text-white tracking-wide shadow-sm hover:scale-[1.01] transition duration-150 flex flex-col items-center justify-center gap-1">
+                    <svg class="w-5 h-5 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
                     </svg>
-                    <span class="font-medium">Clear All Caches</span>
+                    <span>Clear All Caches</span>
                 </button>
             </div>
         </div>
     </div>
 
     <!-- Database Management -->
-    <div class="card">
-        <div class="card-header">
-            <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">Database Management</h3>
+    <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+        <div class="card-header border-b border-light-border dark:border-dark-border/60 pb-4">
+            <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">Database Management</h3>
         </div>
-        <div class="card-body">
+        <div class="card-body p-5">
             <div class="grid md:grid-cols-2 gap-4">
-                <div class="border rounded-lg p-4">
-                    <h4 class="font-medium text-text-primary dark:text-text-dark-primary mb-2">Migration</h4>
-                    <p class="text-sm text-text-secondary dark:text-text-dark-secondary mb-3">Jalankan migration untuk update struktur database</p>
-                    <button @click="runMigration" class="btn btn-warning w-full" :disabled="loading">
+                <div class="border border-light-border/80 dark:border-dark-border/60 rounded-xl p-4 bg-light-bg/10 dark:bg-dark-bg/10 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-text-primary dark:text-text-dark-primary text-sm mb-1.5">Migration</h4>
+                        <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-4 leading-relaxed">Jalankan migration untuk update struktur database</p>
+                    </div>
+                    <button @click="runMigration" class="btn btn-warning w-full py-2.5 text-sm font-semibold text-white tracking-wide shadow-sm hover:scale-[1.01] transition" :disabled="loading">
                         <span x-show="!loading">Run Migration</span>
                         <span x-show="loading" class="flex items-center justify-center gap-2">
-                            <div class="spinner w-4 h-4"></div>
+                            <div class="spinner w-4 h-4 animate-spin border-2 border-white/20 border-t-white rounded-full"></div>
                             Running...
                         </span>
                     </button>
                 </div>
-                <div class="border rounded-lg p-4">
-                    <h4 class="font-medium text-text-primary dark:text-text-dark-primary mb-2">Rollback Migration</h4>
-                    <p class="text-sm text-text-secondary dark:text-text-dark-secondary mb-3">Rollback migration terakhir</p>
-                    <button @click="rollbackMigration" class="btn btn-secondary w-full" :disabled="loading">
+                <div class="border border-light-border/80 dark:border-dark-border/60 rounded-xl p-4 bg-light-bg/10 dark:bg-dark-bg/10 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-text-primary dark:text-text-dark-primary text-sm mb-1.5">Rollback Migration</h4>
+                        <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-4 leading-relaxed">Rollback migration terakhir</p>
+                    </div>
+                    <button @click="rollbackMigration" class="btn btn-secondary w-full py-2.5 text-sm font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border border-light-border dark:border-dark-border hover:scale-[1.01] transition" :disabled="loading">
                         <span x-show="!loading">Rollback</span>
                         <span x-show="loading" class="flex items-center justify-center gap-2">
-                            <div class="spinner w-4 h-4"></div>
+                            <div class="spinner w-4 h-4 animate-spin border-2 border-accent/20 border-t-accent rounded-full"></div>
                             Rolling back...
                         </span>
                     </button>
                 </div>
-                <div class="border rounded-lg p-4">
-                    <h4 class="font-medium text-text-primary dark:text-text-dark-primary mb-2">Run Seeder</h4>
-                    <p class="text-sm text-text-secondary dark:text-text-dark-secondary mb-3">Isi database dengan data dummy</p>
+                <div class="border border-light-border/80 dark:border-dark-border/60 rounded-xl p-4 bg-light-bg/10 dark:bg-dark-bg/10 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-text-primary dark:text-text-dark-primary text-sm mb-1.5">Run Seeder</h4>
+                        <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-4 leading-relaxed">Isi database dengan data dummy</p>
+                    </div>
                     <div class="flex gap-2">
-                        <input type="text" x-model="seederClass" placeholder="Seeder Class" class="input flex-1">
-                        <button @click="runSeeder" class="btn btn-primary" :disabled="loading">
+                        <input type="text" x-model="seederClass" placeholder="Seeder Class" class="input flex-1 text-xs">
+                        <button @click="runSeeder" class="btn btn-primary text-xs font-semibold text-white tracking-wide shadow-sm py-2 px-4 hover:scale-[1.01] transition" :disabled="loading">
                             <span x-show="!loading">Run</span>
                             <span x-show="loading" class="flex items-center gap-2">
-                                <div class="spinner w-4 h-4"></div>
+                                <div class="spinner w-4 h-4 animate-spin border-2 border-white/20 border-t-white rounded-full"></div>
                             </span>
                         </button>
                     </div>
-                    <p class="text-xs text-text-secondary mt-2">Contoh: DatabaseSeeder, StoreSeeder</p>
+                    <p class="text-[10px] text-text-secondary mt-2 font-mono">Contoh: DatabaseSeeder, StoreSeeder</p>
                 </div>
-                <div class="border rounded-lg p-4">
-                    <h4 class="font-medium text-text-primary dark:text-text-dark-primary mb-2">Refresh Database</h4>
-                    <p class="text-sm text-text-secondary dark:text-text-dark-secondary mb-3">Reset dan migrate ulang database</p>
-                    <button @click="refreshDatabase" class="btn btn-danger w-full" :disabled="loading">
+                <div class="border border-light-border/80 dark:border-dark-border/60 rounded-xl p-4 bg-light-bg/10 dark:bg-dark-bg/10 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-text-primary dark:text-text-dark-primary text-sm mb-1.5">Refresh Database</h4>
+                        <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-4 leading-relaxed">Reset dan migrate ulang database</p>
+                    </div>
+                    <button @click="refreshDatabase" class="btn btn-danger w-full py-2.5 text-sm font-semibold text-white tracking-wide shadow-sm hover:scale-[1.01] transition" :disabled="loading">
                         <span x-show="!loading">Refresh Database</span>
                         <span x-show="loading" class="flex items-center justify-center gap-2">
-                            <div class="spinner w-4 h-4"></div>
+                            <div class="spinner w-4 h-4 animate-spin border-2 border-white/20 border-t-white rounded-full"></div>
                             Refreshing...
                         </span>
                     </button>
@@ -223,61 +257,64 @@
     </div>
 
     <!-- Optimization -->
-    <div class="card">
-        <div class="card-header">
-            <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">Optimization</h3>
+    <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+        <div class="card-header border-b border-light-border dark:border-dark-border/60 pb-4">
+            <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">Optimization</h3>
         </div>
-        <div class="card-body">
+        <div class="card-body p-5">
             <div class="grid md:grid-cols-3 gap-4">
-                <button @click="optimizeApp" class="btn btn-outline text-center py-4 hover:border-accent hover:text-accent transition">
-                    <svg class="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="optimizeApp" class="btn btn-outline text-center py-4 text-xs font-semibold text-text-primary dark:text-text-dark-primary hover:text-accent dark:hover:text-accent border border-light-border dark:border-dark-border flex flex-col items-center justify-center gap-1.5 hover:scale-[1.02] transition shadow-xs group">
+                    <svg class="w-6 h-6 mx-auto group-hover:text-accent transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
                     </svg>
-                    <span class="font-medium">Optimize</span>
-                    <p class="text-xs text-text-secondary mt-1">Optimize for production</p>
+                    <span class="font-bold text-sm">Optimize</span>
+                    <p class="text-[10px] text-text-secondary">Optimize for production</p>
                 </button>
-                <button @click="clearOptimized" class="btn btn-outline text-center py-4 hover:border-error hover:text-error transition">
-                    <svg class="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="clearOptimized" class="btn btn-outline text-center py-4 text-xs font-semibold text-text-primary dark:text-text-dark-primary hover:text-error dark:hover:text-error border border-light-border dark:border-dark-border flex flex-col items-center justify-center gap-1.5 hover:scale-[1.02] transition shadow-xs group">
+                    <svg class="w-6 h-6 mx-auto group-hover:text-error transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                     </svg>
-                    <span class="font-medium">Clear Optimized</span>
-                    <p class="text-xs text-text-secondary mt-1">Clear optimized files</p>
+                    <span class="font-bold text-sm">Clear Optimized</span>
+                    <p class="text-[10px] text-text-secondary">Clear optimized files</p>
                 </button>
-                <button @click="clearLogs" class="btn btn-outline text-center py-4 hover:border-error hover:text-error transition">
-                    <svg class="w-6 h-6 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button @click="clearLogs" class="btn btn-outline text-center py-4 text-xs font-semibold text-text-primary dark:text-text-dark-primary hover:text-error dark:hover:text-error border border-light-border dark:border-dark-border flex flex-col items-center justify-center gap-1.5 hover:scale-[1.02] transition shadow-xs group">
+                    <svg class="w-6 h-6 mx-auto group-hover:text-error transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
                     </svg>
-                    <span class="font-medium">Clear Logs</span>
-                    <p class="text-xs text-text-secondary mt-1">Clear all log files</p>
+                    <span class="font-bold text-sm">Clear Logs</span>
+                    <p class="text-[10px] text-text-secondary">Clear all log files</p>
                 </button>
             </div>
         </div>
     </div>
 
     <!-- Maintenance Mode -->
-    <div class="card">
-        <div class="card-header">
-            <h3 class="font-semibold text-text-primary dark:text-text-dark-primary">Maintenance Mode</h3>
+    <div class="card bg-white dark:bg-dark-surface border border-light-border dark:border-dark-border">
+        <div class="card-header border-b border-light-border dark:border-dark-border/60 pb-4">
+            <h3 class="font-bold text-text-primary dark:text-text-dark-primary text-sm uppercase tracking-wider">Maintenance Mode</h3>
         </div>
-        <div class="card-body">
+        <div class="card-body p-5">
             <div class="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                    <p class="text-text-secondary dark:text-text-dark-secondary">
-                        Status: 
-                        <span :class="system.maintenance ? 'text-error' : 'text-success'" class="font-medium">
-                            <span x-text="system.maintenance ? '🔴 Maintenance Mode Active' : '🟢 Normal Operation'"></span>
-                        </span>
-                    </p>
-                    <p class="text-xs text-text-secondary mt-1">When enabled, only developers can access the site</p>
+                    <div class="flex items-center gap-2">
+                        <span class="text-xs font-bold text-text-secondary">Status:</span>
+                        <div class="flex items-center gap-1.5">
+                            <span :class="system.maintenance ? 'bg-rose-500/10 text-rose-500 border-rose-500/20' : 'bg-emerald-500/10 text-emerald-500 border-emerald-500/20'" class="badge border py-0.5 px-2 rounded-full font-bold text-[10px] flex items-center gap-1">
+                                <span class="w-1.5 h-1.5 rounded-full animate-pulse" :class="system.maintenance ? 'bg-rose-500' : 'bg-emerald-500'"></span>
+                                <span x-text="system.maintenance ? 'Maintenance Mode Active' : 'Normal Operation'"></span>
+                            </span>
+                        </div>
+                    </div>
+                    <p class="text-[10px] text-text-secondary mt-1.5">When enabled, only developers can access the site</p>
                 </div>
                 <div class="flex gap-3">
-                    <button @click="enableMaintenance" class="btn btn-danger" x-show="!system.maintenance">
+                    <button @click="enableMaintenance" class="btn btn-danger text-xs font-bold text-white tracking-wide shadow-sm py-2 px-4 hover:scale-[1.01] transition" x-show="!system.maintenance">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                         </svg>
                         Enable Maintenance
                     </button>
-                    <button @click="disableMaintenance" class="btn btn-success" x-show="system.maintenance">
+                    <button @click="disableMaintenance" class="btn btn-success text-xs font-bold text-white tracking-wide shadow-sm py-2 px-4 hover:scale-[1.01] transition" x-show="system.maintenance">
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
                         </svg>
@@ -289,28 +326,32 @@
     </div>
 
     <!-- Danger Zone -->
-    <div class="card border-error/20">
-        <div class="card-header bg-error/5">
-            <h3 class="font-semibold text-error flex items-center gap-2">
+    <div class="card border-error/20 bg-white dark:bg-dark-surface">
+        <div class="card-header bg-error/5 border-b border-error/10 pb-4">
+            <h3 class="font-bold text-error flex items-center gap-2 text-sm uppercase tracking-wider">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
                 </svg>
                 Danger Zone
             </h3>
         </div>
-        <div class="card-body">
+        <div class="card-body p-5">
             <div class="grid md:grid-cols-2 gap-4">
-                <div class="border border-error/20 rounded-lg p-4">
-                    <h4 class="font-medium text-error mb-2">Reset Database</h4>
-                    <p class="text-sm text-text-secondary dark:text-text-dark-secondary mb-3">Hapus semua data dan migration ulang</p>
-                    <button @click="resetDatabase" class="btn btn-danger w-full" :disabled="loading">
+                <div class="border border-error/20 rounded-xl p-4 bg-rose-500/5 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-error text-sm mb-1">Reset Database</h4>
+                        <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-4 leading-relaxed">Hapus semua data dan migration ulang</p>
+                    </div>
+                    <button @click="resetDatabase" class="btn btn-danger w-full py-2 px-4 text-xs font-bold text-white tracking-wide shadow-sm hover:scale-[1.01] transition" :disabled="loading">
                         Reset Database
                     </button>
                 </div>
-                <div class="border border-error/20 rounded-lg p-4">
-                    <h4 class="font-medium text-error mb-2">Clear Application</h4>
-                    <p class="text-sm text-text-secondary dark:text-text-dark-secondary mb-3">Clear all caches, logs, and optimized files</p>
-                    <button @click="clearApplication" class="btn btn-danger w-full" :disabled="loading">
+                <div class="border border-error/20 rounded-xl p-4 bg-rose-500/5 flex flex-col justify-between">
+                    <div>
+                        <h4 class="font-bold text-error text-sm mb-1">Clear Application</h4>
+                        <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-4 leading-relaxed">Clear all caches, logs, and optimized files</p>
+                    </div>
+                    <button @click="clearApplication" class="btn btn-danger w-full py-2 px-4 text-xs font-bold text-white tracking-wide shadow-sm hover:scale-[1.01] transition" :disabled="loading">
                         Clear Application
                     </button>
                 </div>
@@ -319,9 +360,9 @@
     </div>
 
     <!-- Toast Output -->
-    <div x-show="output" class="card bg-dark-bg text-white">
-        <div class="card-body">
-            <pre class="text-sm overflow-x-auto" x-text="output"></pre>
+    <div x-show="output" class="card bg-dark-bg border border-light-border dark:border-dark-border text-white mt-4">
+        <div class="card-body p-4 bg-black rounded-xl">
+            <pre class="text-xs overflow-x-auto font-mono text-slate-300" x-text="output"></pre>
         </div>
     </div>
 </div>
