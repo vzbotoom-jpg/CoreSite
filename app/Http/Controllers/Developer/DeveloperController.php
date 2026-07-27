@@ -73,7 +73,7 @@ class DeveloperController extends Controller
         }
 
         $memUsage = 42.8;
-        if (PHP_OS_NAME === 'Linux') {
+        if (PHP_OS_FAMILY === 'Linux') {
             $free = shell_exec('free');
             if ($free) {
                 $free = (string)trim($free);
