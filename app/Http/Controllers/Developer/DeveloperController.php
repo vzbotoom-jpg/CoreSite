@@ -79,7 +79,7 @@ class DeveloperController extends Controller
             }
         }
 
-        $memUsage = null;
+$memUsage = null;
         if (PHP_OS_FAMILY === 'Linux') {
             // Prefer reading /proc/meminfo (no shell execution required)
             $meminfo = @file_get_contents('/proc/meminfo');
