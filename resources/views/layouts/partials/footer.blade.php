@@ -13,6 +13,7 @@
                 </div>
                 <p class="text-text-secondary dark:text-text-dark-secondary text-sm leading-relaxed transition-colors duration-200">
                     Platform toko online dan kasir otomatis.
+                    Platform toko online dan kasir otomatis. 
                     Dapatkan website toko + E-Catalog profesional dalam hitungan menit.
                 </p>
                 <div class="flex items-center gap-3 mt-4">
@@ -47,7 +48,6 @@
                     <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">CoreSite Security</a></li>
                     <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Download app</a></li>
                     <li><a href="{{ route('pricing') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Pricing</a></li>
-
                     <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Log in to CoreSite</a></li>
                     <li><a href="{{ route('demo') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Demo</a></li>
                 </ul>

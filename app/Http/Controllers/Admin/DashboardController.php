@@ -139,6 +139,7 @@ class DashboardController extends Controller
                 ->limit(5)
                 ->get();
 
+            
             // Ensure all items are Product models, not strings
             $lowStockProductsList = $lowStockProductsList->filter(function($item) {
                 return $item instanceof Product && $item->name;
