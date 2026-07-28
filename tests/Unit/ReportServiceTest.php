@@ -30,8 +30,8 @@ class ReportServiceTest extends TestCase
     public function test_generate_monthly_report()
     {
         // Create products
-        $product1 = Product::factory()->create(['store_id' => $this->store->id, 'price' => 50000]);
-        $product2 = Product::factory()->create(['store_id' => $this->store->id, 'price' => 75000]);
+        $product1 = Product::factory()->create(['store_id' => $this->store->id, 'price' => 50000, 'stock' => 100]);
+        $product2 = Product::factory()->create(['store_id' => $this->store->id, 'price' => 75000, 'stock' => 100]);
         
         // Create transactions for current month
         $saleService = app(\App\Services\SaleService::class);
@@ -49,7 +49,7 @@ class ReportServiceTest extends TestCase
     /** @test */
     public function test_get_daily_breakdown()
     {
-        $product = Product::factory()->create(['store_id' => $this->store->id, 'price' => 50000]);
+        $product = Product::factory()->create(['store_id' => $this->store->id, 'price' => 50000, 'stock' => 100]);
         
         $saleService = app(\App\Services\SaleService::class);
         $saleService->processSale($this->store->id, [['product_id' => $product->id, 'quantity' => 1]], 'cash', 50000);
@@ -68,7 +68,7 @@ class ReportServiceTest extends TestCase
     /** @test */
     public function test_get_weekly_trend()
     {
-        $product = Product::factory()->create(['store_id' => $this->store->id, 'price' => 50000]);
+        $product = Product::factory()->create(['store_id' => $this->store->id, 'price' => 50000, 'stock' => 100]);
         
         $saleService = app(\App\Services\SaleService::class);
         $saleService->processSale($this->store->id, [['product_id' => $product->id, 'quantity' => 1]], 'cash', 50000);
@@ -88,8 +88,8 @@ class ReportServiceTest extends TestCase
     /** @test */
     public function test_get_top_products()
     {
-        $product1 = Product::factory()->create(['store_id' => $this->store->id, 'name' => 'Product A', 'price' => 50000]);
-        $product2 = Product::factory()->create(['store_id' => $this->store->id, 'name' => 'Product B', 'price' => 50000]);
+        $product1 = Product::factory()->create(['store_id' => $this->store->id, 'name' => 'Product A', 'price' => 50000, 'stock' => 100]);
+        $product2 = Product::factory()->create(['store_id' => $this->store->id, 'name' => 'Product B', 'price' => 50000, 'stock' => 100]);
         
         $saleService = app(\App\Services\SaleService::class);
         $saleService->processSale($this->store->id, [['product_id' => $product1->id, 'quantity' => 5]], 'cash', 250000);
@@ -128,7 +128,7 @@ class ReportServiceTest extends TestCase
     /** @test */
     public function test_monthly_report_only_includes_completed_transactions()
     {
-        $product = Product::factory()->create(['store_id' => $this->store->id, 'price' => 50000]);
+        $product = Product::factory()->create(['store_id' => $this->store->id, 'price' => 50000, 'stock' => 100]);
         
         $saleService = app(\App\Services\SaleService::class);
         $saleService->processSale($this->store->id, [['product_id' => $product->id, 'quantity' => 1]], 'cash', 50000);

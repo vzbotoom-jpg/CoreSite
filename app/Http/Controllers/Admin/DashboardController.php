@@ -138,6 +138,7 @@ class DashboardController extends Controller
                 ->orderBy('stock', 'asc')
                 ->limit(5)
                 ->get();
+
             
             // Ensure all items are Product models, not strings
             $lowStockProductsList = $lowStockProductsList->filter(function($item) {

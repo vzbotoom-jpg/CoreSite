@@ -60,18 +60,90 @@ class DeveloperController extends Controller
         $lastMonthStores = Store::whereYear('created_at', now()->subMonth()->year)->whereMonth('created_at', now()->subMonth()->month)->count();
         $storeGrowth = $lastMonthStores > 0 ? round((($thisMonthStores - $lastMonthStores) / $lastMonthStores) * 100, 1) : ($thisMonthStores > 0 ? 100 : 0);
 
-        // System resources
-        $cpuUsage = 15.4;
+        // System resources - real measurements (no hardcoded/fake fallbacks)
+        $cpuUsage = null;
         if (function_exists('sys_getloadavg')) {
             $load = sys_getloadavg();
             if (is_array($load) && isset($load[0])) {
-                $cpuUsage = min(100, round(($load[0] / 2) * 100, 1));
+                $cores = $this->getCpuCores();
+                $cpuUsage = min(100, round(($load[0] / $cores) * 100, 1));
             }
         }
-        if ($cpuUsage <= 0) {
-            $cpuUsage = 15.4;
+        if ($cpuUsage === null && PHP_OS_FAMILY === 'Windows') {
+            $wmicLoad = @shell_exec('wmic cpu get LoadPercentage');
+            if ($wmicLoad) {
+                preg_match_all('/\d+/', $wmicLoad, $matches);
+                if (!empty($matches[0])) {
+                    $cpuUsage = (float)$matches[0][0];
+                }
+            }
         }
 
+$memUsage = null;
+        if (PHP_OS_FAMILY === 'Linux') {
+            // Prefer reading /proc/meminfo (no shell execution required)
+            $meminfo = @file_get_contents('/proc/meminfo');
+            if ($meminfo !== false) {
+                $lines = explode("\n", $meminfo);
+                $memTotal = 0;
+                $memAvailable = 0;
+                foreach ($lines as $line) {
+                    if (preg_match('/^MemTotal:\s+(\d+)/', $line, $matches)) {
+                        $memTotal = (int)$matches[1];
+                    }
+                    if (preg_match('/^MemAvailable:\s+(\d+)/', $line, $matches)) {
+                        $memAvailable = (int)$matches[1];
+                    }
+                }
+                if ($memTotal > 0 && $memAvailable > 0) {
+                    $memUsage = round((($memTotal - $memAvailable) / $memTotal) * 100, 1);
+                }
+            }
+            if ($memUsage === null) {
+                $free = @shell_exec('free');
+                if ($free) {
+                    $free = (string)trim($free);
+                    $free_arr = explode("\n", $free);
+                    if (isset($free_arr[1])) {
+                        $mem = preg_split("/\s+/", $free_arr[1]);
+                        if (isset($mem[1]) && isset($mem[2]) && $mem[1] > 0) {
+                            $memUsage = round(($mem[2] / $mem[1]) * 100, 1);
+                        }
+                    }
+                }
+            }
+        } elseif (PHP_OS_FAMILY === 'Darwin') {
+            $vmStat = @shell_exec('vm_stat');
+            if ($vmStat) {
+                preg_match('/page size of (\d+) bytes/', $vmStat, $sizeMatches);
+                $pageSize = isset($sizeMatches[1]) ? (int)$sizeMatches[1] : 4096;
+                preg_match('/Pages free:\s+(\d+)/', $vmStat, $freeMatches);
+                preg_match('/Pages active:\s+(\d+)/', $vmStat, $activeMatches);
+                preg_match('/Pages inactive:\s+(\d+)/', $vmStat, $inactiveMatches);
+                preg_match('/Pages wired down:\s+(\d+)/', $vmStat, $wiredMatches);
+
+                if (isset($freeMatches[1], $activeMatches[1], $inactiveMatches[1], $wiredMatches[1])) {
+                    $free = (int)$freeMatches[1];
+                    $active = (int)$activeMatches[1];
+                    $inactive = (int)$inactiveMatches[1];
+                    $wired = (int)$wiredMatches[1];
+
+                    $total = $free + $active + $inactive + $wired;
+                    $used = $active + $wired;
+                    if ($total > 0) {
+                        $memUsage = round(($used / $total) * 100, 1);
+                    }
+                }
+            }
+        } elseif (PHP_OS_FAMILY === 'Windows') {
+            $wmicMem = @shell_exec('wmic OS get FreePhysicalMemory,TotalVisibleMemorySize');
+            if ($wmicMem) {
+                preg_match_all('/\d+/', $wmicMem, $matches);
+                if (isset($matches[0][0]) && isset($matches[0][1])) {
+                    $free = (float)$matches[0][0]; // in KB
+                    $total = (float)$matches[0][1]; // in KB
+                    if ($total > 0) {
+                        $memUsage = round((($total - $free) / $total) * 100, 1);
         $memUsage = 42.8;
         if (\PHP_OS_FAMILY === 'Linux') {
             $free = shell_exec('free');
@@ -86,21 +158,16 @@ class DeveloperController extends Controller
                 }
             }
         }
-        if ($memUsage <= 0) {
-            $memUsage = 42.8;
-        }
 
-        $storageUsage = 28.5;
+        $storageUsage = null;
         try {
-            $totalSpace = @disk_total_space('/');
-            $freeSpace = @disk_free_space('/');
+            $path = base_path();
+            $totalSpace = @disk_total_space($path);
+            $freeSpace = @disk_free_space($path);
             if ($totalSpace > 0) {
                 $storageUsage = round((($totalSpace - $freeSpace) / $totalSpace) * 100, 1);
             }
         } catch (\Exception $e) {}
-        if ($storageUsage <= 0) {
-            $storageUsage = 28.5;
-        }
 
         return [
             'total_users' => User::count(),
@@ -122,7 +189,117 @@ class DeveloperController extends Controller
             'cpu_usage' => $cpuUsage,
             'memory_usage' => $memUsage,
             'storage_usage' => $storageUsage,
+            'health' => $this->getSystemHealthStatus(),
+            'version' => $this->getAppVersion(),
         ];
+    }
+
+    /**
+     * Run real, dynamic health checks for Database, Cache, and Storage
+     */
+    private function getSystemHealthStatus(): array
+    {
+        $dbConnected = false;
+        try {
+            DB::connection()->getPdo();
+            $dbConnected = true;
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Database health check failed: ' . $e->getMessage());
+        }
+
+        $cacheConnected = false;
+        try {
+            \Illuminate\Support\Facades\Cache::put('health_check', true, 10);
+            $cacheConnected = \Illuminate\Support\Facades\Cache::get('health_check') === true;
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Cache health check failed: ' . $e->getMessage());
+        }
+
+        $storageWritable = false;
+        try {
+            $storageWritable = \Illuminate\Support\Facades\Storage::put('health_check.txt', 'ok');
+            if ($storageWritable) {
+                \Illuminate\Support\Facades\Storage::delete('health_check.txt');
+            }
+        } catch (\Exception $e) {
+            \Illuminate\Support\Facades\Log::error('Storage health check failed: ' . $e->getMessage());
+        }
+
+        // Determine if system is completely online
+        $systemOnline = $dbConnected && $storageWritable;
+
+        return [
+            'db_connected' => $dbConnected,
+            'cache_connected' => $cacheConnected,
+            'storage_writable' => $storageWritable,
+            'system_online' => $systemOnline,
+        ];
+    }
+
+    /**
+     * Get real application version dynamically
+     */
+    private function getAppVersion(): string
+    {
+        $version = config('app.version');
+        if ($version) {
+            return $version;
+        }
+
+        if (PHP_OS_FAMILY !== 'Windows' && function_exists('shell_exec')) {
+            $gitVersion = @shell_exec('git describe --tags --always 2>/dev/null');
+            if ($gitVersion) {
+                return trim($gitVersion);
+            }
+            $gitCommit = @shell_exec('git rev-parse --short HEAD 2>/dev/null');
+            if ($gitCommit) {
+                return 'git-' . trim($gitCommit);
+            }
+        }
+
+        $composerPath = base_path('composer.json');
+        if (File::exists($composerPath)) {
+            $composer = json_decode(File::get($composerPath), true);
+            if (isset($composer['version'])) {
+                return $composer['version'];
+            }
+        }
+
+        return '1.0.0';
+    }
+
+    /**
+     * Get actual number of CPU cores
+     */
+    private function getCpuCores(): int
+    {
+        if (PHP_OS_FAMILY === 'Linux') {
+            $cpuinfo = @file_get_contents('/proc/cpuinfo');
+            if ($cpuinfo !== false) {
+                preg_match_all('/^processor/m', $cpuinfo, $matches);
+                if (!empty($matches[0])) {
+                    return max(1, count($matches[0]));
+                }
+            }
+            $nproc = @shell_exec('nproc');
+            if ($nproc && is_numeric(trim($nproc))) {
+                return max(1, (int)trim($nproc));
+            }
+        } elseif (PHP_OS_FAMILY === 'Darwin') {
+            $cores = @shell_exec('sysctl -n hw.ncpu');
+            if ($cores && is_numeric(trim($cores))) {
+                return max(1, (int)trim($cores));
+            }
+        } elseif (PHP_OS_FAMILY === 'Windows') {
+            $cores = @shell_exec('wmic cpu get NumberOfCores');
+            if ($cores) {
+                preg_match_all('/\d+/', $cores, $matches);
+                if (!empty($matches[0])) {
+                    return max(1, (int)$matches[0][0]);
+                }
+            }
+        }
+        return 1;
     }
 
     /**
@@ -2000,8 +2177,18 @@ class DeveloperController extends Controller
             ->sum(DB::raw('total_amount'));
         
         // Calculate growth percentages
-        $userGrowth = 0; // Add user registration logic if needed
-        $storeGrowth = 0; // Add store creation logic if needed
+        $currentPeriodUsers = User::whereBetween('created_at', [$startDate, $endDate])->count();
+        $prevPeriodUsers = User::whereBetween('created_at', [$prevStartDate, $prevEndDate])->count();
+        $userGrowth = $prevPeriodUsers > 0
+            ? round((($currentPeriodUsers - $prevPeriodUsers) / $prevPeriodUsers) * 100, 1)
+            : ($currentPeriodUsers > 0 ? 100 : 0);
+
+        $currentPeriodStores = Store::whereBetween('created_at', [$startDate, $endDate])->count();
+        $prevPeriodStores = Store::whereBetween('created_at', [$prevStartDate, $prevEndDate])->count();
+        $storeGrowth = $prevPeriodStores > 0
+            ? round((($currentPeriodStores - $prevPeriodStores) / $prevPeriodStores) * 100, 1)
+            : ($currentPeriodStores > 0 ? 100 : 0);
+
         $transactionGrowth = $prevTransactions > 0 
             ? round((($totalTransactions - $prevTransactions) / $prevTransactions) * 100, 1)
             : 0;
@@ -2813,38 +3000,12 @@ class DeveloperController extends Controller
         $jobData = ScheduledJob::where('name', $job)->orWhere('id', $job)->first();
         
         if ($jobData) {
-            $logs = JobLog::where('job_id', $jobData->id)
+            $logs = JobLog::where('scheduled_job_id', $jobData->id)
                 ->orderBy('created_at', 'desc')
                 ->limit(50)
                 ->get();
         } else {
-            // Generate sample logs
-            $logs = collect([
-                [
-                    'id' => 1,
-                    'status' => 'success',
-                    'message' => 'Job executed successfully',
-                    'output' => 'Completed in 2.5 seconds',
-                    'duration' => 2,
-                    'created_at' => now()->subHour()
-                ],
-                [
-                    'id' => 2,
-                    'status' => 'success',
-                    'message' => 'Job executed successfully',
-                    'output' => 'Completed in 1.8 seconds',
-                    'duration' => 2,
-                    'created_at' => now()->subHours(2)
-                ],
-                [
-                    'id' => 3,
-                    'status' => 'failed',
-                    'message' => 'Connection timeout',
-                    'output' => 'Error: Could not connect to database',
-                    'duration' => 30,
-                    'created_at' => now()->subHours(3)
-                ]
-            ]);
+            $logs = collect();
         }
         
         return response()->json([
