@@ -12,8 +12,8 @@
                     <span class="font-bold text-xl text-text-primary dark:text-text-dark-primary transition-colors duration-200">CoreSite</span>
                 </div>
                 <p class="text-text-secondary dark:text-text-dark-secondary text-sm leading-relaxed transition-colors duration-200">
-                    Platform toko online dan kasir otomatis untuk UMKM Indonesia. 
-                    Dapatkan website toko profesional dalam hitungan menit.
+                    Platform toko online dan kasir otomatis.
+                    Dapatkan website toko + E-Catalog profesional dalam hitungan menit.
                 </p>
                 <div class="flex items-center gap-3 mt-4">
                     <a href="#" class="text-gray-500 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200" aria-label="Facebook">
@@ -41,43 +41,77 @@
             
             <!-- Product Column -->
             <div>
-                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 transition-colors duration-200">Produk</h3>
+                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 transition-colors duration-200">Products</h3>
                 <ul class="space-y-2.5 text-sm">
-                    <li><a href="{{ route('features') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Fitur</a></li>
-                    <li><a href="{{ route('pricing') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Harga</a></li>
+                    <li><a href="{{ route('features') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Features</a></li>
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">CoreSite Security</a></li>
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Download app</a></li>
+                    <li><a href="{{ route('pricing') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Pricing</a></li>
+
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Log in to CoreSite</a></li>
                     <li><a href="{{ route('demo') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Demo</a></li>
+                </ul>
+
+                {{-- Sub-section: ditumpuk di bawah list Products dalam kolom yang sama,
+                     mengikuti pola "Products -> Models" di footer Anthropic --}}
+                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 mt-8 transition-colors duration-200">CoreSite Platform</h3>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Overview</a></li>
+                    <li><a href="{{ route('docs.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Docs</a></li>
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Ecosystem</a></li>
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Pricing</a></li>
                 </ul>
             </div>
             
             <!-- Company Column -->
             <div>
-                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 transition-colors duration-200">Perusahaan</h3>
+                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 transition-colors duration-200">Solutions</h3>
                 <ul class="space-y-2.5 text-sm">
-                    <li><a href="{{ route('about') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Tentang Kami</a></li>
-                    <li><a href="{{ route('careers') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Karir</a></li>
-                    <li><a href="{{ route('blog.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Blog</a></li>
-                    <li><a href="{{ route('contact') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Kontak</a></li>
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">CyberSecurity</a></li>
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Government</a></li>
+                </ul>
+
+                {{-- Sub-section: ditumpuk di bawah list Solutions dalam kolom yang sama,
+                     mengikuti pola "Solutions -> Claude Platform" di footer Anthropic --}}
+                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 mt-8 transition-colors duration-200">Terms and policies</h3>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="{{ route('privacy') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Privacy Policy</a></li>
+                    <li><a href="{{ route('terms') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Terms and Services</a></li>
+                    <li><a href="{{ route('cookie-policy') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Cookie Policy</a></li>
+                    <li><a href="{{ route('gdpr') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">GDPR</a></li>
+                </ul>
+                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 mt-8 transition-colors duration-200">Help and security</h3>
+                <ul class="space-y-2.5 text-sm">
+                    <li><a href="{{ route('privacy') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Support center</a></li>
+                    <li><a href="{{ route('contact') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Customer Support</a></li>
                 </ul>
             </div>
             
             <!-- Support Column -->
             <div>
-                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 transition-colors duration-200">Dukungan</h3>
+                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 transition-colors duration-200">Resources</h3>
                 <ul class="space-y-2.5 text-sm">
-                    <li><a href="{{ route('faq') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">FAQ</a></li>
-                    <li><a href="{{ route('guides') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Panduan</a></li>
-                    <li><a href="{{ route('docs.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Dokumentasi</a></li>
+                    <li><a href="{{ route('blog.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Blog</a></li>
+                    <li><a href="{{ route('guides') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Events</a></li>
+                    <li><a href="{{ route('docs.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Community</a></li>
+                    <li><a href="{{ route('docs.index') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Service Partners</a></li>
+                    <li><a href="{{ route('guides') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Tutorials</a></li>
+                    <li><a href="{{ route('faq') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">FAQs</a></li>
+
                 </ul>
             </div>
             
             <!-- Legal Column -->
             <div>
-                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 transition-colors duration-200">Legal</h3>
+                <h3 class="font-semibold text-text-primary dark:text-text-dark-primary mb-4 transition-colors duration-200">Company</h3>
                 <ul class="space-y-2.5 text-sm">
-                    <li><a href="{{ route('privacy') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Kebijakan Privasi</a></li>
-                    <li><a href="{{ route('terms') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Syarat & Ketentuan</a></li>
-                    <li><a href="{{ route('cookie-policy') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Cookie Policy</a></li>
-                    <li><a href="{{ route('gdpr') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">GDPR</a></li>
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">CoreSite</a></li>
+                    <li><a href="{{ route('about') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">About</a></li>
+                    <li><a href="{{ route('careers') }}" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Careers</a></li>
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">News</a></li>
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Policy</a></li>
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">CoreSite Constitution</a></li>
+                    <li><a href="#" class="text-gray-600 dark:text-gray-400 hover:text-[#00D27A] dark:hover:text-[#00D27A] transition-colors duration-200">Transparency</a></li>
                 </ul>
             </div>
         </div>

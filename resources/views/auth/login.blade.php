@@ -4,7 +4,7 @@
 @section('title', 'Login')
 
 @section('content')
-<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+<div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-light-surface dark:bg-dark-surface">
     <div class="max-w-md w-full">
         <div class="text-center mb-8">
             <a href="{{ route('landing') }}" class="inline-flex items-center gap-2">
@@ -13,51 +13,92 @@
                 </div>
                 <span class="text-2xl font-bold">CoreSite</span>
             </a>
-            <h2 class="mt-6 text-2xl font-bold">Login ke Akun Anda</h2>
+            <h2 class="mt-6 text-2xl font-bold">Selamat Datang Kembali</h2>
             <p class="mt-2 text-text-secondary">Masukkan email dan password untuk melanjutkan</p>
         </div>
-        
-        <div class="card">
+
+        <div class="card shadow-lg">
             <div class="card-body">
-                <form method="POST" action="{{ route('login') }}">
+
+                @if(session('status'))
+                <div class="flex items-start gap-3 bg-success/10 border border-success/20 text-success rounded-lg px-4 py-3 text-sm mb-5">
+                    <svg class="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                    <span>{{ session('status') }}</span>
+                </div>
+                @endif
+
+                <form method="POST" action="{{ route('login') }}" class="space-y-4">
                     @csrf
-                    
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium mb-2">Email</label>
-                        <input type="email" name="email" value="{{ old('email') }}" required 
-                               class="input @error('email') input-error @enderror"
-                               placeholder="admin@coresite.com">
+
+                    {{-- Email --}}
+                    <div>
+                        <label for="email" class="block text-sm font-medium mb-2">Email</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                                </svg>
+                            </div>
+                            <input type="email" id="email" name="email" value="{{ old('email') }}" required autofocus
+                                   class="input pl-10 @error('email') input-error @enderror"
+                                   placeholder="admin@coresite.com">
+                        </div>
                         @error('email')
                             <p class="text-error text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
-                    
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium mb-2">Password</label>
-                        <input type="password" name="password" required 
-                               class="input @error('password') input-error @enderror"
-                               placeholder="********">
+
+                    {{-- Password --}}
+                    <div x-data="{ show: false }">
+                        <label for="password" class="block text-sm font-medium mb-2">Password</label>
+                        <div class="relative">
+                            <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                                <svg class="w-4 h-4 text-text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+                                </svg>
+                            </div>
+                            <input :type="show ? 'text' : 'password'" id="password" name="password" required
+                                   class="input pl-10 pr-11 @error('password') input-error @enderror"
+                                   placeholder="********">
+                            <button type="button" @click="show = !show"
+                                    class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-text-secondary hover:text-text-primary transition-colors">
+                                <svg x-show="!show" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
+                                </svg>
+                                <svg x-show="show" x-cloak class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                                </svg>
+                            </button>
+                        </div>
                         @error('password')
                             <p class="text-error text-sm mt-1">{{ $message }}</p>
                         @enderror
                     </div>
-                    
-                    <div class="flex items-center justify-between mb-6">
-                        <label class="flex items-center gap-2">
-                            <input type="checkbox" name="remember" class="rounded border-gray-300">
+
+                    <div class="flex items-center justify-between">
+                        <label class="flex items-center gap-2 cursor-pointer">
+                            <input type="checkbox" name="remember" class="rounded border-gray-300 text-accent focus:ring-accent">
                             <span class="text-sm text-text-secondary">Ingat Saya</span>
                         </label>
                         <a href="{{ route('password.request') }}" class="text-sm text-accent hover:text-accent-hover">
                             Lupa Password?
                         </a>
                     </div>
-                    
-                    <button type="submit" class="btn btn-primary w-full">Login</button>
+
+                    <button type="submit" class="btn btn-primary w-full flex items-center justify-center gap-2">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/>
+                        </svg>
+                        Login
+                    </button>
                 </form>
-                
+
                 <div class="mt-6 text-center">
                     <p class="text-sm text-text-secondary">
-                        Belum punya akun? 
+                        Belum punya akun?
                         <a href="{{ route('register') }}" class="text-accent hover:text-accent-hover font-medium">
                             Daftar Sekarang
                         </a>
@@ -80,8 +121,7 @@
                        Program (berbayar) + konfigurasi Services ID/Key,
                        jauh lebih rumit dari Google. Siapkan dulu backend-nya
                        (route + controller redirect/callback) sebelum tombol
-                       ini benar-benar bisa dipakai; untuk sementara arahnya
-                       masih placeholder route('auth.google') / route('auth.apple').
+                       ini benar-benar bisa dipakai.
                 --}}
                 <div class="space-y-3">
                     <a href="#"
@@ -109,6 +149,15 @@
                 </div>
             </div>
         </div>
+
+        <p class="text-center text-xs text-text-secondary mt-6">
+            <a href="{{ route('landing') }}" class="hover:text-accent transition-colors inline-flex items-center gap-1">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+                </svg>
+                Kembali ke beranda
+            </a>
+        </p>
     </div>
 </div>
 @endsection

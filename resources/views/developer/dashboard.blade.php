@@ -22,11 +22,12 @@
                     </div>
                 </div>
                 <div class="flex items-center gap-3">
-                    <div class="flex items-center gap-2 px-3 py-1.5 bg-accent/10 text-accent text-sm rounded-full border border-accent/20">
-                        <span class="inline-block w-2 h-2 bg-accent rounded-full animate-pulse"></span>
-                        <span>System Online</span>
-                        <span class="w-px h-4 bg-accent/20"></span>
-                        <span class="text-xs opacity-70">v{{ config('app.version', '1.0.0') }}</span>
+                    <div class="flex items-center gap-2 px-3 py-1.5 text-sm rounded-full border transition"
+                         :class="stats.health?.system_online ? 'bg-accent/10 text-accent border-accent/20' : 'bg-rose-500/10 text-rose-500 border-rose-500/20'">
+                        <span class="inline-block w-2 h-2 rounded-full" :class="stats.health?.system_online ? 'bg-accent animate-pulse' : 'bg-rose-500'"></span>
+                        <span x-text="stats.health?.system_online ? 'System Online' : 'System Degraded'"></span>
+                        <span class="w-px h-4" :class="stats.health?.system_online ? 'bg-accent/20' : 'bg-rose-500/20'"></span>
+                        <span class="text-xs opacity-70" x-text="'v' + (stats.version || '1.0.0')"></span>
                     </div>
                     <button @click="refreshDashboard" class="p-2 hover:bg-light-surface dark:hover:bg-dark-surface rounded-lg transition" title="Refresh Dashboard">
                         <svg class="w-5 h-5 text-text-secondary" :class="{'animate-spin': refreshing}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -281,11 +282,11 @@
                 <div class="card-body p-5 space-y-2">
                     <div class="flex justify-between items-center py-1.5 border-b border-light-border/60 dark:border-dark-border/40">
                         <span class="text-xs text-text-secondary">PHP Version</span>
-                        <span class="text-xs font-bold text-text-primary dark:text-text-dark-primary">{{ phpversion() }}</span>
+                        <span class="text-xs font-bold text-text-primary dark:text-text-dark-primary" x-text="stats.health?.php_version || '{{ phpversion() }}'"></span>
                     </div>
                     <div class="flex justify-between items-center py-1.5 border-b border-light-border/60 dark:border-dark-border/40">
                         <span class="text-xs text-text-secondary">Laravel</span>
-                        <span class="text-xs font-bold text-text-primary dark:text-text-dark-primary">{{ app()->version() }}</span>
+                        <span class="text-xs font-bold text-text-primary dark:text-text-dark-primary" x-text="stats.health?.laravel_version || '{{ app()->version() }}'"></span>
                     </div>
                     <div class="flex justify-between items-center py-1.5 border-b border-light-border/60 dark:border-dark-border/40">
                         <span class="text-xs text-text-secondary">Environment</span>
@@ -301,14 +302,26 @@
                     </div>
                     <div class="flex justify-between items-center py-1.5 border-b border-light-border/60 dark:border-dark-border/40">
                         <span class="text-xs text-text-secondary">Database</span>
-                        <span class="text-xs font-bold text-white bg-emerald-500 px-2 py-0.5 rounded-full flex items-center gap-1">
-                            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span> Connected
+                        <span class="text-xs font-bold text-white px-2 py-0.5 rounded-full flex items-center gap-1 transition"
+                              :class="stats.health?.db_connected ? 'bg-emerald-500' : 'bg-rose-500'">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full" :class="stats.health?.db_connected ? 'animate-pulse' : ''"></span>
+                            <span x-text="stats.health?.db_connected ? 'Connected' : 'Disconnected'"></span>
+                        </span>
+                    </div>
+                    <div class="flex justify-between items-center py-1.5 border-b border-light-border/60 dark:border-dark-border/40">
+                        <span class="text-xs text-text-secondary">Cache</span>
+                        <span class="text-xs font-bold text-white px-2 py-0.5 rounded-full flex items-center gap-1 transition"
+                              :class="stats.health?.cache_connected ? 'bg-emerald-500' : 'bg-rose-500'">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full" :class="stats.health?.cache_connected ? 'animate-pulse' : ''"></span>
+                            <span x-text="stats.health?.cache_connected ? 'Connected' : 'Disconnected'"></span>
                         </span>
                     </div>
                     <div class="flex justify-between items-center py-1.5">
-                        <span class="text-xs text-text-secondary">Queue Worker</span>
-                        <span class="text-xs font-bold text-white bg-emerald-500 px-2 py-0.5 rounded-full flex items-center gap-1">
-                            <span class="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></span> Running
+                        <span class="text-xs text-text-secondary">Storage</span>
+                        <span class="text-xs font-bold text-white px-2 py-0.5 rounded-full flex items-center gap-1 transition"
+                              :class="stats.health?.storage_writable ? 'bg-emerald-500' : 'bg-rose-500'">
+                            <span class="w-1.5 h-1.5 bg-white rounded-full" :class="stats.health?.storage_writable ? 'animate-pulse' : ''"></span>
+                            <span x-text="stats.health?.storage_writable ? 'Writable' : 'Unwritable'"></span>
                         </span>
                     </div>
                 </div>
@@ -328,11 +341,13 @@
                         <svg class="w-32 h-32 transform -rotate-90">
                             <circle class="text-light-surface dark:text-dark-bg" stroke-width="8" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64"/>
                             <circle class="text-accent" stroke-width="8" stroke-linecap="round" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64" 
-                                    stroke-dasharray="351.858" :stroke-dashoffset="351.858 - (351.858 * (stats.cpu_usage || 0) / 100)"/>
+                                    stroke-dasharray="351.858" :stroke-dashoffset="351.858 - (351.858 * (stats.cpu_usage !== null ? stats.cpu_usage : 0) / 100)"/>
                         </svg>
-                        <span class="absolute inset-0 flex items-center justify-center text-2xl font-extrabold text-text-primary dark:text-text-dark-primary" x-text="(stats.cpu_usage || 0) + '%'"></span>
+                        <span class="absolute inset-0 flex items-center justify-center text-2xl font-extrabold text-text-primary dark:text-text-dark-primary"
+                              x-text="stats.cpu_usage !== null ? stats.cpu_usage + '%' : 'N/A'"></span>
                     </div>
-                    <p class="text-xs font-semibold text-text-secondary mt-3 uppercase tracking-wider">Current CPU Load</p>
+                    <p class="text-xs font-semibold text-text-secondary mt-3 uppercase tracking-wider"
+                       x-text="stats.cpu_usage !== null ? 'Current CPU Load' : 'CPU Load (Unavailable)'"></p>
                 </div>
             </div>
         </div>
@@ -347,11 +362,13 @@
                         <svg class="w-32 h-32 transform -rotate-90">
                             <circle class="text-light-surface dark:text-dark-bg" stroke-width="8" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64"/>
                             <circle class="text-info" stroke-width="8" stroke-linecap="round" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64" 
-                                    stroke-dasharray="351.858" :stroke-dashoffset="351.858 - (351.858 * (stats.memory_usage || 0) / 100)"/>
+                                    stroke-dasharray="351.858" :stroke-dashoffset="351.858 - (351.858 * (stats.memory_usage !== null ? stats.memory_usage : 0) / 100)"/>
                         </svg>
-                        <span class="absolute inset-0 flex items-center justify-center text-2xl font-extrabold text-text-primary dark:text-text-dark-primary" x-text="(stats.memory_usage || 0) + '%'"></span>
+                        <span class="absolute inset-0 flex items-center justify-center text-2xl font-extrabold text-text-primary dark:text-text-dark-primary"
+                              x-text="stats.memory_usage !== null ? stats.memory_usage + '%' : 'N/A'"></span>
                     </div>
-                    <p class="text-xs font-semibold text-text-secondary mt-3 uppercase tracking-wider">Memory Used</p>
+                    <p class="text-xs font-semibold text-text-secondary mt-3 uppercase tracking-wider"
+                       x-text="stats.memory_usage !== null ? 'Memory Used' : 'Memory (Unavailable)'"></p>
                 </div>
             </div>
         </div>
@@ -366,11 +383,13 @@
                         <svg class="w-32 h-32 transform -rotate-90">
                             <circle class="text-light-surface dark:text-dark-bg" stroke-width="8" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64"/>
                             <circle class="text-warning" stroke-width="8" stroke-linecap="round" stroke="currentColor" fill="transparent" r="56" cx="64" cy="64" 
-                                    stroke-dasharray="351.858" :stroke-dashoffset="351.858 - (351.858 * (stats.storage_usage || 0) / 100)"/>
+                                    stroke-dasharray="351.858" :stroke-dashoffset="351.858 - (351.858 * (stats.storage_usage !== null ? stats.storage_usage : 0) / 100)"/>
                         </svg>
-                        <span class="absolute inset-0 flex items-center justify-center text-2xl font-extrabold text-text-primary dark:text-text-dark-primary" x-text="(stats.storage_usage || 0) + '%'"></span>
+                        <span class="absolute inset-0 flex items-center justify-center text-2xl font-extrabold text-text-primary dark:text-text-dark-primary"
+                              x-text="stats.storage_usage !== null ? stats.storage_usage + '%' : 'N/A'"></span>
                     </div>
-                    <p class="text-xs font-semibold text-text-secondary mt-3 uppercase tracking-wider">Storage Used</p>
+                    <p class="text-xs font-semibold text-text-secondary mt-3 uppercase tracking-wider"
+                       x-text="stats.storage_usage !== null ? 'Storage Used' : 'Storage (Unavailable)'"></p>
                 </div>
             </div>
         </div>
@@ -399,9 +418,11 @@ function developerDashboard() {
             unique_activity_users: {{ $stats['unique_activity_users'] ?? 0 }},
             user_growth: {{ $stats['user_growth'] ?? 0 }},
             store_growth: {{ $stats['store_growth'] ?? 0 }},
-            cpu_usage: {{ $stats['cpu_usage'] ?? 0 }},
-            memory_usage: {{ $stats['memory_usage'] ?? 0 }},
-            storage_usage: {{ $stats['storage_usage'] ?? 0 }}
+            cpu_usage: {{ $stats['cpu_usage'] !== null ? $stats['cpu_usage'] : 'null' }},
+            memory_usage: {{ $stats['memory_usage'] !== null ? $stats['memory_usage'] : 'null' }},
+            storage_usage: {{ $stats['storage_usage'] !== null ? $stats['storage_usage'] : 'null' }},
+            health: @json($stats['health'] ?? null),
+            version: '{{ $stats['version'] ?? '1.0.0' }}'
         },
         chartsData: null,
         recentActivities: [],

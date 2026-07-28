@@ -64,7 +64,7 @@
                     <span class="px-3 py-1 bg-light-surface dark:bg-dark-bg text-xs font-bold rounded-full">Starter (UMKM)</span>
                 </div>
                 <h3 class="text-xl font-bold text-text-primary dark:text-text-dark-primary mb-2">Starter</h3>
-                <div class="text-4xl font-extrabold text-accent mb-1">Rp0</div>
+                <div class="text-4xl font-extrabold text-accent mb-1">Rp70.000</div>
                 <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-6">Selamanya Gratis</p>
                 <ul class="space-y-3.5 text-left mb-8 text-xs font-semibold text-text-secondary dark:text-text-dark-secondary">
                     <li class="flex items-center gap-2">
@@ -99,6 +99,8 @@
                     <span class="px-3 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full">Best Value</span>
                 </div>
                 <h3 class="text-xl font-bold text-text-primary dark:text-text-dark-primary mb-2">Business</h3>
+                <div class="text-4xl font-extrabold text-accent mb-1">Rp200.000</div>
+                <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-6">Mendapatkan</p>
                 <div class="text-4xl font-extrabold text-accent mb-1" x-text="annual ? 'Rp119.000' : 'Rp149.000'"></div>
                 <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-6" x-text="annual ? '/bulan (ditagih tahunan)' : '/bulan'"></p>
                 <ul class="space-y-3.5 text-left mb-8 text-xs font-semibold text-text-secondary dark:text-text-dark-secondary">
@@ -134,6 +136,8 @@
                     <span class="px-3 py-1 bg-accent/10 text-accent text-xs font-bold rounded-full">Multi-Outlet</span>
                 </div>
                 <h3 class="text-xl font-bold text-text-primary dark:text-text-dark-primary mb-2">Enterprise</h3>
+                <div class="text-4xl font-extrabold text-accent mb-1">Rp599.000</div>
+                <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-6">Selamanya Gratis</p>
                 <div class="text-4xl font-extrabold text-accent mb-1" x-text="annual ? 'Rp399.000' : 'Rp499.000'"></div>
                 <p class="text-xs text-text-secondary dark:text-text-dark-secondary mb-6" x-text="annual ? '/bulan (ditagih tahunan)' : '/bulan'"></p>
                 <ul class="space-y-3.5 text-left mb-8 text-xs font-semibold text-text-secondary dark:text-text-dark-secondary">

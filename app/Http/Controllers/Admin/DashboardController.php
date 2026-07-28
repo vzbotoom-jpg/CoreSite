@@ -138,6 +138,11 @@ class DashboardController extends Controller
                 ->orderBy('stock', 'asc')
                 ->limit(5)
                 ->get();
+
+            // Ensure all items are Product models, not strings
+            $lowStockProductsList = $lowStockProductsList->filter(function($item) {
+                return $item instanceof Product && $item->name;
+            });
         } catch (\Exception $e) {
             Log::warning('Failed to load low stock products list: ' . $e->getMessage());
             $lowStockProductsList = collect([]);
@@ -234,9 +239,11 @@ class DashboardController extends Controller
                 ->where('status', 'completed')
                 ->select('payment_method', DB::raw('COUNT(*) as count'), DB::raw('SUM(total_amount) as total'))
                 ->groupBy('payment_method')
-                ->get();
+                ->get()
+                ->toArray();
         } catch (\Exception $e) {
-            $paymentBreakdown = collect([]);
+            Log::warning('Failed to load payment breakdown: ' . $e->getMessage());
+            $paymentBreakdown = [];
         }
         
         // Today's stats
