@@ -144,16 +144,6 @@ $memUsage = null;
                     $total = (float)$matches[0][1]; // in KB
                     if ($total > 0) {
                         $memUsage = round((($total - $free) / $total) * 100, 1);
-        $memUsage = 42.8;
-        if (\PHP_OS_FAMILY === 'Linux') {
-            $free = shell_exec('free');
-            if ($free) {
-                $free = (string)trim($free);
-                $free_arr = explode("\n", $free);
-                if (isset($free_arr[1])) {
-                    $mem = preg_split("/\s+/", $free_arr[1]);
-                    if (isset($mem[1]) && isset($mem[2]) && $mem[1] > 0) {
-                        $memUsage = round(($mem[2] / $mem[1]) * 100, 1);
                     }
                 }
             }
