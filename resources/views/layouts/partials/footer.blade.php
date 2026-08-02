@@ -1,10 +1,10 @@
 {{-- resources/views/layouts/partials/footer.blade.php --}}
 <footer class="bg-black text-[#A0A5B0] border-t border-slate-900 mt-20 transition-colors duration-200">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Main Footer Content -->
-        <div class="py-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-[2fr_1fr_1fr_1fr_1fr_1fr] gap-8">
-            <!-- Brand Column -->
-            <div class="col-span-1 sm:col-span-2 md:col-span-2 lg:col-span-1 max-w-xs space-y-4">
+        <!-- Main Footer Content in 5 columns on desktop -->
+        <div class="py-16 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+            <!-- Kolom 1 (Kiri Utama): Brand Column (takes 2 columns span on small screen if preferred, or standard 1 column) -->
+            <div class="col-span-2 md:col-span-3 lg:col-span-1 max-w-xs space-y-4">
                 <div class="flex items-center gap-2">
                     <div class="w-10 h-10 bg-accent rounded-xl flex items-center justify-center">
                         <span class="text-white font-bold text-xl">C</span>
@@ -38,79 +38,111 @@
                 </div>
             </div>
             
-            <!-- Products Column -->
-            <div>
-                <h4 class="text-white font-semibold text-sm mb-4">Products</h4>
-                <ul class="space-y-2.5 text-xs sm:text-sm">
-                    <li><a @if(Route::has('features')) href="{{ route('features') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Store Builder</a></li>
-                    <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">E-Catalog Portal</a></li>
-                    <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Automatic POS</a></li>
-                    <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Inventory Control</a></li>
-                    <li><a @if(Route::has('pricing')) href="{{ route('pricing') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">SaaS Pricing</a></li>
-                    <li><a @if(Route::has('demo')) href="{{ route('demo') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Interactive Demo</a></li>
-                </ul>
+            <!-- Kolom 2: Products & Platform (Bertumpuk) -->
+            <div class="space-y-10">
+                <!-- Blok Atas: Products -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Products</h4>
+                    <ul class="space-y-2.5 text-xs sm:text-sm">
+                        <li><a @if(Route::has('features')) href="{{ route('features') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Store Builder</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">E-Catalog Portal</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Automatic POS</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Inventory Control</a></li>
+                        <li><a @if(Route::has('pricing')) href="{{ route('pricing') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">SaaS Pricing</a></li>
+                        <li><a @if(Route::has('demo')) href="{{ route('demo') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Interactive Demo</a></li>
+                    </ul>
+                </div>
+                <!-- Blok Bawah: Platform / Models -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Platform</h4>
+                    <ul class="space-y-2.5 text-xs sm:text-sm">
+                        <li><a @if(Route::has('developer.dashboard')) href="{{ route('developer.dashboard') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Developer Panel</a></li>
+                        <li><a @if(Route::has('developer.system.health')) href="{{ route('developer.system.health') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">System Health</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">CoreSite API</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Mobile Client</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Custom Domains</a></li>
+                    </ul>
+                </div>
             </div>
 
-            <!-- Platform Column -->
-            <div>
-                <h4 class="text-white font-semibold text-sm mb-4">Platform</h4>
-                <ul class="space-y-2.5 text-xs sm:text-sm">
-                    <li><a @if(Route::has('developer.dashboard')) href="{{ route('developer.dashboard') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Developer Panel</a></li>
-                    <li><a @if(Route::has('developer.system.health')) href="{{ route('developer.system.health') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">System Health</a></li>
-                    <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">CoreSite API</a></li>
-                    <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Mobile Client</a></li>
-                    <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Custom Domains</a></li>
-                </ul>
+            <!-- Kolom 3: Solutions & Integrations (Bertumpuk) -->
+            <div class="space-y-10">
+                <!-- Blok Atas: Solutions -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Solutions</h4>
+                    <ul class="space-y-2.5 text-xs sm:text-sm">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Retail Boutiques</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">F&amp;B and Cafes</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">MSME / UMKM</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Multi-outlet Retail</a></li>
+                    </ul>
+                </div>
+                <!-- Blok Bawah: Integrations / Ecosystem -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Integrations</h4>
+                    <ul class="space-y-2.5 text-xs sm:text-sm">
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Payment Gateways</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Shipping Partners</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Accounting Plugins</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">E-Commerce Sync</a></li>
+                    </ul>
+                </div>
             </div>
 
-            <!-- Solutions Column -->
-            <div>
-                <h4 class="text-white font-semibold text-sm mb-4">Solutions</h4>
-                <ul class="space-y-2.5 text-xs sm:text-sm">
-                    <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Retail Boutiques</a></li>
-                    <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">F&amp;B and Cafes</a></li>
-                    <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">MSME / UMKM</a></li>
-                    <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Multi-outlet Retail</a></li>
-                </ul>
+            <!-- Kolom 4: Resources & Help & Security (Bertumpuk) -->
+            <div class="space-y-10">
+                <!-- Blok Atas: Resources -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Resources</h4>
+                    <ul class="space-y-2.5 text-xs sm:text-sm">
+                        <li><a @if(Route::has('docs.index')) href="{{ route('docs.index') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Documentation</a></li>
+                        <li><a @if(Route::has('blog.index')) href="{{ route('blog.index') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Business Blog</a></li>
+                        <li><a @if(Route::has('guides')) href="{{ route('guides') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">User Guides</a></li>
+                        <li><a @if(Route::has('faq')) href="{{ route('faq') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">FAQ Center</a></li>
+                    </ul>
+                </div>
+                <!-- Blok Bawah: Help & Security -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Help &amp; Security</h4>
+                    <ul class="space-y-2.5 text-xs sm:text-sm">
+                        <li><a @if(Route::has('contact')) href="{{ route('contact') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Customer Support</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">System Security</a></li>
+                        <li><a @if(Route::has('developer.system.health')) href="{{ route('developer.system.health') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Service Status</a></li>
+                    </ul>
+                </div>
             </div>
 
-            <!-- Resources Column -->
-            <div>
-                <h4 class="text-white font-semibold text-sm mb-4">Resources</h4>
-                <ul class="space-y-2.5 text-xs sm:text-sm">
-                    <li><a @if(Route::has('docs.index')) href="{{ route('docs.index') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Documentation</a></li>
-                    <li><a @if(Route::has('blog.index')) href="{{ route('blog.index') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Business Blog</a></li>
-                    <li><a @if(Route::has('guides')) href="{{ route('guides') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">User Guides</a></li>
-                    <li><a @if(Route::has('faq')) href="{{ route('faq') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">FAQ Center</a></li>
-                </ul>
-            </div>
-
-            <!-- Company & Help Column -->
-            <div>
-                <h4 class="text-white font-semibold text-sm mb-4">Company</h4>
-                <ul class="space-y-2.5 text-xs sm:text-sm">
-                    <li><a @if(Route::has('about')) href="{{ route('about') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">About Us</a></li>
-                    <li><a @if(Route::has('careers')) href="{{ route('careers') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Careers</a></li>
-                    <li><a @if(Route::has('contact')) href="{{ route('contact') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Customer Support</a></li>
-                    <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">System Security</a></li>
-                </ul>
+            <!-- Kolom 5: Company & Terms and policies (Bertumpuk) -->
+            <div class="space-y-10">
+                <!-- Blok Atas: Company -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Company</h4>
+                    <ul class="space-y-2.5 text-xs sm:text-sm">
+                        <li><a @if(Route::has('about')) href="{{ route('about') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">About Us</a></li>
+                        <li><a @if(Route::has('careers')) href="{{ route('careers') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Careers</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">News &amp; Press</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Transparency</a></li>
+                    </ul>
+                </div>
+                <!-- Blok Bawah: Terms and policies -->
+                <div>
+                    <h4 class="text-white font-semibold text-sm mb-4">Terms &amp; Policies</h4>
+                    <ul class="space-y-2.5 text-xs sm:text-sm">
+                        <li><a @if(Route::has('terms')) href="{{ route('terms') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Terms of Service</a></li>
+                        <li><a @if(Route::has('privacy')) href="{{ route('privacy') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Privacy Policy</a></li>
+                        <li><a @if(Route::has('cookie-policy')) href="{{ route('cookie-policy') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Cookie Policy</a></li>
+                        <li><a @if(Route::has('gdpr')) href="{{ route('gdpr') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">GDPR Compliance</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         
         <!-- Bottom Bar -->
         <div class="py-8 border-t border-slate-900 flex flex-col md:flex-row justify-between items-center gap-6">
-            <div class="flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
+            <div class="text-center md:text-left">
                 <p class="text-xs sm:text-sm text-slate-500">
                     &copy; {{ date('Y') }} <span class="font-medium text-slate-300">CoreSite</span>. All rights reserved.
                 </p>
-                <!-- Terms & Policies inline on bottom row -->
-                <div class="flex flex-wrap justify-center gap-x-4 gap-y-1 text-xs text-slate-500">
-                    <span class="hidden md:inline text-slate-700">|</span>
-                    <a @if(Route::has('terms')) href="{{ route('terms') }}" @else href="#" @endif class="hover:text-slate-300 transition-colors duration-150">Terms of Service</a>
-                    <a @if(Route::has('privacy')) href="{{ route('privacy') }}" @else href="#" @endif class="hover:text-slate-300 transition-colors duration-150">Privacy Policy</a>
-                    <a @if(Route::has('cookie-policy')) href="{{ route('cookie-policy') }}" @else href="#" @endif class="hover:text-slate-300 transition-colors duration-150">Cookie Policy</a>
-                    <a @if(Route::has('gdpr')) href="{{ route('gdpr') }}" @else href="#" @endif class="hover:text-slate-300 transition-colors duration-150">GDPR</a>
-                </div>
             </div>
 
             <div class="flex items-center gap-4 text-xs text-slate-500">
