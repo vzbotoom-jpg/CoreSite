@@ -54,13 +54,13 @@
                 </div>
                 <!-- Blok Bawah: Platform / Models -->
                 <div>
-                    <h4 class="text-white font-semibold text-sm mb-4">Platform CoreSite</h4>
+                    <h4 class="text-white font-semibold text-sm mb-4">CoreSite Platform</h4>
                     <ul class="space-y-2.5 text-xs sm:text-sm">
-                        <li><a @if(Route::has('developer.dashboard')) href="{{ route('developer.dashboard') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Developer Panel</a></li>
-                        <li><a @if(Route::has('developer.system.health')) href="{{ route('developer.system.health') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">System Health</a></li>
-                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">CoreSite API</a></li>
-                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Mobile Client</a></li>
-                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Custom Domains</a></li>
+                        <li><a @if(Route::has('developer.dashboard')) href="{{ route('developer.dashboard') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Overview</a></li>
+                        <li><a @if(Route::has('developer.system.health')) href="{{ route('developer.system.health') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Docs</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Ecosystem</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Pricing</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Cloud on AWS</a></li>
                     </ul>
                 </div>
             </div>
@@ -72,19 +72,20 @@
                     <h4 class="text-white font-semibold text-sm mb-4">Solutions</h4>
                     <ul class="space-y-2.5 text-xs sm:text-sm">
                         <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Retail Boutiques</a></li>
-                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">F&amp;B and Cafes</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Enterprises</a></li>
                         <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">MSME / UMKM</a></li>
                         <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Multi-outlet Retail</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Customers support</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Government</a></li>
                     </ul>
                 </div>
-                <!-- Blok Bawah: Integrations / Ecosystem -->
                 <div>
-                    <h4 class="text-white font-semibold text-sm mb-4">Integrations</h4>
+                    <h4 class="text-white font-semibold text-sm mb-4">Terms &amp; Policies</h4>
                     <ul class="space-y-2.5 text-xs sm:text-sm">
-                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Payment Gateways</a></li>
-                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Shipping Partners</a></li>
-                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Accounting Plugins</a></li>
-                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">E-Commerce Sync</a></li>
+                        <li><a @if(Route::has('privacy')) href="{{ route('privacy') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Privacy Policy</a></li>
+                        <li><a @if(Route::has('cookie-policy')) href="{{ route('cookie-policy') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Cookie Policy</a></li>
+                        <li><a @if(Route::has('terms')) href="{{ route('terms') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Terms of Service</a></li>
+                        <li><a @if(Route::has('gdpr')) href="{{ route('gdpr') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">GDPR Compliance</a></li>
                     </ul>
                 </div>
             </div>
@@ -95,21 +96,15 @@
                 <div>
                     <h4 class="text-white font-semibold text-sm mb-4">Resources</h4>
                     <ul class="space-y-2.5 text-xs sm:text-sm">
-                        <li><a @if(Route::has('docs.index')) href="{{ route('docs.index') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Documentation</a></li>
-                        <li><a @if(Route::has('blog.index')) href="{{ route('blog.index') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Business Blog</a></li>
+                        <li><a @if(Route::has('blog.index')) href="{{ route('blog.index') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Blog</a></li>
                         <li><a @if(Route::has('guides')) href="{{ route('guides') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">User Guides</a></li>
+                        <li><a @if(Route::has('faq')) href="{{ route('faq') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Community</a></li>
+                        <li><a @if(Route::has('faq')) href="{{ route('faq') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Customer Stories</a></li>
+                        <li><a @if(Route::has('faq')) href="{{ route('faq') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Service Desk</a></li>
                         <li><a @if(Route::has('faq')) href="{{ route('faq') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">FAQ Center</a></li>
                     </ul>
                 </div>
                 <!-- Blok Bawah: Help & Security -->
-                <div>
-                    <h4 class="text-white font-semibold text-sm mb-4">Help &amp; Security</h4>
-                    <ul class="space-y-2.5 text-xs sm:text-sm">
-                        <li><a @if(Route::has('contact')) href="{{ route('contact') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Customer Support</a></li>
-                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">System Security</a></li>
-                        <li><a @if(Route::has('developer.system.health')) href="{{ route('developer.system.health') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Service Status</a></li>
-                    </ul>
-                </div>
             </div>
 
             <!-- Kolom 5: Company & Terms and policies (Bertumpuk) -->
@@ -118,20 +113,12 @@
                 <div>
                     <h4 class="text-white font-semibold text-sm mb-4">Company</h4>
                     <ul class="space-y-2.5 text-xs sm:text-sm">
-                        <li><a @if(Route::has('about')) href="{{ route('about') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">About Us</a></li>
-                        <li><a @if(Route::has('careers')) href="{{ route('careers') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Careers</a></li>
-                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">News &amp; Press</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">CoreSite</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Careers</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">News</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Policy</a></li>
+                        <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Security and Compliance</a></li>
                         <li><a href="#" class="text-slate-400 hover:text-white transition-colors duration-150">Transparency</a></li>
-                    </ul>
-                </div>
-                <!-- Blok Bawah: Terms and policies -->
-                <div>
-                    <h4 class="text-white font-semibold text-sm mb-4">Terms &amp; Policies</h4>
-                    <ul class="space-y-2.5 text-xs sm:text-sm">
-                        <li><a @if(Route::has('terms')) href="{{ route('terms') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Terms of Service</a></li>
-                        <li><a @if(Route::has('privacy')) href="{{ route('privacy') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Privacy Policy</a></li>
-                        <li><a @if(Route::has('cookie-policy')) href="{{ route('cookie-policy') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Cookie Policy</a></li>
-                        <li><a @if(Route::has('gdpr')) href="{{ route('gdpr') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">GDPR Compliance</a></li>
                     </ul>
                 </div>
             </div>
