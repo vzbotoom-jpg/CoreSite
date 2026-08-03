@@ -78,6 +78,7 @@ class SaleServiceTest extends TestCase
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
             'price' => 100000,
+            'stock' => 100,
         ]);
         
         $result = $this->saleService->processSale(
@@ -128,6 +129,7 @@ class SaleServiceTest extends TestCase
         $product = Product::factory()->create([
             'store_id' => $this->store->id,
             'price' => 50000,
+            'stock' => 100,
         ]);
         
         $result = $this->saleService->processSale(
