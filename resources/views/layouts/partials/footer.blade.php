@@ -54,7 +54,7 @@
                 </div>
                 <!-- Blok Bawah: Platform / Models -->
                 <div>
-                    <h4 class="text-white font-semibold text-sm mb-4">Platform</h4>
+                    <h4 class="text-white font-semibold text-sm mb-4">Platform CoreSite</h4>
                     <ul class="space-y-2.5 text-xs sm:text-sm">
                         <li><a @if(Route::has('developer.dashboard')) href="{{ route('developer.dashboard') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">Developer Panel</a></li>
                         <li><a @if(Route::has('developer.system.health')) href="{{ route('developer.system.health') }}" @else href="#" @endif class="text-slate-400 hover:text-white transition-colors duration-150">System Health</a></li>
